@@ -24,9 +24,45 @@ window.onload = function () {
     var greeter = new Greeter(el);
     greeter.start();
 };
-var consistsOnlyOfLetters = (function () {
-    function consistsOnlyOfLetters() {
+var Validation = (function () {
+    function Validation(inpu, inp) {
+        this.firstInput = inpu;
+        this.secondInput = inp;
     }
-    return consistsOnlyOfLetters;
+    Validation.prototype.isValid = function () {
+        if (this.isEmail(this.firstInput.value.toString()) && this.isValidPass(this.secondInput.value.toString()))
+            return true;
+        else if (this.isEmail(this.firstInput.value.toString())) {
+            alert("Invalid password.Try again.");
+            return false;
+        } else if (this.isValidPass(this.secondInput.value.toString())) {
+            alert("Invalid e-mail.Try again.");
+            return false;
+        } else {
+            alert("Invalid e-mail and password.");
+            return false;
+        }
+    };
+
+    Validation.prototype.isEmail = function (t) {
+        if (t.indexOf('@') != -1)
+            return true;
+        else
+            return false;
+    };
+    Validation.prototype.isValidPass = function (t) {
+        if (t.length < 6)
+            return false;
+        else
+            return true;
+    };
+    return Validation;
 })();
+
+function startValidation() {
+    var el1 = document.getElementById('eMail');
+    var el2 = document.getElementById('password');
+    var val = new Validation(el1, el2);
+    val.isValid();
+}
 //# sourceMappingURL=app.js.map
