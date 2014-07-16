@@ -24,4 +24,9 @@ window.onload = function () {
     var greeter = new Greeter(el);
     greeter.start();
 };
+var consistsOnlyOfLetters = (function () {
+    function consistsOnlyOfLetters() {
+    }
+    return consistsOnlyOfLetters;
+})();
 //# sourceMappingURL=app.js.map
