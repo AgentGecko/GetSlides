@@ -83,4 +83,5 @@ function startLoginValidation() {
     var val = new LoginValidation(el1, el2);
     if (val.isValid())
         window.location.href = "Page.html";
+
 }

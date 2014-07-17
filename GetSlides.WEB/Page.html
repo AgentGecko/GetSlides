@@ -6,19 +6,19 @@
     <link rel="stylesheet" href="Content/CustomStyle.css" type="text/css" />
     <script src="Scripts/jquery-2.1.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
-    <script src="Scripts/knockout-3.1.0.js"></script>
     <title>HTMLPage</title>
+    
 </head>
 <body>
     <header class="">
         <div>
             <span class="">GetSlides</span>
-            <span class="label label-default" data-bind="text: username"></span>
+            <span class="label" data-bind="text: username"></span>
         </div>
         <ul class="nav nav-pills nav-justified " role="navigation">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Presentations</a></li>
+            <li><a class="" href="#">Profile</a></li>
+            <li><a class="" href="#">Presentations</a></li>
         </ul>
     </header>
     <div class="container-fluid content" >
@@ -39,5 +39,16 @@
         </div>
     </div>
 
+    <script src="Scripts/knockout-3.1.0.js"></script>
+    <script>
+        function appView() {
+            this.username = ko.observable("Anon");
+        }
+        ko.applyBindings(new appView());
+
+
+    </script>
 </body>
+
+
 </html>
