@@ -24,45 +24,76 @@ window.onload = function () {
     var greeter = new Greeter(el);
     greeter.start();
 };
-var Validation = (function () {
-    function Validation(inpu, inp) {
+// Regular Expressions for pattern testing and validation.
+var mailRegEx = /^(\w+|(\w+\.\w+)+)@\w+\.\w+$/;
+
+var onlyNumberRegEx = /^\d+$/;
+var onlyLetterRegEx = /^[a-zA-Z]+$/;
+
+var azLetterRegEx = /[a-z]+/;
+var AZLetterRegEx = /[A-Z]+/;
+var numberRegEx = /\d+/;
+
+var LoginValidation = (function () {
+    function LoginValidation(inpu, inp) {
         this.firstInput = inpu;
         this.secondInput = inp;
     }
-    Validation.prototype.isValid = function () {
-        if (this.isEmail(this.firstInput.value.toString()) && this.isValidPass(this.secondInput.value.toString()))
-            return true;
-        else if (this.isEmail(this.firstInput.value.toString())) {
-            alert("Invalid password.Try again.");
+    LoginValidation.prototype.isValid = function () {
+        if (this.informationEntered()) {
+            if (this.isEmail(this.firstInput.value.toString()) && this.isValidPassword(this.secondInput.value.toString()))
+                return true;
+            else if (this.isEmail(this.firstInput.value.toString())) {
+                alert("Invalid password.Try again.");
+                return false;
+            } else if (this.isValidPassword(this.secondInput.value.toString())) {
+                alert("Invalid e-mail.Try again.");
+                return false;
+            } else {
+                alert("Invalid e-mail and password.");
+                return false;
+            }
+        } else
             return false;
-        } else if (this.isValidPass(this.secondInput.value.toString())) {
-            alert("Invalid e-mail.Try again.");
-            return false;
-        } else {
-            alert("Invalid e-mail and password.");
-            return false;
-        }
     };
 
-    Validation.prototype.isEmail = function (t) {
-        if (t.indexOf('@') != -1)
+    LoginValidation.prototype.isEmail = function (t) {
+        if (mailRegEx.test(t.trim()))
             return true;
         else
             return false;
     };
-    Validation.prototype.isValidPass = function (t) {
+    LoginValidation.prototype.isValidPassword = function (t) {
         if (t.length < 6)
             return false;
         else
             return true;
     };
-    return Validation;
+    LoginValidation.prototype.informationEntered = function () {
+        if (this.firstInput.value == null && this.secondInput.value == null) {
+            alert("You need to enter Your e-mail and password.");
+            return false;
+        } else if (this.firstInput.value == null) {
+            alert("You need to enter Your e-mail.");
+            return false;
+        } else if (this.secondInput.value == null) {
+            alert("You need to enter Your password.");
+            return false;
+        } else
+            return true;
+    };
+    return LoginValidation;
+})();
+var RegistrationValidation = (function () {
+    function RegistrationValidation() {
+    }
+    return RegistrationValidation;
 })();
 
-function startValidation() {
+function startLoginValidation() {
     var el1 = document.getElementById('eMail');
     var el2 = document.getElementById('password');
-    var val = new Validation(el1, el2);
+    var val = new LoginValidation(el1, el2);
     val.isValid();
 }
 //# sourceMappingURL=app.js.map

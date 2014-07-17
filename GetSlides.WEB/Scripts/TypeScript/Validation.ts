@@ -1,8 +1,19 @@
-﻿interface IValidation {
+﻿// Regular Expressions for pattern testing and validation.
+var mailRegEx = /^(\w+|(\w+\.\w+)+)@\w+\.\w+$/
+
+var onlyNumberRegEx = /^\d+$/;
+var onlyLetterRegEx = /^[a-zA-Z]+$/;
+
+var azLetterRegEx = /[a-z]+/;
+var AZLetterRegEx = /[A-Z]+/;
+var numberRegEx = /\d+/;
+
+interface IValidation {
     isValid(): boolean;
+    informationEntered(): boolean;
 }
 
-class Validation implements IValidation{
+class LoginValidation implements IValidation{
     firstInput: HTMLInputElement;
     secondInput: HTMLInputElement;
 
@@ -12,41 +23,63 @@ class Validation implements IValidation{
     }
 
     isValid() {
-        if (this.isEmail(this.firstInput.value.toString()) && this.isValidPass(this.secondInput.value.toString()))
-            return true;
-        else if (this.isEmail(this.firstInput.value.toString())) {
-            alert("Invalid password.Try again.");
-            return false;
+        if (this.informationEntered()) {
+            if (this.isEmail(this.firstInput.value.toString()) && this.isValidPassword(this.secondInput.value.toString()))
+                return true;
+
+            else if (this.isEmail(this.firstInput.value.toString()))
+            {
+                alert("Invalid password.Try again.");
+                return false;
+            }
+            else if (this.isValidPassword(this.secondInput.value.toString()))
+            {
+                alert("Invalid e-mail.Try again.");
+                return false;
+            }
+            else
+            {
+                alert("Invalid e-mail and password.");
+                return false;
+            }
         }
-        else if (this.isValidPass(this.secondInput.value.toString())) {
-            alert("Invalid e-mail.Try again.");
-            return false;
-        }
-        else
-        {
-            alert("Invalid e-mail and password.");
-            return false;
-        }
+        else return false;
     }
 
     isEmail(t: string){
-        if (t.indexOf('@')!=-1)
-            return true;
+        if (mailRegEx.test(t.trim()))
+          return  true;
         else
-            return false;
+          return false;
     }
-    isValidPass(t: string) {
-        
+    isValidPassword(t: string) {
         if (t.length < 6)
             return false;
         else
             return true;
     }
+    informationEntered() {
+        if (this.firstInput.value == null && this.secondInput.value == null) {
+            alert("You need to enter Your e-mail and password.");
+            return false;
+        }
+        else if (this.firstInput.value == null) {
+            alert("You need to enter Your e-mail.");
+            return false;
+        }
+        else if (this.secondInput.value == null) {
+            alert("You need to enter Your password.");
+            return false;
+        }
+        else
+            return true;
+    }
 }
+class RegistrationValidation { }
 
-function startValidation (){
+function startLoginValidation() {
     var el1 = <HTMLInputElement> document.getElementById('eMail');
     var el2 = <HTMLInputElement> document.getElementById('password');
-    var val = new Validation(el1, el2);
+    var val = new LoginValidation(el1, el2);
     val.isValid();
 }
