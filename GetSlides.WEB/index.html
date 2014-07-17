@@ -3,12 +3,19 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Index</title>
+    <link rel="stylesheet" href="Content/bootstrap-theme.css" type="text/css" />
+    <link rel="stylesheet" href="Content/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="Content/CustomStyle.css" type="text/css" />
+    <script src="Scripts/jquery-2.1.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/knockout-3.1.0.js"></script>
     <script src="Scripts/app.js"></script>
+    <title>Index</title>
+    
 </head>
 <body>
-    <input type="text" id="eMail"/>
+    <input type="text" id="eMail" data-bind="value: username"/>
     <input type="password" id="password"/>
-    <button onclick="startLoginValidation()">Login</button>
+    <button onclick="startLoginValidation()" >Login</button>
 </body>
 </html>

@@ -81,5 +81,6 @@ function startLoginValidation() {
     var el1 = <HTMLInputElement> document.getElementById('eMail');
     var el2 = <HTMLInputElement> document.getElementById('password');
     var val = new LoginValidation(el1, el2);
-    val.isValid();
+    if (val.isValid())
+        window.location.href = "Page.html";
 }

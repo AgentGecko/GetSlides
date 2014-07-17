@@ -1,0 +1,18 @@
+﻿body {
+}
+
+header{
+    margin-bottom: 20px;
+}
+.content {
+    position: relative;
+}
+.col-xs-6 {
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+    border-style: solid;
+}
+.thumbnail {
+    margin-top: 20px;
+}
