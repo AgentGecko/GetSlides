@@ -4,3 +4,9 @@ C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.WEB\bin\GetSlides.WEB.pdb
 C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.WEB\obj\Debug\GetSlides.WEB.dll
 C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.WEB\obj\Debug\GetSlides.WEB.pdb
 C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.WEB\obj\Debug\GetSlides.WEB.csprojResolveAssemblyReference.cache
+C:\Users\Marin\Documents\GitHub\GetSlides\GetSlides.WEB\bin\GetSlides.WEB.dll.config
+C:\Users\Marin\Documents\GitHub\GetSlides\GetSlides.WEB\bin\GetSlides.WEB.dll
+C:\Users\Marin\Documents\GitHub\GetSlides\GetSlides.WEB\bin\GetSlides.WEB.pdb
+C:\Users\Marin\Documents\GitHub\GetSlides\GetSlides.WEB\obj\Debug\GetSlides.WEB.csprojResolveAssemblyReference.cache
+C:\Users\Marin\Documents\GitHub\GetSlides\GetSlides.WEB\obj\Debug\GetSlides.WEB.dll
+C:\Users\Marin\Documents\GitHub\GetSlides\GetSlides.WEB\obj\Debug\GetSlides.WEB.pdb
