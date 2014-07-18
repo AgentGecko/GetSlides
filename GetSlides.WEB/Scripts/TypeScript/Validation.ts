@@ -1,4 +1,7 @@
-﻿// Regular Expressions for pattern testing and validation.
+﻿
+// We will be using jquery.validation library
+/*
+// Regular Expressions for pattern testing and validation.
 var mailRegEx = /^(\w+|(\w+\.\w+)+)@\w+\.\w+$/
 
 var onlyNumberRegEx = /^\d+$/;
@@ -85,3 +88,4 @@ function startLoginValidation() {
         window.location.href = "Page.html";
 
 }
+*/
