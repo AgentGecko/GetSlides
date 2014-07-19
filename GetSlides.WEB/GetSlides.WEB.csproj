@@ -17,11 +17,8 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CustomStyle.css" />
+    <Content Include="Content\Source\CustomSyle.css" />
+    <Content Include="Content\vendor.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
     <Content Include="Index1.html" />
@@ -29,29 +26,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Presentation\Index.html" />
     <Content Include="Presentation\Present\Index.html" />
     <Content Include="Presentation\Watch\Index.html" />
     <Content Include="Registration\Index.html" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\knockout-3.1.0.debug.js" />
-    <Content Include="Scripts\knockout-3.1.0.js" />
-    <Content Include="UserPage\Index.html" />
+    <Content Include="Scripts\vendor.js" />
+    <Content Include="Settings\Index.html" />
+    <Content Include="Template.html" />
     <Content Include="web.config" />
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\TypeScript\app.ts" />
-    <TypeScriptCompile Include="Scripts\TypeScript\Validation.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="web.Debug.config">
@@ -63,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pictures\" />
+    <Folder Include="Scripts\Source\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
