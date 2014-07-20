@@ -38,6 +38,7 @@
         text-align:center;
         margin-top:0;
         font-style: oblique;
+        color:#34495e
     }
     .login-form button {
         background-color:#34495e;
@@ -52,6 +53,7 @@
             color:whitesmoke;
             text-shadow:none;
         }
+
 .login-footer{
     position:fixed;
     bottom: 0;

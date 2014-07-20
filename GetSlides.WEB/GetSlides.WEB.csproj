@@ -29,6 +29,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Pictures\GetSlides.png" />
+    <Content Include="Pictures\GetSlides1.png" />
     <Content Include="Presentation\Index.html" />
     <Content Include="Presentation\Present\Index.html" />
     <Content Include="Presentation\Watch\Index.html" />
