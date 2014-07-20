@@ -17,6 +17,8 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="About\Index.html" />
+    <Content Include="Content\Source\CustomStyle1.css" />
     <Content Include="Content\Source\CustomSyle.css" />
     <Content Include="Content\vendor.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
