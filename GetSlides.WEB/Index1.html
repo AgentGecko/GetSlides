@@ -4,17 +4,25 @@
     <title>GetSlides</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <link rel="stylesheet" href="Content/vendor.css" />
-    <link rel="stylesheet" href="Content/Source/CustomSyle.css" />
+    <link rel="stylesheet" href="Content/Source/CustomStyle.css" />
+    <link rel="stylesheet" href="Content/Source/CustomStyle1.css" />
 </head>
 <body>
-    <div>
-        <img src="http://lh5.ggpht.com/-YsFvGsc3NsE/UQQJflYLBKI/AAAAAAAAJQM/41iS_X6SGgs/s9000/batman-logo-centre-8.png" class="login_element" style="width:10%;height:10%;"/>
-        <input type="text" placeholder="E-mail" class="login_element left_logo" id="e-mail">
-        <input type="password"placeholder="Password" class="login_element left_logo" id="password"/>
-        <button class="login_element">Login</button>
-        <div class="login_element"><a>Forgot password</a></div>
-        <div><button class="login_element">Anon</button></div>
-    </div>
+    
+        <form class="login-form" role="log">
+            <img src="Pictures/GetSlides.png"/>
+            <h1>GetSlides</h1>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Insert Your E-mail">
+                <input type="text" class="form-control" placeholder="Insert Your Password">
+            </div>
+            <button type="submit" class="btn btn-default btn-block">Submit</button>
+            
+        </form>
+    <footer class="login-footer">
+        <a href="#">Forgot password?</a>
+        <a href="#">Continue as anon</a>
+    </footer>
         
 </body>
 </html>
