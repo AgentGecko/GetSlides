@@ -22,8 +22,7 @@
     <Content Include="Content\Source\CustomSyle.css" />
     <Content Include="Content\vendor.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="index.html" />
-    <Content Include="Index1.html" />
+    <Content Include="Index.html" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
