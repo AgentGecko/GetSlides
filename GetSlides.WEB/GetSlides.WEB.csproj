@@ -33,6 +33,7 @@
     <Content Include="Presentation\Present\Index.html" />
     <Content Include="Presentation\Watch\Index.html" />
     <Content Include="Registration\Index.html" />
+    <Content Include="Scripts\Source\CustomJS.js" />
     <Content Include="Scripts\vendor.js" />
     <Content Include="Settings\Index.html" />
     <Content Include="Template.html" />
@@ -46,9 +47,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\Source\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
