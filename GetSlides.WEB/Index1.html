@@ -6,10 +6,17 @@
     <link rel="stylesheet" href="Content/vendor.css" />
     <link rel="stylesheet" href="Content/Source/CustomStyle.css" />
     <link rel="stylesheet" href="Content/Source/CustomStyle1.css" />
+    <script type="text/javascript">
+        function getHeigth() {
+            var x = (window.innerHeight - document.getElementById('cen').offsetHeight) / 2;
+            document.getElementById('cen').style.marginTop = x + 'px';
+        }
+        window.onload = getHeigth;
+    </script>
 </head>
 <body>
     
-        <form class="login-form" role="log">
+        <form class="login-form" role="log" id="cen">
             <img src="Pictures/GetSlides1.png"/>
             <h1>GetSlides</h1>
             <div class="form-group">
