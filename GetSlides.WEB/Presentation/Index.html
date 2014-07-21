@@ -45,16 +45,16 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div class="main-container">
-        <div class="container-fluid">
-            <div class="row">
+       
+      <div class="presentation-container"> 
+            <div class="row" data-bind="foreach: presentations">
                 <div class="col-xs-6 col-md-3">
                     <a href="#" class="thumbnail">
                         <img data-src="holder.js/100%x180" alt="...">
                     </a>
                     <div class="caption">
                         <h3>Thumbnail label</h3>
-                        <p>Info</p>
+                        <p data-bind="">Info</p>
                         <p>
                             <a href="#" class="btn btn-primary" role="button">View</a>
                             <a href="#" class="btn btn-default" role="button">Present</a>
@@ -63,16 +63,7 @@
                 </div>
             </div>
         </div>
-    </div>
    
-    <script>
-        function appView() {
-            this.username = ko.observable("Anon");
-        }
-        ko.applyBindings(new appView());
-    </script>
     <script src="../Scripts/vendor.js"></script>
 </body>
-
-
 </html>
