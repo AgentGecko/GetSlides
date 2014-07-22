@@ -16,26 +16,36 @@ var PresentationVM;
 
     // Overall ViewModel for one user's presentations
     var PresetationViewModel = (function () {
-        function PresetationViewModel() {
+        function PresetationViewModel(userPresentation) {
+            var _this = this;
+            this.UserPresentations = ko.observableArray([]);
+            userPresentation.forEach(function (p) {
+                return _this.UserPresentations.push(p);
+            });
         }
         PresetationViewModel.prototype.addPresentation = function (presentation) {
             this.UserPresentations.push(presentation);
         };
-        PresetationViewModel.prototype.deletePresentation = function () {
+        PresetationViewModel.prototype.removePresentation = function () {
             // Somehow need to reference which object.
-        };
-        PresetationViewModel.prototype.renamePresentation = function () {
         };
         return PresetationViewModel;
     })();
     PresentationVM.PresetationViewModel = PresetationViewModel;
 })(PresentationVM || (PresentationVM = {}));
 
-/*
-$(() => {
-ko.applyBindings(new PresentationVM.PresetationViewModel());
+$(function () {
+    var prezentacija = new PresentationVM.Presentation("Prezentacija", "pic1", "info1", "date1");
+    var prezentacija1 = new PresentationVM.Presentation("Prezentacija2", "pic2", "info2", "date2");
+
+    var prezentacije = new Array();
+    prezentacije.push(prezentacija);
+    prezentacije.push(prezentacija1);
+
+    var prezVM = new PresentationVM.PresetationViewModel(prezentacije);
+    ko.applyBindings(prezVM);
 });
-*/
+
 var UserVM;
 (function (UserVM) {
     var User = (function () {

@@ -46,15 +46,15 @@
         </div><!-- /.container-fluid -->
     </nav>
        
-      <div class="presentation-container"> 
+    <div class="presentation-container"> 
             <div class="row" data-bind="foreach: UserPresentations">
                 <div class="col-xs-6 col-md-3">
                     <a href="#" class="thumbnail">
                         <img data-src="U" alt="...">
                     </a>
                     <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p data-bind="">Info</p>
+                        <h3 data-bind="text: Name"></h3>
+                        <p data-bind="text: Info"></p>
                         <p>
                             <a href="#" class="btn btn-primary" role="button">View</a>
                             <a href="#" class="btn btn-default" role="button">Present</a>
@@ -65,5 +65,6 @@
         </div>
    
     <script src="../Scripts/vendor.js"></script>
+    <script src="../Scripts/App.js"></script>
 </body>
 </html>
