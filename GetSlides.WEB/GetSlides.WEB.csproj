@@ -48,10 +48,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\Source\knockout.d.ts" />
     <TypeScriptCompile Include="Scripts\Source\TypeScript.ts" />
-    <TypeScriptCompile Include="Scripts\typings\knockout.viewmodel\knockout.viewmodel.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

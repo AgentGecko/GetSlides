@@ -1,4 +1,4 @@
-﻿/// <reference path="knockout.d.ts" />
+﻿/// <reference path="../../../packages/knockout.TypeScript.DefinitelyTyped.0.5.4/Content/Scripts/typings/knockout/knockout.d.ts" />
 
 var PresentationVM;
 (function (PresentationVM) {
@@ -17,7 +17,6 @@ var PresentationVM;
     // Overall ViewModel for one user's presentations
     var PresetationViewModel = (function () {
         function PresetationViewModel() {
-            this.self = this;
         }
         PresetationViewModel.prototype.addPresentation = function (presentation) {
             this.UserPresentations.push(presentation);
@@ -25,15 +24,18 @@ var PresentationVM;
         PresetationViewModel.prototype.deletePresentation = function () {
             // Somehow need to reference which object.
         };
+        PresetationViewModel.prototype.renamePresentation = function () {
+        };
         return PresetationViewModel;
     })();
     PresentationVM.PresetationViewModel = PresetationViewModel;
 })(PresentationVM || (PresentationVM = {}));
 
-$(function () {
-    ko.applyBindings(new PresentationVM.PresetationViewModel());
+/*
+$(() => {
+ko.applyBindings(new PresentationVM.PresetationViewModel());
 });
-
+*/
 var UserVM;
 (function (UserVM) {
     var User = (function () {
