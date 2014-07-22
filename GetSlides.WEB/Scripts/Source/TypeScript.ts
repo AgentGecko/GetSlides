@@ -1,39 +1,59 @@
 ﻿/// <reference path="knockout.d.ts" />
-module PresentationViewModel {
+
+declare var $: any;
+
+module PresentationVM {
 
     export interface IPresentation {
-        Id: number;
     }
 
     // Class to represent a presentation 
     export class Presentation implements IPresentation {
-        Id: number;
-        UserId: number;
-        ImgUri: any;
-        Info: string;
+        
+        // Presentation properties - only those which are to be shown in the View
+        // Those properties which the user will be allowed to change are knockout observeables.
+        Name: KnockoutObservable<string>;
+        Picture: HTMLImageElement; 
+        Info: KnockoutObservable<string>; 
         DateUploaded: number;
 
-        getID() {
-            return this.Id;
+        constructor(name: string, pic: HTMLImageElement, info: string, dateUploaded: number){
+            this.Name = name;
+            this.Picture = pic;
+            this.Info = info;
+            this.DateUploaded = dateUploaded;
         }
-        setID(newID: number) {
-            this.Id = newID;
-        }
-        getUserID() {
-            return this.UserId;
-        }
-
     }
 
-    // Overall ViewModel for one user's screen
+    // Overall ViewModel for one user's presentations
     export class PresetationViewModel {
         self: any = this;
-        UserId: number;
-
+       
         UserPresentations: KnockoutObservableArray<Presentation>;
+        
+        addPresentation(presentation: Presentation) {
+            this.UserPresentations.push(presentation);
+        }
+        deletePresentation() {
+             // Somehow need to reference which object.
+        }
+        
+    }
+}
 
-        
-        
+$(() => {
+    ko.applyBindings(new PresentationVM.PresetationViewModel());
+});
+
+
+module UserVM {
+    export class User {
+        UserName: string;
+    }
+
+    export class UserViewModel {
+        MyUser: User;
+
 
     }
 }

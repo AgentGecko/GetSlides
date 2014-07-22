@@ -1,30 +1,53 @@
 ﻿/// <reference path="knockout.d.ts" />
-var PresentationViewModel;
-(function (PresentationViewModel) {
+
+var PresentationVM;
+(function (PresentationVM) {
     // Class to represent a presentation
     var Presentation = (function () {
-        function Presentation() {
+        function Presentation(name, pic, info, dateUploaded) {
+            this.Name = name;
+            this.Picture = pic;
+            this.Info = info;
+            this.DateUploaded = dateUploaded;
         }
-        Presentation.prototype.getID = function () {
-            return this.Id;
-        };
-        Presentation.prototype.setID = function (newID) {
-            this.Id = newID;
-        };
-        Presentation.prototype.getUserID = function () {
-            return this.UserId;
-        };
         return Presentation;
     })();
-    PresentationViewModel.Presentation = Presentation;
+    PresentationVM.Presentation = Presentation;
 
-    // Overall ViewModel for one user's screen
+    // Overall ViewModel for one user's presentations
     var PresetationViewModel = (function () {
         function PresetationViewModel() {
             this.self = this;
         }
+        PresetationViewModel.prototype.addPresentation = function (presentation) {
+            this.UserPresentations.push(presentation);
+        };
+        PresetationViewModel.prototype.deletePresentation = function () {
+            // Somehow need to reference which object.
+        };
         return PresetationViewModel;
     })();
-    PresentationViewModel.PresetationViewModel = PresetationViewModel;
-})(PresentationViewModel || (PresentationViewModel = {}));
+    PresentationVM.PresetationViewModel = PresetationViewModel;
+})(PresentationVM || (PresentationVM = {}));
+
+$(function () {
+    ko.applyBindings(new PresentationVM.PresetationViewModel());
+});
+
+var UserVM;
+(function (UserVM) {
+    var User = (function () {
+        function User() {
+        }
+        return User;
+    })();
+    UserVM.User = User;
+
+    var UserViewModel = (function () {
+        function UserViewModel() {
+        }
+        return UserViewModel;
+    })();
+    UserVM.UserViewModel = UserViewModel;
+})(UserVM || (UserVM = {}));
 //# sourceMappingURL=app.js.map
