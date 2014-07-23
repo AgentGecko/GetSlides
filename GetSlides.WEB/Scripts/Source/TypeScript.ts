@@ -1,6 +1,6 @@
-﻿/// <reference path="../../../packages/knockout.TypeScript.DefinitelyTyped.0.5.4/Content/Scripts/typings/knockout/knockout.d.ts" />
-
-declare var $: any;
+﻿/// <reference path="../typings/jquery/jquery.d.ts" />
+/// <reference path="../typings/knockout/knockout.d.ts" />
+/// <reference path="../typings/knockout.viewmodel/knockout.viewmodel.d.ts" />
 
 module PresentationVM {
 
@@ -40,6 +40,15 @@ module PresentationVM {
         removePresentation(){
              // Somehow need to reference which object.
         }
+        loadPresentations() {
+            $.ajax({
+               url: 'https://getslidesapi.azurewebsites.net/api/presentation',
+               type: 'GET'
+            }).done((result: Array<Presentation>) => {
+                result.forEach(p => this.UserPresentations.push(p));
+            });
+        }
+
        }
 
 }
@@ -53,6 +62,7 @@ $(() => {
     prezentacije.push(prezentacija1);
 
     var prezVM = new PresentationVM.PresetationViewModel(prezentacije);
+    prezVM.loadPresentations();
     ko.applyBindings(prezVM);
 });
 

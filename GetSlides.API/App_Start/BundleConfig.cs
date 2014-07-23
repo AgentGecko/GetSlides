@@ -10,6 +10,7 @@ namespace GetSlides.API
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            /*
             bundles.Add(new ScriptBundle("~/bundles/vendor").Include("~/Scripts/jquery-{version}.js",
                                                                      "~/Scripts/bootstrap.min.js",
                                                                      "~/Scripts/jquery.validate.min.js",
@@ -18,8 +19,8 @@ namespace GetSlides.API
             bundles.Add(new StyleBundle("~/bundles/vendorcss").Include("~/Content/bootstrap-theme.min.css",
                                                                     "~/Content/bootstrap.min.css"));
             bundles.Add(new StyleBundle("~/bundles/sourcecss").Include("~/Content/Source/*.css"));
-
-            BundleTable.EnableOptimizations = true;
+            */
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

@@ -62,7 +62,7 @@ body {
             color:whitesmoke;
             text-shadow:none;
         }
-    .login-form #email-error {
+    .login-form #email-error, .login-form #password-error{
         display: block;
         text-align:center;
         position:relative;

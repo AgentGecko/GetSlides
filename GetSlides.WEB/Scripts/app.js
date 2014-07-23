@@ -1,5 +1,6 @@
-﻿/// <reference path="../../../packages/knockout.TypeScript.DefinitelyTyped.0.5.4/Content/Scripts/typings/knockout/knockout.d.ts" />
-
+﻿/// <reference path="../typings/jquery/jquery.d.ts" />
+/// <reference path="../typings/knockout/knockout.d.ts" />
+/// <reference path="../typings/knockout.viewmodel/knockout.viewmodel.d.ts" />
 var PresentationVM;
 (function (PresentationVM) {
     // Class to represent a presentation
@@ -29,6 +30,17 @@ var PresentationVM;
         PresetationViewModel.prototype.removePresentation = function () {
             // Somehow need to reference which object.
         };
+        PresetationViewModel.prototype.loadPresentations = function () {
+            var _this = this;
+            $.ajax({
+                url: 'https://getslidesapi.azurewebsites.net/api/presentation',
+                type: 'GET'
+            }).done(function (result) {
+                result.forEach(function (p) {
+                    return _this.UserPresentations.push(p);
+                });
+            });
+        };
         return PresetationViewModel;
     })();
     PresentationVM.PresetationViewModel = PresetationViewModel;
@@ -43,6 +55,7 @@ $(function () {
     prezentacije.push(prezentacija1);
 
     var prezVM = new PresentationVM.PresetationViewModel(prezentacije);
+    prezVM.loadPresentations();
     ko.applyBindings(prezVM);
 });
 

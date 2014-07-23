@@ -16,9 +16,9 @@ namespace GetSlides.API.Controllers
         {
             //return new List<string> { "a", "b", "c" };
             List<Presentation> lista = new List<Presentation>();
-            lista.Add(new Presentation("Moje ime", "", "Info moj je da Davida volim", ""));
-            lista.Add(new Presentation("Nesto", "", "Gospodine Abrame ja vas voljam (cat)", ""));
-            lista.Add(new Presentation("Randomsranje", "", "lovelovelove", ""));
+            lista.Add(new Presentation("Prezentacija3", "", "Info neki jako jako jako jako jako jako jako jako jako jako dug.", ""));
+            lista.Add(new Presentation("Prezetacija4", "", "Info4", ""));
+            lista.Add(new Presentation("Prezentacija5", "", "Info5", ""));
             return lista;
         }
     }

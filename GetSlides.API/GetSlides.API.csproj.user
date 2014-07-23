@@ -8,6 +8,12 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44301</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <NameOfLastUsedPublishProfile>getslidesapi</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
@@ -30,6 +36,15 @@
           </StartWorkingDirectory>
           <EnableENC>True</EnableENC>
           <AlwaysStartWebServerOnDebug>True</AlwaysStartWebServerOnDebug>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6640</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44301/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
