@@ -18,8 +18,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="About\Index.html" />
-    <Content Include="Content\Source\CustomStyle1.css" />
-    <Content Include="Content\Source\CustomSyle.css" />
+    <Content Include="Content\Source\CustomStyle.css" />
+    <Content Include="Content\Source\Custom.css" />
     <Content Include="Content\vendor.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Index.html" />
@@ -30,6 +30,7 @@
     <Content Include="Pictures\GetSlides.png" />
     <Content Include="Pictures\GetSlides1.png" />
     <Content Include="Presentation\Index.html" />
+    <Content Include="Presentation\PresentationOptions\Index.html" />
     <Content Include="Presentation\Present\Index.html" />
     <Content Include="Presentation\Watch\Index.html" />
     <Content Include="Registration\Index.html" />
