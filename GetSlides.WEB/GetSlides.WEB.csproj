@@ -34,6 +34,8 @@
     <Content Include="Presentation\Present\Index.html" />
     <Content Include="Presentation\Watch\Index.html" />
     <Content Include="Registration\Index.html" />
+    <Content Include="Scripts\sammy-0.7.4.js" />
+    <Content Include="Scripts\sammy-0.7.4.min.js" />
     <Content Include="Scripts\Source\CustomJS.js" />
     <Content Include="Scripts\vendor.js" />
     <Content Include="Settings\Index.html" />
@@ -53,6 +55,7 @@
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout.viewmodel\knockout.viewmodel.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sammyjs\sammyjs.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
