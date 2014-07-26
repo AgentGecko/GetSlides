@@ -17,28 +17,29 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="About\Index.html" />
+    <Content Include="Index.html" />
+    <Content Include="Views\About\Index.html" />
     <Content Include="Content\Source\CustomStyle.css" />
     <Content Include="Content\Source\Custom.css" />
     <Content Include="Content\vendor.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Index.html" />
+    <Content Include="LogIn\Index.html" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Pictures\GetSlides.png" />
     <Content Include="Pictures\GetSlides1.png" />
-    <Content Include="Presentation\Index.html" />
-    <Content Include="Presentation\PresentationOptions\Index.html" />
-    <Content Include="Presentation\Present\Index.html" />
-    <Content Include="Presentation\Watch\Index.html" />
+    <Content Include="Views\Presentation\Index.html" />
+    <Content Include="Views\Presentation\PresentationOptions\Index.html" />
+    <Content Include="Views\Presentation\Present\Index.html" />
+    <Content Include="Views\Presentation\Watch\Index.html" />
     <Content Include="Registration\Index.html" />
     <Content Include="Scripts\sammy-0.7.4.js" />
     <Content Include="Scripts\sammy-0.7.4.min.js" />
     <Content Include="Scripts\Source\CustomJS.js" />
     <Content Include="Scripts\vendor.js" />
-    <Content Include="Settings\Index.html" />
+    <Content Include="Views\Settings\Index.html" />
     <Content Include="Template.html" />
     <Content Include="web.config" />
   </ItemGroup>
@@ -57,6 +58,7 @@
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sammyjs\sammyjs.d.ts" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GetSlides</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="../Content/vendor.css" />
+    <link rel="stylesheet" href="../Content/Source/Custom.css" />
+    <link rel="stylesheet" href="../Content/Source/CustomStyle.css" />
+   
+</head>
+<body>
+    
+    <form class="login-form" novalidate="novalidate">
+        <img src="Pictures/GetSlides1.png" />
+        <h1>GetSlides</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Insert Your E-mail" id="email" name="email">
+            <input type="text" class="form-control" placeholder="Insert Your Password" id="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-default btn-block">Submit</button>
+    </form>
+    <div class="login-footer">
+        <a href="#">Forgot password?</a>
+        <a href="#">Continue as anon</a>
+    </div>
+
+    <script src="Scripts/vendor.js"></script>
+    <script src="Scripts/Source/CustomJS.js"></script>    
+    <script>
+        $(".login-form").validate({
+            rules: {
+                password: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                password: {
+                    required: "Password required for log in."
+                },
+                email: {
+                    required: "Your email is required for logging in.",
+                    email: "Your email address must be in the format of name@domain.com"
+                }
+            }
+        });
+    </script>
+</body>
+</html>
