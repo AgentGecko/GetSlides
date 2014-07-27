@@ -53,16 +53,16 @@ module PresentationVM {
 
 }
 
-$(() => {
+$(".row").ready(function(){
     var prezentacija = new PresentationVM.Presentation("Prezentacija", "pic1", "info1", "date1");
-    var prezentacija1 = new PresentationVM.Presentation("Prezentacija2", "pic2","info2","date2" );
+    var prezentacija1 = new PresentationVM.Presentation("Prezentacija2", "pic2", "info2", "date2");
 
     var prezentacije = new Array<PresentationVM.Presentation>();
     prezentacije.push(prezentacija);
     prezentacije.push(prezentacija1);
 
     var prezVM = new PresentationVM.PresetationViewModel(prezentacije);
-    prezVM.loadPresentations();
+   // prezVM.loadPresentations();
     ko.applyBindings(prezVM);
 });
 

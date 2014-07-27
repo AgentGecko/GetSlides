@@ -46,7 +46,7 @@ var PresentationVM;
     PresentationVM.PresetationViewModel = PresetationViewModel;
 })(PresentationVM || (PresentationVM = {}));
 
-$(function () {
+$(".row").ready(function () {
     var prezentacija = new PresentationVM.Presentation("Prezentacija", "pic1", "info1", "date1");
     var prezentacija1 = new PresentationVM.Presentation("Prezentacija2", "pic2", "info2", "date2");
 
@@ -55,7 +55,8 @@ $(function () {
     prezentacije.push(prezentacija1);
 
     var prezVM = new PresentationVM.PresetationViewModel(prezentacije);
-    prezVM.loadPresentations();
+
+    // prezVM.loadPresentations();
     ko.applyBindings(prezVM);
 });
 
