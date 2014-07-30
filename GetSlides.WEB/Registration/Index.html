@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <title>GetSlides registration</title>
-    <link rel="stylesheet" href="../Content/Source/CustomStyle1.css" />
     <link rel="stylesheet" href="../Content/vendor.css" />
+    <link rel="stylesheet" href="../Content/Source/CustomStyle.css" />
 </head>
 <body>
     <form class="login-form" novalidate="novalidate">
@@ -16,6 +16,7 @@
         </div>
         <button type="submit" class="btn btn-default btn-block">Register</button>
     </form>
+    <script src="../Scripts/vendor.js"></script>
     <script>
         $(document).ready(function () {
 
@@ -37,17 +38,17 @@
                 },
                 messages: {
                     email: {
-                        required: "enter emali"
+                        required: "Your email is required for registration."
                     },
                     password1: {
-                        required: "specify password"
+                        required: "You need to enter a password for Your GetSlides account."
                     },
                     password2: {
-                        required: "confirm password",
-                        equalTo: "enter the same password as above"
+                        required: "You need to confirm Your password.",
+                        equalTo: "Please enter the same password as above."
                     },
                     username: {
-                        required: "enter username"
+                        required: "A username is required for registration."
                     }
                 }
             });
