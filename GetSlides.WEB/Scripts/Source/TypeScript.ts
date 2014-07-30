@@ -53,19 +53,21 @@ module PresentationVM {
 
 }
 
-$(".row").ready(function(){
-    var prezentacija = new PresentationVM.Presentation("Prezentacija", "pic1", "info1", "date1");
-    var prezentacija1 = new PresentationVM.Presentation("Prezentacija2", "pic2", "info2", "date2");
+class moja
+{
 
-    var prezentacije = new Array<PresentationVM.Presentation>();
-    prezentacije.push(prezentacija);
-    prezentacije.push(prezentacija1);
+    static presentations() {
+        var prezentacija = new PresentationVM.Presentation("Prezentacija", "pic1", "info1", "date1");
+        var prezentacija1 = new PresentationVM.Presentation("Prezentacija2", "pic2", "info2", "date2");
 
-    var prezVM = new PresentationVM.PresetationViewModel(prezentacije);
-   // prezVM.loadPresentations();
-    ko.applyBindings(prezVM);
-});
-
+        var prezentacije = new Array<PresentationVM.Presentation>();
+        prezentacije.push(prezentacija);
+        prezentacije.push(prezentacija1);
+        var prezVM = new PresentationVM.PresetationViewModel(prezentacije);
+       // prezVM.loadPresentations();
+        ko.applyBindings(prezVM);
+    }
+}
 
 module UserVM {
     export class User {

@@ -60,7 +60,7 @@
                 this.element_selector = '.view-container';
 
                 this.get('#/', function () {
-                    this.partial('/Views/Presentation/Index.html');
+                    this.partial('/Views/Presentation/Index.html',null, moja.presentations,null);
                 });
 
                 this.get('#/About', function () {
