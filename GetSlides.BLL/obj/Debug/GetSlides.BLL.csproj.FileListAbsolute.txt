@@ -1,7 +1,0 @@
-C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.BLL\bin\Debug\GetSlides.BLL.dll
-C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.BLL\bin\Debug\GetSlides.BLL.pdb
-C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.BLL\bin\Debug\GetSlides.DAL.dll
-C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.BLL\bin\Debug\GetSlides.DAL.pdb
-C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.BLL\obj\Debug\GetSlides.BLL.csprojResolveAssemblyReference.cache
-C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.BLL\obj\Debug\GetSlides.BLL.dll
-C:\Users\Danica\Documents\GitHub\GetSlides\GetSlides.BLL\obj\Debug\GetSlides.BLL.pdb
