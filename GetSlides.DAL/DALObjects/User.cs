@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GetSlides.BLL
+namespace GetSlides.DAL
 {
-    public class Class1
+    public partial class User : IDALObject
     {
     }
 }
