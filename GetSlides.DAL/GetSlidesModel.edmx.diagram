@@ -5,9 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="711a0424378e41de868db5c05e84f715" Name="Diagram1">
-        <EntityTypeShape EntityType="GetSlidesModel.AuthToken" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="GetSlidesModel.User" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="GetSlidesModel.AuthToken" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="GetSlidesModel.EmailToken" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="GetSlidesModel.User" Width="1.5" PointX="0.75" PointY="2.375" />
         <AssociationConnector Association="GetSlidesModel.FK_Users_AuthTokens" />
+        <AssociationConnector Association="GetSlidesModel.FK_EmailTokens_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -31,7 +31,6 @@ namespace GetSlides.DAL
                 context.SaveChanges();
             }
         }
-
         public override void Update(User user) 
         {
             using(GetSlidesDBEntities context = new GetSlidesDBEntities())
@@ -41,7 +40,6 @@ namespace GetSlides.DAL
                 context.SaveChanges();
             }
         }
-
         public override void Delete(User user) 
         {
             using(GetSlidesDBEntities context = new GetSlidesDBEntities())
@@ -50,7 +48,6 @@ namespace GetSlides.DAL
                 context.SaveChanges();
             }
         }
-
         public AuthToken GetLatestToken(User user) 
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
@@ -58,5 +55,13 @@ namespace GetSlides.DAL
                 return context.Users.FirstOrDefault(t => t.ID == user.ID).AuthTokens.Where(t => t.StartDateTime + TimeSpan.Parse(t.Timespan.ToString()) > DateTime.Now).OrderByDescending(t => t.StartDateTime).FirstOrDefault();
             }
         }
+        public EmailToken GetLatestEmailToken(User user) 
+        {
+            using (GetSlidesDBEntities context = new GetSlidesDBEntities()) 
+            {
+                return context.Users.FirstOrDefault(t => t.ID == user.ID).EmailTokens.OrderByDescending(t => t.StartDateTime).FirstOrDefault();
+            }
+        }
+    
     }
 }

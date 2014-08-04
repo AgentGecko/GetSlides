@@ -10,5 +10,8 @@ namespace GetSlides.BLL
     {
         ICollection<T> Select();
         T Select(string ID);
+        void Update(T item);
+        void Delete(T item);
+        void Create(T item);
     }
 }

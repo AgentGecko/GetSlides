@@ -26,6 +26,7 @@ namespace GetSlides.DAL
         }
     
         public virtual DbSet<AuthToken> AuthTokens { get; set; }
+        public virtual DbSet<EmailToken> EmailTokens { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

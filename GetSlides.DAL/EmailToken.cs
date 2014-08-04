@@ -12,20 +12,12 @@ namespace GetSlides.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class EmailToken
     {
-        public User()
-        {
-            this.AuthTokens = new HashSet<AuthToken>();
-            this.EmailTokens = new HashSet<EmailToken>();
-        }
-    
         public string ID { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string PasswordHash { get; set; }
+        public string UserID { get; set; }
+        public System.DateTime StartDateTime { get; set; }
     
-        public virtual ICollection<AuthToken> AuthTokens { get; set; }
-        public virtual ICollection<EmailToken> EmailTokens { get; set; }
+        public virtual User User { get; set; }
     }
 }
