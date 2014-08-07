@@ -8,5 +8,6 @@ namespace GetSlides.DAL
 {
     public partial class User : IDALObject
     {
+       
     }
 }

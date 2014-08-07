@@ -52,6 +52,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Source\UserAuthentication.ts" />
     <TypeScriptCompile Include="Scripts\Source\TypeScript.ts" />
     <TypeScriptCompile Include="Scripts\Source\Validation.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
