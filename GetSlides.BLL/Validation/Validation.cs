@@ -52,18 +52,6 @@ namespace GetSlides.BLL
         }
         #endregion
 
-        /*
-        public static bool UsernameExists(object username) 
-        {
-            UserRepository bllRepo = new UserRepository();
-            return bllRepo.Select().Select(t => t.Username == username.ToString()).FirstOrDefault();
-        }
-        public static bool EmailExists(object email) 
-        {
-            UserRepository bllRepo = new UserRepository();
-            return bllRepo.Select().Select(t => t.Email == email.ToString()).FirstOrDefault();
-        }
-       */
         #endregion
     }
 }
