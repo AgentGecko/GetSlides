@@ -14,7 +14,7 @@
             <input type="password" placeholder="Enter password" class="form-control" name="password1"/>
             <input type="password" placeholder="Re-enter password" class="form-control" name="password2"/>
         </div>
-        <button type="submit" class="btn btn-default btn-block" onclick="reg()">Register</button>
+        <button type="button" class="btn btn-default btn-block" onclick="reg()">Register</button>
     </form>
     <script src="../Scripts/vendor.js"></script>
     <script src="../Scripts/Source/Validation.js"></script>
@@ -22,7 +22,7 @@
     <script>
         $(document).ready(Validate.RegisterValidation());
         function reg() {
-            UserAuthentication.register($(username).val(), $(email).val(), $(password1).val(),$(password2).val());
+            UserAuthentication.register($("input[name = username]").val(), $("input[name = email]").val(), $("input[name = password1]").val(), $("input[name = password2]").val());
         }
     </script>
 </body>

@@ -5,14 +5,12 @@ class UserAuthentication
     public static register(username: string, email: string, password: string, confirmPassword: string)
     {
         $.ajax({
-            url: "api/Register/?username=" + username + "&email=" + email + "&password=" + password + "&confirmPassword=" + confirmPassword,
+            url: "//getslidesapi.azurewebsites.net//api/Register/?username=" + username + "&email=" + email + "&password=" + password + "&confirmPassword=" + confirmPassword,
             type: "POST"
         }).done(function () {
-                alert('Successful registration. To continue confirm email.')
-
+            window.location.assign('../Index.html');
             }).fail(function () {
-                alert('Failed to register. Try again')
-
+                alert('Failed to register. Try again');
             });
     }
 

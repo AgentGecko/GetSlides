@@ -1,13 +1,11 @@
 ﻿/// <reference path="../typings/jquery/jquery.d.ts" />
 /// <reference path="../typings/jquery.validation/jquery.validation.d.ts" />
-
-class Validate{
-
-    public static RegisterValidation() {
-
+var Validate = (function () {
+    function Validate() {
+    }
+    Validate.RegisterValidation = function () {
         $('.login-form').validate({
-            rules:
-            {
+            rules: {
                 email: {
                     required: true,
                     email: true
@@ -42,10 +40,9 @@ class Validate{
                 }
             }
         });
-    }
+    };
 
-    public static LogInValidation() {
-
+    Validate.LogInValidation = function () {
         $(".login-form").validate({
             rules: {
                 password: {
@@ -66,5 +63,7 @@ class Validate{
                 }
             }
         });
-    }    
-}
+    };
+    return Validate;
+})();
+//# sourceMappingURL=Validation.js.map

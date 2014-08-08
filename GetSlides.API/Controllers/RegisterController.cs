@@ -17,6 +17,7 @@ namespace GetSlides.API.Controllers
             {
                 UserRepository userBLLRepo = new UserRepository();
                 userBLLRepo.Create(username, email, password, confirmPassword, Hash.CreateHash(password));
+                //SO! Email confirmation should be sent only if the BLL sends a positive responce from saving into DB
                 return true;
             }
             catch(Exception ex)

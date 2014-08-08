@@ -40,7 +40,10 @@ namespace GetSlides.BLL
         }
         public void Create(string username, string email, string password, string confirmPassword, string passwordHash)
         {
-            // user.VALIDATEME!();
+            if(!Validation.ValidateInputUsername(username))
+                ; // Do something to tell the controller
+            if (!Validation.ValidateInputEmail(email))
+                ; // Do something to tell the controller
             var user = new User { Username = username, Email = email, PasswordHash = passwordHash };
             this.Create(user);
         }
