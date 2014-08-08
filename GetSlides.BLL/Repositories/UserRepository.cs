@@ -40,15 +40,25 @@ namespace GetSlides.BLL
         }
         public void Create(string username, string email, string password, string confirmPassword, string passwordHash)
         {
-            if(!Validation.ValidateInputUsername(username))
+        //    if(!Validation.ValidateInputUsername(username))
                 ; // Do something to tell the controller
-            if (!Validation.ValidateInputEmail(email))
+        //    if (!Validation.ValidateInputEmail(email))
                 ; // Do something to tell the controller
             var user = new User { Username = username, Email = email, PasswordHash = passwordHash };
             this.Create(user);
         }
         #endregion
 
+        public bool UsernameExists(string username)
+        {
+            DAL.UserRepository dalRepo = new DAL.UserRepository();
+            return dalRepo.UsernameExists(username);
+        }
+        public bool EmailExists(string email) 
+        {
+            DAL.UserRepository dalRepo = new DAL.UserRepository();
+            return dalRepo.EmailExists(email);
+        }
         private ICollection<User> CollectionFromDAL(ICollection<DAL.User> users) 
         {
             var BLLList = new HashSet<User>();

@@ -8,6 +8,7 @@ namespace GetSlides.DAL
 {
     public class UserRepository : DALRepository<User>
     {
+        #region CRUD
         public override ICollection<User> Select() 
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
@@ -24,11 +25,15 @@ namespace GetSlides.DAL
         }
         public override void Create(User user) 
         {
+            // Ovo bi trebalo bit bool da vrati false ako je postojao. To treba nekako diferencirati.
             using (GetSlidesDBEntities context = new GetSlidesDBEntities()) 
             {
-                user.ID = this.GenerateID();
-                context.Users.Add(user);
-                context.SaveChanges();
+                if(!UsernameExists(user.Username) && !EmailExists(user.Email))
+                {
+                    user.ID = this.GenerateID();
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                } 
             }
         }
         public override void Update(User user) 
@@ -48,6 +53,8 @@ namespace GetSlides.DAL
                 context.SaveChanges();
             }
         }
+        #endregion
+
         public AuthToken GetLatestToken(User user) 
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
@@ -62,6 +69,25 @@ namespace GetSlides.DAL
                 return context.Users.FirstOrDefault(t => t.ID == user.ID).EmailTokens.OrderByDescending(t => t.StartDateTime).FirstOrDefault();
             }
         }
-    
+        public bool UsernameExists(string username) 
+        {
+            using (GetSlidesDBEntities context = new GetSlidesDBEntities()) 
+            {
+                if (context.Users.Select(t => t.Username == username).FirstOrDefault())
+                    return true;
+                else
+                    return false;
+            }
+        }
+        public bool EmailExists(string email) 
+        {
+            using (GetSlidesDBEntities context = new GetSlidesDBEntities())
+            {
+                if (context.Users.Select(t => t.Email == email).FirstOrDefault())
+                    return true;
+                else
+                    return false;
+            }
+        }
     }
 }

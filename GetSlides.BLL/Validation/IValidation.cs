@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GetSlides.BLL
 {
-    public interface IBLLObject 
+    public interface IValidation
     {
-        string ID { get; }
+       bool Validate();
     }
 }

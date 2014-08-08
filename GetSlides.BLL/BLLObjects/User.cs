@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GetSlides.BLL
 {
-    public class User : IBLLObject
+    public class User : Validation, IBLLObject
     {
         private string id;
         public string ID { get { return this.id; } }
@@ -21,6 +21,16 @@ namespace GetSlides.BLL
             this.Username = username;
             this.Email = email;
             this.PasswordHash = passwordHash;
+        }
+
+        public override bool Validate()
+        {
+            if (!ValidateInputEmail(this.Email))
+                return false; // +Signal faulty email
+            if (!ValidateInputUsername(this.Username))
+                return false; // +Signal faulty username
+            // Password je u ovom trenu problem jer već u API-ju prolazi kroz hash i ne šalje se.
+            return true;
         }
 
         public static User FromDALObject(DAL.User user) 
