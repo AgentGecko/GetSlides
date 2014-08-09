@@ -41,7 +41,9 @@ namespace GetSlides.BLL
         public void Create(string username, string email, string password, string confirmPassword, string passwordHash)
         {
             var user = new User { Username = username, Email = email, PasswordHash = passwordHash };
-            this.Create(user);
+            if(user.Validate(password) && !UsernameExists(username) && !EmailExists(email))
+                this.Create(user);
+            // else ask for new information.
         }
         #endregion
 

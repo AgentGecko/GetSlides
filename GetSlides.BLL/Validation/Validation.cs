@@ -23,11 +23,8 @@ namespace GetSlides.BLL
         #region UserValidation
         protected bool ValidateInputEmail(string email)
         {
-            UserRepository userRepo = new UserRepository();
-
             // Regular Expression for testing whether the input is an valid e-mail pattern.
             if (System.Text.RegularExpressions.Regex.IsMatch(email, @"/^(\w+|(\w+\.\w+)+)@\w+\.\w+$/",RegexOptions.ECMAScript))
-               if(!userRepo.EmailExists(email))
                     return true;
            
             return false;
@@ -38,7 +35,6 @@ namespace GetSlides.BLL
 
             // Regular Expression for testing whether the input contains only alphanumeric characters and the underscore.
             if (System.Text.RegularExpressions.Regex.IsMatch(username, @"/^\w+$", RegexOptions.ECMAScript))
-               if(!userRepo.UsernameExists(username))
                     return true;
             return false;
         }
