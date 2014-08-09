@@ -57,6 +57,7 @@
     <Compile Include="DALObjects\EmailToken.cs" />
     <Compile Include="DALObjects\IDALObject.cs" />
     <Compile Include="DALObjects\User.cs" />
+    <Compile Include="DALRepositories\AuthTokenRepository.cs" />
     <Compile Include="DALRepositories\EmailTokenRepository.cs" />
     <Compile Include="DALRepositories\IDALRepository.cs" />
     <Compile Include="DALRepositories\DALRepository.cs" />

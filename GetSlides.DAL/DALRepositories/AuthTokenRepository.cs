@@ -6,51 +6,49 @@ using System.Threading.Tasks;
 
 namespace GetSlides.DAL
 {
-    public class EmailTokenRepository : DALRepository<EmailToken>
+    public class AuthTokenRepository : DALRepository<AuthToken>
     {
         #region CRUD
-        public override ICollection<EmailToken> Select()
+        public override ICollection<AuthToken> Select()
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
-                return context.EmailTokens.ToList();
+                return context.AuthTokens.ToList();
             }
         }
-        public override EmailToken Select(string ID)
+        public override AuthToken Select(string ID)
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
-                return context.EmailTokens.FirstOrDefault(t => t.ID == ID);
+                return context.AuthTokens.FirstOrDefault(t => t.ID == ID);
             }
         }
-        public override void Create(EmailToken token)
+        public override void Create(AuthToken token)
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
                 token.ID = this.GenerateID();
-                context.EmailTokens.Add(token);
+                context.AuthTokens.Add(token);
                 context.SaveChanges();
             }
         }
-
-        public override void Update(EmailToken token)
+        public override void Update(AuthToken token)
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
-                var DBToken = context.EmailTokens.FirstOrDefault(t => t.ID == token.ID);
+                var DBToken = context.AuthTokens.FirstOrDefault(t => t.ID == token.ID);
                 DBToken = token;
                 context.SaveChanges();
             }
         }
-
-        public override void Delete(EmailToken token)
+        public override void Delete(AuthToken token)
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
-                context.EmailTokens.Remove(token);
+                context.AuthTokens.Remove(token);
                 context.SaveChanges();
             }
-        } 
+        }
         #endregion
     }
 }

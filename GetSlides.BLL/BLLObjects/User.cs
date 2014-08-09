@@ -31,7 +31,7 @@ namespace GetSlides.BLL
                 return false; // +Signal faulty username
             return true;
         }
-        public override bool Validate(string password)
+        public bool Validate(string password)
         {
             if (!ValidateInputEmail(this.Email))
                 return false; // +Signal faulty email
