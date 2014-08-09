@@ -89,5 +89,15 @@ namespace GetSlides.DAL
                     return false;
             }
         }
+        public bool PasswordExists(string passwordHash)
+        {
+            using (GetSlidesDBEntities context = new GetSlidesDBEntities())
+            {
+                if (context.Users.Select(t => t.PasswordHash == passwordHash).FirstOrDefault())
+                    return true;
+                else 
+                    return false;
+            }
+        }
     }
 }
