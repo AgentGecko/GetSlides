@@ -67,6 +67,7 @@ module GetSlidesBinding
         prezentacije.push(prezentacija);
         prezentacije.push(prezentacija1);
         var prezVM = new PresetationViewModel(prezentacije);
+        ko.cleanNode($('#UserPresentationContainer')[0]);
         ko.applyBindings(prezVM, document.getElementById('UserPresentationContainer'));
     }
 }
