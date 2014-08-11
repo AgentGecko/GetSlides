@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="Content/Source/CustomStyle.css" />
 </head>
 <body>
-    <!--Navigation bar-->
+   <!--Navigation bar-->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -25,11 +25,11 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#/">MyPresentations</a></li>
-                    <li><a href="#/Watch">Watch a Presentation</a></li>
+                    <li><a href="#/Watch">Watch</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#/Account">Account Info</a></li>
+                            <li><a href="#/Account">Account</a></li>
                             <li><a href="#/LogOut">Log Out</a></li>
                         </ul>
                     </li>
@@ -39,9 +39,7 @@
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
                 </form>
-                <p class="navbar-text navbar-right">Signed in as <a href="#/Account" class="navbar-link">Mark Otto</a></p>
-                <p class="navbar-text navbar-right">Sign in</p>
-                <p class="navbar-text navbar-right">Register</p>
+                <p class="navbar-text navbar-right">Signed in as <a href="#/Account" class="navbar-link" >Username placeholder</a></p>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -54,6 +52,7 @@
     <script src="Scripts/vendor.js"></script>
     <script src="Scripts/sammy-0.7.4.min.js"></script>
     <script src="../Scripts/App.js"></script>
+    <script src="Scripts/Source/Bindings.js"></script>
     <script>
         // Sammy.js view changes
        ; (function ($) {
@@ -61,7 +60,7 @@
                 this.element_selector = '.view-container';
 
                 this.get('#/', function () {
-                    this.partial('/Views/Presentation/Index.html',null, moja.presentations,null);
+                    this.partial('/Views/Presentation/Index.html', null, GetSlidesBinding.BindPrezVM, null);
                 });
 
                 this.get('#/About', function () {

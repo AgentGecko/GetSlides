@@ -17,6 +17,7 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Default\Index.html" />
     <Content Include="Index.html" />
     <Content Include="Views\About\Index.html" />
     <Content Include="Content\Source\CustomStyle.css" />
@@ -52,8 +53,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Source\Bindings.ts" />
     <TypeScriptCompile Include="Scripts\Source\UserAuthentication.ts" />
-    <TypeScriptCompile Include="Scripts\Source\TypeScript.ts" />
     <TypeScriptCompile Include="Scripts\Source\Validation.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
