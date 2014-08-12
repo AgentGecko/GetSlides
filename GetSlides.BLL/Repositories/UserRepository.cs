@@ -70,10 +70,15 @@ namespace GetSlides.BLL
         {
             return tokenID == this.userDALRepo.GetLatestEmailToken(user.ToDALObject()).ID;
         }
-        public bool PasswoedHashExists(string passwordHash)
+        public bool PasswordExists(string passwordHash)
         {
             DAL.UserRepository dalRepo = new DAL.UserRepository();
             return dalRepo.PasswordExists(passwordHash);
+        }
+        public bool LogInValidation(string email, string passwordHash)
+        {
+            DAL.UserRepository dalRepo = new DAL.UserRepository();
+            return dalRepo.LogInValidation(email, passwordHash);
         }
     }
 }

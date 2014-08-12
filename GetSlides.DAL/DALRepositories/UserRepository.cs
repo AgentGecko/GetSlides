@@ -99,5 +99,20 @@ namespace GetSlides.DAL
                     return false;
             }
         }
+        public bool LogInValidation(string email, string passwordHash) 
+        {
+            if(PasswordExists(passwordHash))
+            { 
+                using (GetSlidesDBEntities context = new GetSlidesDBEntities())
+                {
+                    var user = context.Users.FirstOrDefault(t => t.Email == email);
+                    if (passwordHash == user.PasswordHash)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
