@@ -101,7 +101,7 @@ namespace GetSlides.DAL
         }
         public bool LogInValidation(string email, string passwordHash) 
         {
-            if(PasswordExists(passwordHash))
+            if(PasswordExists(passwordHash) && EmailExists(email))
             { 
                 using (GetSlidesDBEntities context = new GetSlidesDBEntities())
                 {
