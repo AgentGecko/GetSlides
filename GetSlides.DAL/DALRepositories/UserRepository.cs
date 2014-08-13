@@ -89,7 +89,7 @@ namespace GetSlides.DAL
                     return false;
             }
         }
-        public bool PasswordExists(string passwordHash)
+        public bool PasswordHashExists(string passwordHash)
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
@@ -99,7 +99,7 @@ namespace GetSlides.DAL
                     return false;
             }
         }
-        public bool LogInValidation(string email, string passwordHash) 
+        public bool LogInBaseValidation(string email, string passwordHash) 
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
