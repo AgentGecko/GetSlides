@@ -101,15 +101,12 @@ namespace GetSlides.DAL
         }
         public bool LogInValidation(string email, string passwordHash) 
         {
-            if(PasswordExists(passwordHash) && EmailExists(email))
-            { 
-                using (GetSlidesDBEntities context = new GetSlidesDBEntities())
+            using (GetSlidesDBEntities context = new GetSlidesDBEntities())
+            {
+                var user = context.Users.FirstOrDefault(t => t.Email == email);
+                if (passwordHash == user.PasswordHash)
                 {
-                    var user = context.Users.FirstOrDefault(t => t.Email == email);
-                    if (passwordHash == user.PasswordHash)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             return false;
