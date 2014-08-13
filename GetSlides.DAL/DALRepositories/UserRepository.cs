@@ -23,6 +23,13 @@ namespace GetSlides.DAL
                 return context.Users.FirstOrDefault(t => t.ID == ID);
             }
         }
+        public override User SelectByEmail(string email) 
+        {
+            using (GetSlidesDBEntities context = new GetSlidesDBEntities())
+            {
+                return context.Users.FirstOrDefault(t => t.Email == email);
+            }        
+        }
         public override void Create(User user) 
         {
             // Ovo bi trebalo bit bool da vrati false ako je postojao. To treba nekako diferencirati.

@@ -26,6 +26,10 @@ namespace GetSlides.BLL
         {
             return User.FromDALObject(this.userDALRepo.Select(ID));
         }
+        public User SelectByEmail(string email) 
+        {
+            return User.FromDALObject(this.userDALRepo.SelectByEmail(email));
+        }
         public void Update(User user) 
         {
             this.userDALRepo.Update(user.ToDALObject());
@@ -56,7 +60,13 @@ namespace GetSlides.BLL
         {
             DAL.UserRepository dalRepo = new DAL.UserRepository();
             return dalRepo.EmailExists(email);
+        } 
+        public bool PasswordHashExists(string passwordHash)
+        {
+            DAL.UserRepository dalRepo = new DAL.UserRepository();
+            return dalRepo.PasswordHashExists(passwordHash);
         }
+       
         private ICollection<User> CollectionFromDAL(ICollection<DAL.User> users) 
         {
             var BLLList = new HashSet<User>();
@@ -70,15 +80,17 @@ namespace GetSlides.BLL
         {
             return tokenID == this.userDALRepo.GetLatestEmailToken(user.ToDALObject()).ID;
         }
-        public bool PasswordHashExists(string passwordHash)
-        {
-            DAL.UserRepository dalRepo = new DAL.UserRepository();
-            return dalRepo.PasswordHashExists(passwordHash);
-        }
         public bool LogInBaseValidation(string email, string passwordHash)
         {
             DAL.UserRepository dalRepo = new DAL.UserRepository();
-            return dalRepo.LogInBaseValidation(email, passwordHash);
+            if (dalRepo.LogInBaseValidation(email, passwordHash))
+            {
+                AuthTokenRepository authTok = new AuthTokenRepository();
+                // Treba se odluciti oko Timespana i rjesit token. Zasad nek stoji ovako
+                authTok.Create(new AuthToken {UserID = dalRepo.SelectByEmail(email).ID, StartDateTime = DateTime.Now, Timespan = 20 , Token = "token" });
+                return true;
+            }
+            return false;  
         }
     }
 }
