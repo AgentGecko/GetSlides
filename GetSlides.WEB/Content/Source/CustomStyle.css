@@ -86,4 +86,14 @@ body {
         margin-right: 10px;
     }
 
+.presentation_upload {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+    .presentation_upload button {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+    }
 
