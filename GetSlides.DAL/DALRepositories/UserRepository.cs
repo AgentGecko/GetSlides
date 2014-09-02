@@ -23,7 +23,7 @@ namespace GetSlides.DAL
                 return context.Users.FirstOrDefault(t => t.ID == ID);
             }
         }
-        public override User SelectByEmail(string email) 
+        public User SelectByEmail(string email) 
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
