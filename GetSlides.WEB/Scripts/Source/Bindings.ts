@@ -5,7 +5,7 @@
 module GetSlidesBinding
 {
     // Class to represent a presentation 
-   class Presentation {
+    class Presentation {
 
         // Presentation properties
         Name: string;
@@ -22,7 +22,7 @@ module GetSlidesBinding
     }
 
     // Overall ViewModel for one user's presentations
-   class PresetationViewModel {
+    class PresetationViewModel {
         UserPresentations: KnockoutObservableArray<Presentation>;
 
         constructor(userPresentation: Array<Presentation>) {
@@ -48,17 +48,30 @@ module GetSlidesBinding
     }
 
     // Class to represent user
-   class User{
+    class User{
 
-        UserName: string;
+        UserName: KnockoutObservable<string>;
         Email: string;
 
-        constructor(username: string) {
-            this.UserName = username;
+        constructor(username: string, email: string) {
+            this.UserName = ko.observable(username);
+            this.Email = email;
         }
     }
 
-    
+    // Overall ViewModel for one user's data
+    class UserViewModel {
+        ThisUser: User;
+        
+        constructor(userName: string, email: string) {
+            this.ThisUser = new User(userName, email);
+         }
+
+        changeUsername() {
+            // check the format and if available
+        }
+    }
+
     export function BindPrezVM() {
         var prezentacija = new Presentation("Prezentacija", "pic1", "info1", "date1");
         var prezentacija1 = new Presentation("Prezentacija2", "pic2", "info2", "date2");
@@ -69,5 +82,15 @@ module GetSlidesBinding
         var prezVM = new PresetationViewModel(prezentacije);
         ko.cleanNode($('#UserPresentationContainer')[0]);
         ko.applyBindings(prezVM, document.getElementById('UserPresentationContainer'));
+    }
+
+    export function BindUserVM() {
+        var userVM = new UserViewModel('Probni username', 'Probni mail');
+
+        ko.cleanNode($('#usernamePlaceholder')[0]);
+        ko.applyBindings(userVM, document.getElementById('usernamePlaceholder'));
+
+        ko.cleanNode($('#settingsHolder')[0]);
+        ko.applyBindings(userVM, document.getElementById('settingsHolder'));
     }
 }

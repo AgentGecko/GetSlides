@@ -64,6 +64,10 @@ var Validate = (function () {
             }
         });
     };
+
+    Validate.UsernameValidation = function () {
+        // Changes in username should first be validated locally then sent to server to check if available
+    };
     return Validate;
 })();
 //# sourceMappingURL=Validation.js.map

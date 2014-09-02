@@ -67,4 +67,8 @@ class Validate{
             }
         });
     }    
+
+    public static UsernameValidation() {
+        // Changes in username should first be validated locally then sent to server to check if available
+    }
 }
