@@ -1,1 +1,48 @@
 ﻿<h1>Present view</h1>
+<button onclick="testWebSocket()">Start!</button>
+<p>Message to send: <input id="wsMessage" onchange="websocket.send($('#wsMessage').val())" /></p>
+<button onclick="onClose()">Stop!</button>
+<script>
+    var wsUri = "wss://localhost:44301/api/WebSocket";
+    var output;
+
+    function init()
+    {
+        output = document.getElementById("output"); testWebSocket();
+    }
+
+    function testWebSocket()
+    {
+        websocket = new WebSocket(wsUri);
+        websocket.onopen = function (evt) { onOpen(evt) };
+        websocket.onclose = function (evt) { onClose(evt) };
+        websocket.onmessage = function (evt) { onMessage(evt) };
+        websocket.onerror = function (evt) { onError(evt) };
+    }
+    function onOpen(evt)
+    {
+        console.log("CONNECTED");
+        doSend("WebSocket rocks");
+    }
+    function onClose(evt)
+    {
+        console.log("DISCONNECTED");
+    }
+    function onMessage(evt)
+    {
+        console.log('RESPONSE: ' + evt.data);
+    }
+    function onError(evt)
+    {
+        console.log('ERROR' + evt.data);
+    }
+    function doSend(message)
+    {
+        console.log("SENT: " + message);
+        websocket.send(message);
+    }
+
+    window.addEventListener("load", init, false);
+</script>
+<h2>WebSocket Test</h2>
+<div id="output"></div>
