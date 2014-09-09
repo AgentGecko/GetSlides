@@ -157,7 +157,11 @@
     <Compile Include="Models\Presentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Hash.cs" />
+    <Compile Include="WebSocket\IObserver.cs" />
+    <Compile Include="WebSocket\ISubject.cs" />
     <Compile Include="WebSocket\WebSocketHandler.cs" />
+    <Compile Include="WebSocket\WebSocketSubject.cs" />
+    <Compile Include="WebSocket\WebSocketObserver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

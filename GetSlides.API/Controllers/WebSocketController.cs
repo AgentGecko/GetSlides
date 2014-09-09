@@ -18,7 +18,7 @@ namespace GetSlides.API.Controllers
         {
             if (HttpContext.Current.IsWebSocketRequest)
             {
-                HttpContext.Current.AcceptWebSocketRequest(new MyWebSocketHandler());
+                HttpContext.Current.AcceptWebSocketRequest(new _WebSocketHandler());
             }
             return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
         }
