@@ -6,7 +6,7 @@ using Microsoft.Web.WebSockets;
 
 namespace GetSlides.API
 {
-    public class _WebSocketHandler : _WebSocketHandler, IObserver
+    public class WebSocketObserver : _WebSocketHandler, IObserver
     {
         public void Update() 
         {

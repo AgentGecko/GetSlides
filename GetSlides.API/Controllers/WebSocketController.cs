@@ -7,14 +7,17 @@ using System.Web.Http;
 using System.Web;
 using Microsoft.Web.WebSockets;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Concurrent;
+using System.Web.WebSockets;
+using System.Net.WebSockets;
 
 namespace GetSlides.API.Controllers
 {
     public class WebSocketController : ApiController
     {
-        MyWebSocketHandler webSocketHandler;
-
-        public HttpResponseMessage Get()
+        private static ConcurrentDictionary<ISubject, int> _subjects;
+        public HttpResponseMessage Get(string user, string data)
         {
             if (HttpContext.Current.IsWebSocketRequest)
             {
@@ -23,5 +26,6 @@ namespace GetSlides.API.Controllers
             return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
         }
 
+        
     }
 }

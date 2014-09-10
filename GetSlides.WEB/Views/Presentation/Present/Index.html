@@ -1,9 +1,10 @@
 ﻿<h1>Present view</h1>
+<p>Insert id number: <input id="presentationKey"/></p>
 <button onclick="testWebSocket()">Start!</button>
 <p>Message to send: <input id="wsMessage" onchange="websocket.send($('#wsMessage').val())" /></p>
 <button onclick="onClose()">Stop!</button>
 <script>
-    var wsUri = "wss://localhost:44301/api/WebSocket";
+    var wsUri = "wss://localhost:44301/api/WebSocket?pin=mojpin&user=dummyus";
     var output;
 
     function init()
@@ -22,7 +23,7 @@
     function onOpen(evt)
     {
         console.log("CONNECTED");
-        doSend("WebSocket rocks");
+        doSend("o");
     }
     function onClose(evt)
     {

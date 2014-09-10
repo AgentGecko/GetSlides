@@ -1,4 +1,5 @@
 ﻿<h1>Watch view - WebSocket testing </h1>
+<p>Insert key <input id="presentationKey"/></p>
 <button onclick="testWebSocket()">Start gettin' stuff!</button>
 <button onclick="onClose()">Stop</button>
 <script>
@@ -18,7 +19,7 @@
     }
     function onOpen(evt) {
         console.log("CONNECTED");
-        doSend("WebSocket rocks");
+        doSend($('#presentationKey').val());
     }
     function onClose(evt) {
         console.log("DISCONNECTED");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GetSlides.API
 {
-    interface IObserver
+    public interface IObserver
     {
         void Update();
     }

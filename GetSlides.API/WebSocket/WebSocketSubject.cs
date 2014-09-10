@@ -15,15 +15,15 @@ namespace GetSlides.API
             this.observers = new List<IObserver>();
         }
 
-        void Subscribe(IObserver observer)
+        public void Subscribe(IObserver observer)
         {
             this.observers.Add(observer);
         }
-        void Unsubscribe(IObserver observer)
+        public void Unsubscribe(IObserver observer)
         {
             this.observers.Remove(observer);
         }
-        void Notify() 
+        public void Notify() 
         {
             this.observers.ForEach(x => x.Update());
         }
