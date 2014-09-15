@@ -23,13 +23,6 @@ namespace GetSlides.DAL
                 return context.AuthTokens.FirstOrDefault(t => t.ID == ID);
             }
         }
-        public AuthToken SelectToken(string token)
-        {
-            using (GetSlidesDBEntities context = new GetSlidesDBEntities())
-            {
-                return context.AuthTokens.FirstOrDefault(t => t.Token == token);
-            }
-        }
         public override void Create(AuthToken token)
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())

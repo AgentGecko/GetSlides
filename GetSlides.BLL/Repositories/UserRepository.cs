@@ -80,19 +80,7 @@ namespace GetSlides.BLL
         {
             return tokenID == this.userDALRepo.GetLatestEmailToken(user.ToDALObject()).ID;
         }
-        
-        public bool LogInBaseValidation(string email, string passwordHash, string token)
-        {
-            DAL.UserRepository dalRepo = new DAL.UserRepository();
-            if (dalRepo.LogInBaseValidation(email, passwordHash))
-            {
-                AuthTokenRepository authTok = new AuthTokenRepository();
-                authTok.Create(new AuthToken {UserID = dalRepo.SelectByEmail(email).ID, StartDateTime = DateTime.Now, Timespan = (long)TimeSpan.FromDays(10).TotalDays , Token = token });
-                return true;
-            }
-            return false;  
-        }
-
+       
         public AuthToken GetLatestToken(User user)
         {
             return AuthToken.FromDALObject(this.userDALRepo.GetLatestToken(user.ToDALObject()));

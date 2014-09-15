@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Security.Cryptography;
 
 namespace GetSlides.API
 {
@@ -22,10 +23,10 @@ namespace GetSlides.API
         /// Authenticate is a static function in the AuthenticationToken class used for authenticating the user through a token string.
         /// </summary>
         /// <returns>Return types vary depending on the situation but the method will return either a boolean value or a new AuthenticationToken.</returns>
-        public static object Authenticate(string token)
+        public static object Authenticate(string token, string guidHash)
         {
             BLL.AuthTokenRepository authRepo = new BLL.AuthTokenRepository();
-            BLL.AuthToken baseToken = authRepo.SelectToken(Hash.CreateHash(token));
+            BLL.AuthToken baseToken = authRepo.Select(guidHash);
 
             // Checks if the date today had passed the date until the token was valid.
             if (baseToken.StartDateTime.Date.AddDays((double)baseToken.Timespan) < DateTime.Today)

@@ -106,17 +106,6 @@ namespace GetSlides.DAL
                     return false;
             }
         }
-        public bool LogInBaseValidation(string email, string passwordHash) 
-        {
-            using (GetSlidesDBEntities context = new GetSlidesDBEntities())
-            {
-                var user = context.Users.FirstOrDefault(t => t.Email == email);
-                if (passwordHash == user.PasswordHash)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+      
     }
 }

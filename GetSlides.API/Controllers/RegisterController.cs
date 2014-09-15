@@ -18,15 +18,28 @@ namespace GetSlides.API.Controllers
         {
             try
             {
-                UserRepository userBLLRepo = new UserRepository();
-                userBLLRepo.Create(username, email, password, confirmPassword, Hash.CreateHash(password));
-                EmailManagementSystem.SendConfirmationLink();
+                UserRepository bllUserRepo = new UserRepository();
+                EmailTokenRepository bllEmailTokenRepo = new EmailTokenRepository();
+                bllUserRepo.Create(username, email, password, confirmPassword, Hash.CreateHash(password));
+                EmailToken Token = new EmailToken { UserID = bllUserRepo.SelectByEmail(email).ID, StartDateTime = DateTime.Now };
+                bllEmailTokenRepo.Create(Token);
+                EmailManagementSystem.SendConfirmationLink(email, Token.ID );
                 return true;
             }
             catch(Exception ex)
             {
                 return false;
             }
+        }
+
+        [HttpPost]
+        public object ConfirmRegistration(string email, string token)
+        {
+            UserRepository bllUserRepo = new UserRepository();
+            if (bllUserRepo.ConfirmEmailToken(token, bllUserRepo.SelectByEmail(email)))
+                return true;
+            else
+                return false;
         }
     }
 }

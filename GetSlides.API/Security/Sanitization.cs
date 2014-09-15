@@ -10,5 +10,6 @@ namespace GetSlides.API
     /// </summary>
     public class Sanitization
     {
+      
     }
 }
