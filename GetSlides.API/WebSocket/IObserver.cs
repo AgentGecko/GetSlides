@@ -8,6 +8,6 @@ namespace GetSlides.API
 {
     public interface IObserver
     {
-        void Update();
+        void Update(string msg);
     }
 }

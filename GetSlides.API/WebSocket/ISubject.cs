@@ -10,6 +10,6 @@ namespace GetSlides.API
     {
         void Subscribe(IObserver observer);
         void Unsubscribe(IObserver observer);
-        void Notify();
+        void Notify(string msg);
     }
 }

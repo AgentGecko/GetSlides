@@ -16,12 +16,25 @@ namespace GetSlides.API.Controllers
 {
     public class WebSocketController : ApiController
     {
-        private static ConcurrentDictionary<ISubject, int> _subjects;
+        private static ConcurrentDictionary<int, ISubject> _subjects = new ConcurrentDictionary<int, ISubject>();
         public HttpResponseMessage Get(string user, string data)
         {
             if (HttpContext.Current.IsWebSocketRequest)
             {
-                HttpContext.Current.AcceptWebSocketRequest(new _WebSocketHandler());
+                if(data.Substring(data.IndexOf('-')-1,1) == "1")
+                {
+                    var subject = new WebSocketSubject();
+                    _subjects.GetOrAdd( Int32.Parse(data.Substring(data.LastIndexOf('-') + 1)), subject);
+                    HttpContext.Current.AcceptWebSocketRequest(subject);
+                }
+                else
+                {
+                    var observer = new WebSocketObserver();
+                        _subjects.First(t => t.Key == Int32.Parse(data.Substring(data.LastIndexOf('-') + 1))).Value.Subscribe(observer);    
+                        HttpContext.Current.AcceptWebSocketRequest(observer);
+                }
+                
+                
             }
             return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
         }

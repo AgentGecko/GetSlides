@@ -1,15 +1,17 @@
 ﻿<h1>Watch view - WebSocket testing </h1>
-<p>Insert key <input id="presentationKey"/></p>
+<p>Insert key <input onchange="pk()" id="presentationKey"/></p>
 <button onclick="testWebSocket()">Start gettin' stuff!</button>
 <button onclick="onClose()">Stop</button>
 <script>
-    var wsUri = "wss://localhost:44301/api/WebSocket";
+    var wsUri = "wss://localhost:44301/api/WebSocket?user=drugibrate&data=0-";
     var output;
 
     function init() {
-        output = document.getElementById("output"); testWebSocket();
+        output = document.getElementById("output"); 
     }
-
+    function pk() {
+        wsUri = wsUri + $('#presentationKey').val();
+    }
     function testWebSocket() {
         websocket = new WebSocket(wsUri);
         websocket.onopen = function (evt) { onOpen(evt) };
@@ -28,7 +30,7 @@
         console.log('RESPONSE: ' + evt.data);
     }
     function onError(evt) {
-        console.log('ERROR' + evt.data);
+        console.log(evt.data);
     }
     function doSend(message) {
         console.log("SENT: " + message);

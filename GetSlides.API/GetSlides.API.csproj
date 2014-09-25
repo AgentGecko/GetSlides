@@ -166,7 +166,6 @@
     <Compile Include="Security\Sanitization.cs" />
     <Compile Include="WebSocket\IObserver.cs" />
     <Compile Include="WebSocket\ISubject.cs" />
-    <Compile Include="WebSocket\WebSocketHandler.cs" />
     <Compile Include="WebSocket\WebSocketSubject.cs" />
     <Compile Include="WebSocket\WebSocketObserver.cs" />
   </ItemGroup>
