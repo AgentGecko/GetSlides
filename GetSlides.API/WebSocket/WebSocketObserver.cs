@@ -8,10 +8,12 @@ namespace GetSlides.API
 {
     public class WebSocketObserver : WebSocketHandler, IObserver
     {
-        public void Update() 
+        public void Update(string msg) 
         {
             this.Send("Subject updated some content.");
         }
+
+        #region WSHandler
         public override void OnOpen()
         {
             this.Send("Hello! Let's do the full-duplex communication again!!");
@@ -29,5 +31,6 @@ namespace GetSlides.API
         {
             base.OnError();
         }
+        #endregion
     }
 }

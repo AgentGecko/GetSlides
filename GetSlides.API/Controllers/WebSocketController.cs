@@ -11,34 +11,45 @@ using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Web.WebSockets;
 using System.Net.WebSockets;
+using MVC = System.Web.Mvc;
 
 namespace GetSlides.API.Controllers
 {
     public class WebSocketController : ApiController
-    {
-        private static ConcurrentDictionary<int, ISubject> _subjects = new ConcurrentDictionary<int, ISubject>();
-        public HttpResponseMessage Get(string user, string data)
+    { 
+        [HttpGet]
+        [MVC.RequireHttps]
+        [Route("~/api/Present")]
+        public HttpResponseMessage GetSubject(string user, string data)
         {
             if (HttpContext.Current.IsWebSocketRequest)
             {
-                if(data.Substring(data.IndexOf('-')-1,1) == "1")
-                {
-                    var subject = new WebSocketSubject();
-                    _subjects.GetOrAdd( Int32.Parse(data.Substring(data.LastIndexOf('-') + 1)), subject);
-                    HttpContext.Current.AcceptWebSocketRequest(subject);
-                }
-                else
-                {
-                    var observer = new WebSocketObserver();
-                        _subjects.First(t => t.Key == Int32.Parse(data.Substring(data.LastIndexOf('-') + 1))).Value.Subscribe(observer);    
-                        HttpContext.Current.AcceptWebSocketRequest(observer);
-                }
-                
-                
+                var subject = (WebSocketSubject)WebSocketFactory.CreateSubject();
+                HttpContext.Current.AcceptWebSocketRequest(subject); 
+                return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);  
             }
-            return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
+            else
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
 
-        
+        [HttpGet]
+        [MVC.RequireHttps]
+        [Route("~/api/WatchPresentation")]
+        public HttpResponseMessage GetObserver(string user, string data)
+        {
+            if (HttpContext.Current.IsWebSocketRequest)
+            {
+                var observer = (WebSocketObserver)WebSocketFactory.CreateObserver(GetPin(data));
+                HttpContext.Current.AcceptWebSocketRequest(observer);
+                return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
+            }
+            else
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+        }
+
+        private int GetPin(string data) 
+        {
+            return 5;
+        }
     }
 }

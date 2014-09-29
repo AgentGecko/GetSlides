@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GetSlides.Utility;
 
 namespace GetSlides.DAL
 {
@@ -21,6 +22,20 @@ namespace GetSlides.DAL
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
                 return context.AuthTokens.FirstOrDefault(t => t.ID == ID);
+            }
+        }
+        public void Create(AuthToken token, out string authenticationToken)
+        {
+            authenticationToken = "";
+            using (GetSlidesDBEntities context = new GetSlidesDBEntities())
+            {
+                token.ID = this.GenerateID();
+                token.StartDateTime = DateTime.Now;
+                authenticationToken = token.Token = Hash.CreateHash(context.Users.FirstOrDefault(t => t.ID == token.UserID).Email
+                                                                    + token.StartDateTime);
+                authenticationToken = token.Token + ";" + token.ID + ";" + MD5Hash.CreateHash(token.Token + token.ID + token.UserID);
+                context.AuthTokens.Add(token);
+                context.SaveChanges();
             }
         }
         public override void Create(AuthToken token)

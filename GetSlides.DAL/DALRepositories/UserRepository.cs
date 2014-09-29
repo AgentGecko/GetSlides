@@ -69,6 +69,14 @@ namespace GetSlides.DAL
                 return context.Users.FirstOrDefault(t => t.ID == user.ID).AuthTokens.Where(t => t.StartDateTime + TimeSpan.Parse(t.Timespan.ToString()) > DateTime.Now).OrderByDescending(t => t.StartDateTime).FirstOrDefault();
             }
         }
+        public AuthToken GetLatestToken(string userID)
+        {
+            using (GetSlidesDBEntities context = new GetSlidesDBEntities())
+            {
+                return context.Users.FirstOrDefault(t => t.ID == userID).AuthTokens.Where(t => t.StartDateTime + TimeSpan.Parse(t.Timespan.ToString()) > DateTime.Now).OrderByDescending(t => t.StartDateTime).FirstOrDefault();
+            }
+        }
+
         public EmailToken GetLatestEmailToken(User user) 
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities()) 

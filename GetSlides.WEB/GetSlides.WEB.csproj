@@ -56,6 +56,7 @@
     <TypeScriptCompile Include="Scripts\Source\Bindings.ts" />
     <TypeScriptCompile Include="Scripts\Source\UserAuthentication.ts" />
     <TypeScriptCompile Include="Scripts\Source\Validation.ts" />
+    <TypeScriptCompile Include="Scripts\Source\WebSockets.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout.viewmodel\knockout.viewmodel.d.ts" />

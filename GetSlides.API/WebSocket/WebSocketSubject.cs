@@ -9,10 +9,12 @@ namespace GetSlides.API
     public class WebSocketSubject : WebSocketHandler, ISubject
     {
         private List<IObserver> observers;
+        private int pin;
 
-        public WebSocketSubject() 
+        public WebSocketSubject(int pin) 
         {
             this.observers = new List<IObserver>();
+            this.pin = pin;
         }
 
         public void Subscribe(IObserver observer)
@@ -27,6 +29,8 @@ namespace GetSlides.API
         {
             this.observers.ForEach(x => x.Update(msg));
         }
+
+        #region WSHandler
         public override void OnOpen()
         {
             this.Send("Hello! Let's do the full-duplex communication again!!");
@@ -39,13 +43,19 @@ namespace GetSlides.API
         }
         public override void OnClose()
         {
+            this.DisposeEntry();
             base.OnClose();
         }
         public override void OnError()
         {
             base.OnError();
         }
-        
+        #endregion
+
+        public void DisposeEntry() 
+        {
+            WebSocketFactory._subjects.TryUpdate(pin, null, this);
+        }
 
     }
 }

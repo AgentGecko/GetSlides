@@ -27,6 +27,10 @@ namespace GetSlides.BLL
         {
             this.authRepo.Delete(authToken.ToDALObject());
         }
+        public void Create(AuthToken authToken, out string authenticationToken)
+        {
+            this.authRepo.Create(authToken.ToDALObject(),out authenticationToken);
+        }
         public void Create(AuthToken authToken)
         {
             this.authRepo.Create(authToken.ToDALObject());

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using GetSlides.BLL;
 using System.Web;
-
+using GetSlides.Utility;
 
 namespace GetSlides.API.Controllers
 {

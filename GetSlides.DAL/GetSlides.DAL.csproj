@@ -114,6 +114,12 @@
   <ItemGroup>
     <Content Include="SQLScripts\Scripts.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GetSlides.Utility\GetSlides.Utility.csproj">
+      <Project>{5dae353f-9217-494b-b204-2d0c71ccd43d}</Project>
+      <Name>GetSlides.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

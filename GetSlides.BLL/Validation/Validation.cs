@@ -16,7 +16,7 @@ namespace GetSlides.BLL
             // Input strings should have a defined max lenght. 20 is just for non error purposes
             if (((string)item).Length > 20)
                 return false;
-
+            // Should use sanitize from the utility project
             return false;
         }
 

@@ -25,7 +25,7 @@ using System;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace GetSlides.API
+namespace GetSlides.Utility
 {
     /// <summary>
     /// Salted string hashing with PBKDF2-SHA1.

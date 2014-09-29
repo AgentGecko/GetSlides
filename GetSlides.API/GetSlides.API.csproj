@@ -159,11 +159,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="WebSocket\WebSocketFactory.cs" />
     <Compile Include="Models\Presentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\Authentication\AuthenticationToken.cs" />
-    <Compile Include="Security\Hash.cs" />
-    <Compile Include="Security\Sanitization.cs" />
     <Compile Include="WebSocket\IObserver.cs" />
     <Compile Include="WebSocket\ISubject.cs" />
     <Compile Include="WebSocket\WebSocketSubject.cs" />
@@ -188,12 +186,15 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\TypeScript\" />
-    <Folder Include="Security\Authorization\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GetSlides.BLL\GetSlides.BLL.csproj">
       <Project>{00ec965f-50f0-49d4-9839-dae91edf0cda}</Project>
       <Name>GetSlides.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GetSlides.Utility\GetSlides.Utility.csproj">
+      <Project>{5dae353f-9217-494b-b204-2d0c71ccd43d}</Project>
+      <Name>GetSlides.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

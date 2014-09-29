@@ -85,5 +85,9 @@ namespace GetSlides.BLL
         {
             return AuthToken.FromDALObject(this.userDALRepo.GetLatestToken(user.ToDALObject()));
         }
+        public AuthToken GetLatestToken(string userID)
+        {
+            return AuthToken.FromDALObject(this.userDALRepo.GetLatestToken(userID));
+        }
     }
 }
