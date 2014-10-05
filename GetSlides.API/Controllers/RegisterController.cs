@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using GetSlides.BLL;
 using System.Web;
+using System.Net.Http;
 using GetSlides.Utility;
 
 namespace GetSlides.API.Controllers
@@ -14,7 +15,7 @@ namespace GetSlides.API.Controllers
     public class RegisterController : ApiController
     {
         [HttpPost]
-        public object Register(string username, string email, string password, string confirmPassword)
+        public void Register(string username, string email, string password, string confirmPassword)
         {
             try
             {
@@ -24,15 +25,14 @@ namespace GetSlides.API.Controllers
                 EmailToken Token = new EmailToken { UserID = bllUserRepo.SelectByEmail(email).ID, StartDateTime = DateTime.Now };
                 bllEmailTokenRepo.Create(Token);
                 EmailManagementSystem.SendConfirmationLink(email, Token.ID );
-                return true;
             }
             catch(Exception ex)
             {
-                return false;
+                
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public object ConfirmRegistration(string email, string token)
         {
             UserRepository bllUserRepo = new UserRepository();

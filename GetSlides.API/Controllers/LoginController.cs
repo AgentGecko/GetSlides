@@ -14,7 +14,16 @@ namespace GetSlides.API.Controllers
         [HttpPost]
         public object Login(string email, string password) 
         {
-            return null;
+            UserRepository userRepo = new UserRepository();
+            User currentUser = userRepo.SelectByEmail(email);
+            if (Hash.ValidateContent(Hash.CreateHash(password), currentUser.PasswordHash))
+            {
+                AuthTokenRepository authTokenRepo = new AuthTokenRepository();
+                string newToken;
+                authTokenRepo.Create(new AuthToken { UserID = currentUser.ID, Timespan = 20 }, out newToken);
+                return newToken;
+            }
+            return false;
         }
      
     }

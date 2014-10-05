@@ -48,11 +48,26 @@ namespace GetSlides.API
         /// SendPasswordReset is a method in the EmailManagementSystem class called on a user's request in order to activate
         /// the process of reseting the caller's password.
         /// </summary>
-        public static IRestResponse SendPasswordReset() 
+        public static IRestResponse SendPasswordReset(string email) 
         {
             RestClient client = new RestClient();
+            client.BaseUrl = "https://api.mailgun.net/v2";
+            client.Authenticator = new HttpBasicAuthenticator("api", "key_not_for_github_:D");
 
             RestRequest request = new RestRequest();
+            request.AddParameter("domain", "samples.mailgun.org", ParameterType.UrlSegment);
+            request.Resource = "sandboxb5fea17d73ac4aa6b7ef752a19c5f5e4.mailgun.org/messages";
+            request.AddParameter("from", "GetSlides <do_not_reply@getslides.com>");
+            request.AddParameter("to", email);
+            request.AddParameter("subject", "Password reset.");
+            request.AddParameter("html", @"<html>
+                                                <p>There has been a password change request from the GetSlides account linked
+                                                with this e-mail address.</p>
+                                                <p>Please click on the link below to confirm the request and change the password:
+                                                    <a href=""https://localhost:44301/api/account?email=" + email + @"></a></p>
+                                                <p>If you didn't sign up, please ignore this message and have a nice day :)<p>
+                                          </html>");
+            request.Method = Method.POST;
             return client.Execute(request);
         }
 

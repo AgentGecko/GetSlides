@@ -8,5 +8,6 @@ namespace GetSlides.DAL
 {
     public partial class EmailToken : IDALObject
     {
+        public string Token;
     }
 }

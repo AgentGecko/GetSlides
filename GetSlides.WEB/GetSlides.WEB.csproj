@@ -19,6 +19,7 @@
   <ItemGroup>
     <Content Include="Default\Index.html" />
     <Content Include="Index.html" />
+    <Content Include="Registration\Redirect.html" />
     <Content Include="Views\About\Index.html" />
     <Content Include="Content\Source\CustomStyle.css" />
     <Content Include="Content\Source\Custom.css" />
