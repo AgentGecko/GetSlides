@@ -12,7 +12,6 @@ namespace GetSlides.BLL
         public string ID { get { return this.id; } }
         public string UserID { get; set; }
         public System.DateTime StartDateTime { get; set; }
-        public string Token { get; set; }
 
         public EmailToken() { }
         public EmailToken(string id, string userId, System.DateTime startDateTime, string token)

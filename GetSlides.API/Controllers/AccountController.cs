@@ -14,17 +14,20 @@ namespace GetSlides.API.Controllers
         [HttpPost]
         public void ResetPassword(string email) 
         {
-            
-            EmailManagementSystem.SendPasswordReset(email);
-            HttpContext.Current.Response.Redirect("");
+            BLL.EmailTokenRepository emailTokenRepo = new BLL.EmailTokenRepository();
+            string tokenID;
+            BLL.EmailToken emailToken = new BLL.EmailToken { StartDateTime = DateTime.Now };
+            emailTokenRepo.Create(emailToken, out tokenID);
+            EmailManagementSystem.SendPasswordReset(email, tokenID);
+            HttpContext.Current.Response.Redirect("",true);
         }
 
         [HttpPost]
-        public void SetNewPassword(string email, string newPassword, string confirmPass) 
+        public void SetNewPassword(string email, string newPassword, string confirmPass, string tokenID) 
         {
             BLL.UserRepository userRepo = new BLL.UserRepository();
             BLL.User user = userRepo.SelectByEmail(email);
-            if (newPassword == confirmPass)
+            if (newPassword == confirmPass && userRepo.ConfirmEmailToken(tokenID,user))
             {
                 user.PasswordHash = Hash.CreateHash(newPassword);
                 userRepo.Update(user);

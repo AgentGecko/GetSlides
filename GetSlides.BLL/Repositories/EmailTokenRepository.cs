@@ -31,9 +31,9 @@ namespace GetSlides.BLL
         {
             this.emailRepo.Create(emailToken.ToDALObject());
         }
-        public void Create(EmailToken emailToken, out string mailToken, string controlDigit)
+        public void Create(EmailToken emailToken, out string mailTokenID)
         {
-            this.emailRepo.Create(emailToken.ToDALObject(), out mailToken, controlDigit);
+            this.emailRepo.Create(emailToken.ToDALObject(), out mailTokenID);
         }
         #endregion
 
