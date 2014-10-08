@@ -14,12 +14,12 @@ namespace GetSlides.BLL
         public System.DateTime StartDateTime { get; set; }
 
         public EmailToken() { }
-        public EmailToken(string id, string userId, System.DateTime startDateTime, string token)
+        public EmailToken(string id, string userId, System.DateTime startDateTime)
         {
             this.id = id;
             this.UserID = userId;
             this.StartDateTime = startDateTime;
-            this.Token = token;
+            
         }
 
         public static EmailToken FromDALObject(DAL.EmailToken emailToken)

@@ -1,5 +1,35 @@
 ﻿<h1>Present view</h1>
-<p>Insert id number: <input onchange="pk()" id="presentationKey"/></p>
+<canvas id="the-canvas">
+
+</canvas>
+<script src="../../../Scripts/pdf.js"></script>
+<script>
+    $(document).ready(function () {
+
+        PDFJS.workerSrc = '../../../Scripts/pdf.worker.js';
+
+        PDFJS.getDocument('https://localhost:44301/PDF/Pr.pdf').then(function (pdf) {
+            pdf.getPage(1).then(function (page) {
+
+                var scale = 1.5;
+                var viewport = page.getViewport(scale);
+
+                var canvas = document.getElementById('the-canvas');
+                var context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        });
+
+    });
+</script>
+<!--<p>Insert id number: <input onchange="pk()" id="presentationKey"/></p>
 <button onclick="testWebSocket()">Start!</button>
 <p>Message to send: <input id="wsMessage" onchange="websocket.send($('#wsMessage').val())" /></p>
 <button onclick="onClose()">Stop!</button>
@@ -51,3 +81,4 @@
 </script>
 <h2>WebSocket Test</h2>
 <div id="output"></div>
+    -->
