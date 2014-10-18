@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Web;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.IO;
 
 namespace GetSlides.API.Controllers
 {
@@ -24,30 +25,33 @@ namespace GetSlides.API.Controllers
             lista.Add(new Presentation("Prezentacija5", "", "Info5", ""));
             return lista;
         }
-        public async Task<HttpResponseMessage> UploadPresentation()
+
+        public Task<HttpResponseMessage> PostFile()
         {
-            if(!Request.Content.IsMimeMultipartContent())
+            HttpRequestMessage request = this.Request;
+            if (!request.Content.IsMimeMultipartContent())
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            string root = HttpContext.Current.Server.MapPath("~/Uploads");
-            var provider = new MultipartFileStreamProvider(root);
-            try
-            {
-                await Request.Content.ReadAsMultipartAsync(provider);
+            string root = System.Web.HttpContext.Current.Server.MapPath("~/Uploads");
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(root);
 
-                foreach (MultipartFileData pdfFile in provider.FileData)
+            var task = Request.Content.ReadAsMultipartAsync(provider);
+
+            return task.ContinueWith<HttpResponseMessage>(t =>
                 {
-                    Trace.WriteLine(pdfFile.Headers.ContentDisposition.FileName);
-                    Trace.WriteLine("Server path: " + pdfFile.LocalFileName);
-                }
-                return Request.CreateResponse(HttpStatusCode.OK);
-            }
-            catch (Exception error)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, error);
-            }
+                    var bodyPart = provider.FileData.FirstOrDefault();
+                    string savedFile = bodyPart.ToString().TrimStart('"').TrimEnd('"');
+
+                    FileInfo file = new FileInfo(savedFile);
+                    file.CopyTo(Path.Combine(root, savedFile), true);
+
+                    return new HttpResponseMessage()
+                    {
+                        Content = new StringContent("File uploaded.")
+                    };
+                }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
 }
