@@ -27,15 +27,20 @@
         }
     });
     $("#upload_btn").click(function () {
-        $("upload_status").html("Uploading...");
+        
         var formData = new FormData($('form')[0]);
+        var newText = $("#file_uploader").val().split("\\")[2];
+        //alert(newText);
         $.ajax({
-            url: 'https://localhost:44301/api/presentation',
+            url: 'https://localhost:44301/api/Presentation',
             type: 'POST',
-            data: formData,
+            data: {fileName : newText},
             cache: false,
             contentType: false,
-            processData: false
+            processData: false,
+            success: function (response) {
+                alert(response);
+            }
         });
     });
 </script>

@@ -26,32 +26,28 @@ namespace GetSlides.API.Controllers
             return lista;
         }
 
-        public Task<HttpResponseMessage> PostFile()
+        public HttpResponseMessage PostFile(string fileName)
         {
-            HttpRequestMessage request = this.Request;
-            if (!request.Content.IsMimeMultipartContent())
-            {
-                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-            }
+            var task = Request.Content.ReadAsStreamAsync();
+            task.Wait();
+            Stream requestStream = task.Result;
 
             string root = System.Web.HttpContext.Current.Server.MapPath("~/Uploads");
-            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(root);
+            root = System.IO.Path.Combine(root, fileName);
+            try
+            {
+                FileStream file = System.IO.File.OpenWrite(root);
+                requestStream.CopyTo(file);
+                file.Close();
+            }
+            catch
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError));
+            }
 
-            var task = Request.Content.ReadAsMultipartAsync(provider);
-
-            return task.ContinueWith<HttpResponseMessage>(t =>
-                {
-                    var bodyPart = provider.FileData.FirstOrDefault();
-                    string savedFile = bodyPart.ToString().TrimStart('"').TrimEnd('"');
-
-                    FileInfo file = new FileInfo(savedFile);
-                    file.CopyTo(Path.Combine(root, savedFile), true);
-
-                    return new HttpResponseMessage()
-                    {
-                        Content = new StringContent("File uploaded.")
-                    };
-                }, TaskScheduler.FromCurrentSynchronizationContext());
+            HttpResponseMessage response = new HttpResponseMessage();
+            response.StatusCode = HttpStatusCode.Created;
+            return response;
         }
     }
 }
