@@ -2,7 +2,7 @@
     <label for="file_uploader" class="btn btn-default btn-primary">Browse</label>
     <label id="upload_status">No file chosen.</label>
     <input type="file" id="file_uploader" name="file" class="btn btn-default" style="display:none" />
-    <button class="btn btn-default btn-primary" style="display:block" >Submit</button>
+    <button class="btn btn-default btn-primary" style="display:block" id="upload_btn">Submit</button>
 </div>
 <div id="UserPresentationContainer" class="row" data-bind="foreach: UserPresentations">
     <div class="col-xs-12 col-md-4">
@@ -14,6 +14,7 @@
         </div>
     </div>
 </div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
     $("#file_uploader").change(function () {
         var newText = $("#file_uploader").val();
@@ -25,5 +26,21 @@
             $("#upload_status").text("Error: The format is not supported.");
         }
     });
-
+    $("#upload_btn").click(function () {
+        
+        var formData = new FormData($('form')[0]);
+        var newText = $("#file_uploader").val().split("\\")[2];
+        //alert(newText);
+        $.ajax({
+            url: 'https://localhost:44301/api/Presentation',
+            type: 'POST',
+            data: {fileName : newText},
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                alert(response);
+            }
+        });
+    });
 </script>

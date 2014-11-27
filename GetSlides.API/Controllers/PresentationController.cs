@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Web;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.IO;
 
 namespace GetSlides.API.Controllers
 {
@@ -24,30 +25,29 @@ namespace GetSlides.API.Controllers
             lista.Add(new Presentation("Prezentacija5", "", "Info5", ""));
             return lista;
         }
-        public async Task<HttpResponseMessage> UploadPresentation()
-        {
-            if(!Request.Content.IsMimeMultipartContent())
-            {
-                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-            }
 
-            string root = HttpContext.Current.Server.MapPath("~/Uploads");
-            var provider = new MultipartFileStreamProvider(root);
+        public HttpResponseMessage PostFile(string fileName)
+        {
+            var task = Request.Content.ReadAsStreamAsync();
+            task.Wait();
+            Stream requestStream = task.Result;
+
+            string root = System.Web.HttpContext.Current.Server.MapPath("~/Uploads");
+            root = System.IO.Path.Combine(root, fileName);
             try
             {
-                await Request.Content.ReadAsMultipartAsync(provider);
-
-                foreach (MultipartFileData pdfFile in provider.FileData)
-                {
-                    Trace.WriteLine(pdfFile.Headers.ContentDisposition.FileName);
-                    Trace.WriteLine("Server path: " + pdfFile.LocalFileName);
-                }
-                return Request.CreateResponse(HttpStatusCode.OK);
+                FileStream file = System.IO.File.OpenWrite(root);
+                requestStream.CopyTo(file);
+                file.Close();
             }
-            catch (Exception error)
+            catch
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, error);
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError));
             }
+
+            HttpResponseMessage response = new HttpResponseMessage();
+            response.StatusCode = HttpStatusCode.Created;
+            return response;
         }
     }
 }
