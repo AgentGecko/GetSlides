@@ -3,82 +3,15 @@
 
 </canvas>
 <script src="../../../Scripts/pdf.js"></script>
+<script src="../../../Scripts/Source/WebSockets.js"></script>
 <script>
-    $(document).ready(function () {
-
-        PDFJS.workerSrc = '../../../Scripts/pdf.worker.js';
-
-        PDFJS.getDocument('https://localhost:44301/PDF/Pr.pdf').then(function (pdf) {
-            pdf.getPage(1).then(function (page) {
-
-                var scale = 1.5;
-                var viewport = page.getViewport(scale);
-
-                var canvas = document.getElementById('the-canvas');
-                var context = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                var renderContext = {
-                    canvasContext: context,
-                    viewport: viewport
-                };
-                page.render(renderContext);
-            });
-        });
-
-    });
+   
 </script>
 <!--<p>Insert id number: <input onchange="pk()" id="presentationKey"/></p>
 <button onclick="testWebSocket()">Start!</button>
 <p>Message to send: <input id="wsMessage" onchange="websocket.send($('#wsMessage').val())" /></p>
 <button onclick="onClose()">Stop!</button>
-<script>
-    var wsUri = "wss://localhost:44301/api/WebSocket?user=ja&data=1-";
-    var output;
 
-    function init()
-    {
-        output = document.getElementById("output"); 
-    }
-    function pk()
-    {
-        wsUri = wsUri + $('#presentationKey').val();
-        alert("DA"+wsUri);
-    }
-    function testWebSocket()
-    {
-        websocket = new WebSocket(wsUri);
-        websocket.onopen = function (evt) { onOpen(evt) };
-        websocket.onclose = function (evt) { onClose(evt) };
-        websocket.onmessage = function (evt) { onMessage(evt) };
-        websocket.onerror = function (evt) { onError(evt) };
-    }
-    function onOpen(evt)
-    {
-        console.log("CONNECTED");
-        doSend("o");
-    }
-    function onClose(evt)
-    {
-        console.log("DISCONNECTED");
-    }
-    function onMessage(evt)
-    {
-        console.log('RESPONSE: ' + evt.data);
-    }
-    function onError(evt)
-    {
-        console.log(evt.data);
-    }
-    function doSend(message)
-    {
-        console.log("SENT: " + message);
-        websocket.send(message);
-    }
-
-    window.addEventListener("load", init, false);
-</script>
 <h2>WebSocket Test</h2>
 <div id="output"></div>
     -->
