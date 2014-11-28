@@ -22,7 +22,7 @@ namespace GetSlides.BLL
         {
             return this.CollectionFromDAL(this.userDALRepo.Select());
         }
-        public User Select(string ID) 
+        public User Select(int ID) 
         {
             return User.FromDALObject(this.userDALRepo.Select(ID));
         }
@@ -76,7 +76,7 @@ namespace GetSlides.BLL
             }
             return BLLList;
         }
-        public bool ConfirmEmailToken(string tokenID, User user)
+        public bool ConfirmEmailToken(int tokenID, User user)
         {
             return tokenID == this.userDALRepo.GetLatestEmailToken(user.ToDALObject()).ID;
         }
@@ -85,7 +85,7 @@ namespace GetSlides.BLL
         {
             return AuthToken.FromDALObject(this.userDALRepo.GetLatestToken(user.ToDALObject()));
         }
-        public AuthToken GetLatestToken(string userID)
+        public AuthToken GetLatestToken(int userID)
         {
             return AuthToken.FromDALObject(this.userDALRepo.GetLatestToken(userID));
         }

@@ -8,6 +8,6 @@ namespace GetSlides.BLL
 {
     public interface IBLLObject 
     {
-        string ID { get; }
+        int ID { get; }
     }
 }

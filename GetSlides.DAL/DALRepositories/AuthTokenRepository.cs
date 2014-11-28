@@ -17,7 +17,7 @@ namespace GetSlides.DAL
                 return context.AuthTokens.ToList();
             }
         }
-        public override AuthToken Select(string ID)
+        public override AuthToken Select(int ID)
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
@@ -29,7 +29,7 @@ namespace GetSlides.DAL
             authenticationToken = "";
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
-                token.ID = this.GenerateID();
+                
                 token.StartDateTime = DateTime.Now;
                 authenticationToken = token.Token = Hash.CreateHash(context.Users.FirstOrDefault(t => t.ID == token.UserID).Email
                                                                     + token.StartDateTime);
@@ -42,7 +42,7 @@ namespace GetSlides.DAL
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
-                token.ID = this.GenerateID();
+                
                 context.AuthTokens.Add(token);
                 context.SaveChanges();
             }

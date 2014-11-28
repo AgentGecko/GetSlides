@@ -8,14 +8,14 @@ namespace GetSlides.BLL
 {
     public class User : Validation, IBLLObject
     {
-        private string id;
-        public string ID { get { return this.id; } }
+        private int id;
+        public int ID { get { return this.id; } }
         public string Username { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
 
         public User() { }
-        public User(string id, string username, string email, string passwordHash) 
+        public User(int id, string username, string email, string passwordHash) 
         {
             this.id = id;
             this.Username = username;

@@ -17,7 +17,7 @@ namespace GetSlides.API
         /// SendConfirmationLink is a method in the EmailManagementSystem class used to send a registration confirmation
         /// link to the user specified e-mail in order to complete the registration process.
         /// </summary>
-        public static IRestResponse SendConfirmationLink(string mail, string tokID) 
+        public static IRestResponse SendConfirmationLink(string mail, int tokID) 
         {
             RestClient client = new RestClient();
             client.BaseUrl = "https://api.mailgun.net/v2";

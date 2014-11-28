@@ -33,7 +33,7 @@ namespace GetSlides.API.Controllers
         }
 
         [HttpGet]
-        public object ConfirmRegistration(string email, string token)
+        public object ConfirmRegistration(string email, int token)
         {
             UserRepository bllUserRepo = new UserRepository();
             if (bllUserRepo.ConfirmEmailToken(token, bllUserRepo.SelectByEmail(email)))

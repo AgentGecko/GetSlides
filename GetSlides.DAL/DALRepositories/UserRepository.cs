@@ -16,7 +16,7 @@ namespace GetSlides.DAL
                 return context.Users.ToList();
             }
         }
-        public override User Select(string ID) 
+        public override User Select(int ID) 
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities()) 
             {
@@ -37,7 +37,7 @@ namespace GetSlides.DAL
             {
                 if(!UsernameExists(user.Username) && !EmailExists(user.Email))
                 {
-                    user.ID = this.GenerateID();
+                  
                     context.Users.Add(user);
                     context.SaveChanges();
                 } 
@@ -69,7 +69,7 @@ namespace GetSlides.DAL
                 return context.Users.FirstOrDefault(t => t.ID == user.ID).AuthTokens.Where(t => t.StartDateTime + TimeSpan.Parse(t.Timespan.ToString()) > DateTime.Now).OrderByDescending(t => t.StartDateTime).FirstOrDefault();
             }
         }
-        public AuthToken GetLatestToken(string userID)
+        public AuthToken GetLatestToken(int userID)
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {

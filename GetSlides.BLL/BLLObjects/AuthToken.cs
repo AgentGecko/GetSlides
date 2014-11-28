@@ -9,15 +9,15 @@ namespace GetSlides.BLL
 {
     public class AuthToken : IBLLObject
     {
-        private string id;
-        public string ID { get { return this.id; } }
-        public string UserID { get; set; }
+        private int id;
+        public int ID { get { return this.id; } }
+        public int UserID { get; set; }
         public string Token { get; set; }
         public System.DateTime StartDateTime { get; set; }
         public long Timespan { get; set; }
 
         public AuthToken() { }
-        public AuthToken(string id, string userID, string token, System.DateTime startDateTime, long timespan)
+        public AuthToken(int id, int userID, string token, System.DateTime startDateTime, long timespan)
         {
             this.id = id;
             this.UserID = userID;

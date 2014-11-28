@@ -14,8 +14,8 @@ namespace GetSlides.DAL
     
     public partial class EmailToken
     {
-        public string ID { get; set; }
-        public string UserID { get; set; }
+        public int ID { get; set; }
+        public int UserID { get; set; }
         public System.DateTime StartDateTime { get; set; }
     
         public virtual User User { get; set; }

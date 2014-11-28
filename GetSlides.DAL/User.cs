@@ -20,7 +20,7 @@ namespace GetSlides.DAL
             this.EmailTokens = new HashSet<EmailToken>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }

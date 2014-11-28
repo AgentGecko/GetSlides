@@ -10,7 +10,7 @@ namespace GetSlides.DAL
     {
         void Create(T item);
         ICollection<T> Select();
-        T Select(string ID);
+        T Select(int ID);
         void Update(T item);
         void Delete(T item);
     }

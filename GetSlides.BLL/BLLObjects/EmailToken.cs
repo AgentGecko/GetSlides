@@ -8,13 +8,13 @@ namespace GetSlides.BLL
 {
     public class EmailToken :  IBLLObject
     {
-        private string id;
-        public string ID { get { return this.id; } }
-        public string UserID { get; set; }
+        private int id;
+        public int ID { get { return this.id; } }
+        public int UserID { get; set; }
         public System.DateTime StartDateTime { get; set; }
 
         public EmailToken() { }
-        public EmailToken(string id, string userId, System.DateTime startDateTime)
+        public EmailToken(int id, int userId, System.DateTime startDateTime)
         {
             this.id = id;
             this.UserID = userId;

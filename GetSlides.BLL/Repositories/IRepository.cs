@@ -9,7 +9,7 @@ namespace GetSlides.BLL
     public interface IRepository<T> where T: IBLLObject
     {
         ICollection<T> Select();
-        T Select(string ID);
+        T Select(int ID);
         void Update(T item);
         void Delete(T item);
         void Create(T item);

@@ -17,7 +17,7 @@ namespace GetSlides.DAL
                 return context.EmailTokens.ToList();
             }
         }
-        public override EmailToken Select(string ID)
+        public override EmailToken Select(int ID)
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
@@ -28,7 +28,7 @@ namespace GetSlides.DAL
         {
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
-                token.ID = this.GenerateID();
+                //izbrisan  generate id
                 context.EmailTokens.Add(token);
                 context.SaveChanges();
             }
@@ -38,7 +38,7 @@ namespace GetSlides.DAL
             emailTokenID = "";
             using (GetSlidesDBEntities context = new GetSlidesDBEntities())
             {
-                emailTokenID = token.ID = this.GenerateID();
+              
                 token.StartDateTime = DateTime.Now;
                 context.EmailTokens.Add(token);
                 context.SaveChanges();

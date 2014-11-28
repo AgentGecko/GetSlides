@@ -15,7 +15,7 @@ namespace GetSlides.BLL
         {
             return this.CollectionFromDAL(this.emailRepo.Select());
         }
-        public EmailToken Select(string ID)
+        public EmailToken Select(int ID)
         {
             return EmailToken.FromDALObject(this.emailRepo.Select(ID));
         }

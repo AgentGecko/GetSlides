@@ -15,7 +15,7 @@ namespace GetSlides.BLL
         {
             return this.CollectionFromDAL(this.authRepo.Select());
         }
-        public AuthToken Select(string ID)
+        public AuthToken Select(int ID)
         {
             return AuthToken.FromDALObject(this.authRepo.Select(ID));
         }

@@ -23,7 +23,7 @@ namespace GetSlides.API.Controllers
         }
 
         [HttpPost]
-        public void SetNewPassword(string email, string newPassword, string confirmPass, string tokenID) 
+        public void SetNewPassword(string email, string newPassword, string confirmPass, int tokenID) 
         {
             BLL.UserRepository userRepo = new BLL.UserRepository();
             BLL.User user = userRepo.SelectByEmail(email);
