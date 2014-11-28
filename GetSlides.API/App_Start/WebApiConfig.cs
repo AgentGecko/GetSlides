@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Web.Http.Cors;
 
 namespace GetSlides.API
 {
@@ -12,6 +13,10 @@ namespace GetSlides.API
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+
+            // Web API CORS 
+            var cors = new EnableCorsAttribute(origins: "https://GetSlides.azurewebsites.com",headers: "*",methods: "*");
+            config.EnableCors(cors);
 
             // Web API routes
             config.MapHttpAttributeRoutes();

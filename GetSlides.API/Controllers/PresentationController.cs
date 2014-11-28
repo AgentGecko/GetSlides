@@ -9,13 +9,14 @@ using Newtonsoft.Json;
 using System.Web;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Web.Http.Cors;
 using System.IO;
 
 namespace GetSlides.API.Controllers
 {
     public class PresentationController : ApiController
     {
-        [HttpGet] // Signals the caller that when there is a Http GET request at this class this method should be called
+        [HttpGet] 
         public IEnumerable<Presentation> GetDummy()
         {
             //return new List<string> { "a", "b", "c" };
@@ -26,6 +27,8 @@ namespace GetSlides.API.Controllers
             return lista;
         }
 
+
+        [HttpPost]
         public HttpResponseMessage PostFile(string fileName)
         {
             var task = Request.Content.ReadAsStreamAsync();
