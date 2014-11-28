@@ -36,8 +36,8 @@
             type: 'POST',
             data: {fileName : newText},
             cache: false,
-            contentType: false,
-            processData: false,
+            contentType: 'application/json; charset=utf-8',
+            crossDomain: true,
             success: function (response) {
                 alert(response);
             }
