@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Http;
 using GetSlides.APP.AuthProviders;
 using Microsoft.Owin.Security.OAuth;
+using GetSlides.APP.WebSocket;
 
 [assembly: OwinStartup(typeof(GetSlides.APP.Startup))]
 namespace GetSlides.APP
@@ -33,6 +34,7 @@ namespace GetSlides.APP
             app.UseWebApi(config);
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            WebSocketFactory.Initialize();
         }
     }
 }

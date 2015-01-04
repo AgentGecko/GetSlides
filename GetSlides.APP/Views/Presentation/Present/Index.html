@@ -12,29 +12,45 @@
             <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
         </button>
         <span class="col-lg-1 col-sm-1 col-xs-1 col-md-1"></span>
-        <button type="button" class="btn col-lg-2 col-sm-2 col-xs-2 col-md-2 " onclick="start()">
+        <button type="button" class="btn col-lg-2 col-sm-2 col-xs-2 col-md-2 " onclick="testWebSocket()">
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         </button>
     </div>
 </div>
 <script>
-    function start() {
-        PDFJS.getDocument('https://getSlidesAPI.azurewebsites.net/PDF/PlanProjekta_GetSlides.pdf').then(function (pdf) {
-            pdf.getPage(1).then(function (page) {
-                var scale = 1.5;
-                var viewport = page.getViewport(scale);
+    var wsUri = "ws://localhost:6316/api/ws/present?user=drugibrate&data=0-";
+    var output;
 
-                var canvas = document.getElementById('the-canvas');
-                var context = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                var renderContext = {
-                    canvasContext: context,
-                    viewport: viewport
-                };
-                page.render(renderContext);
-            });
-        });
+    function init() {
+        output = document.getElementById("output");
     }
+    function pk() {
+        wsUri = wsUri + $('#presentationKey').val();
+    }
+    function testWebSocket() {
+        websocket = new WebSocket(wsUri);
+        websocket.onopen = function (evt) { onOpen(evt) };
+        websocket.onclose = function (evt) { onClose(evt) };
+        websocket.onmessage = function (evt) { onMessage(evt) };
+        websocket.onerror = function (evt) { onError(evt) };
+    }
+    function onOpen(evt) {
+        console.log("CONNECTED");
+        doSend($('#presentationKey').val());
+    }
+    function onClose(evt) {
+        console.log("DISCONNECTED");
+    }
+    function onMessage(evt) {
+        console.log('RESPONSE: ' + evt.data);
+    }
+    function onError(evt) {
+        console.log(evt.data);
+    }
+    function doSend(message) {
+        console.log("SENT: " + message);
+        websocket.send(message);
+    }
+
+    window.addEventListener("load", init, false);
 </script>
