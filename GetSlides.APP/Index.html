@@ -4,9 +4,38 @@
     <title></title>
 </head>
 <body>
+    <canvas id="canvas"></canvas>
+    <div id="pageContainer"></div>
     <script src="Scripts/jquery-2.1.3.min.js"></script>
     <script src="Scripts/sammy-0.7.5.min.js"></script>
+    <script src="Scripts/pdf.js"></script>
+    <script src="Scripts/src/storage.js"></script>
     <script src="Scripts/src/router.js"></script>
     <script src="Scripts/src/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            PDFJS.getDocument('/PDF/helloworld.pdf').then(function(pdf) {
+                console.log(pdf);
+                pdf.getPage(1).then(function(page) {
+                    console.log(page);
+
+                    var scale = 1.5;
+                    var viewport = page.getViewport(scale);
+
+                    var canvas = document.getElementById('canvas');
+                    console.log(canvas);
+                    var context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    var renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    page.render(renderContext);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

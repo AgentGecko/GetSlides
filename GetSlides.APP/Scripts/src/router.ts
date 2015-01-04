@@ -63,6 +63,8 @@
             });
         }
 
+        
+
         public getToken(username: string, password: string, callback: Function) {
             var data = { grant_type: "password", username: username, password: password };
             $.ajax({

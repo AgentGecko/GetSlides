@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GetSlides registration</title>
+</head>
+    <body>
+    <form class="login-form" novalidate="novalidate">
+        <h1>Register</h1>
+        <div class="form-group">
+            <!--<input type="email" placeholder="E-mail" class="form-control" name="email"/>-->
+            <input type="text" placeholder="Username" class="form-control" id="username" name="username"/>
+            <input type="password" placeholder="Enter password" class="form-control" id="password1" name="password1"/>
+            <input type="password" placeholder="Re-enter password" class="form-control" name="password2"/>
+        </div>
+        <button type="button" class="btn btn-default btn-block" onclick=" GetSlides.register($('#username').val(), $('#password1').val());">Register</button>
+    </form>
+        <script src="../Scripts/jquery-2.1.3.min.js"></script>
+        <script src="../Scripts/src/register.main.js"></script>
+    </body>
+</html>
