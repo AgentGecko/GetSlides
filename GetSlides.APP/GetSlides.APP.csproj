@@ -170,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\src\main.ts" />
+    <TypeScriptCompile Include="Scripts\src\router.ts" />
     <TypeScriptCompile Include="Scripts\typings\pdf\pdf.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout.mapping\knockout.mapping.d.ts" />
