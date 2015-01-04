@@ -1,0 +1,40 @@
+﻿<h1>Present view</h1>
+<div>
+    <canvas class="row" id="the-canvas"></canvas>
+    
+    <div class="row">
+        <span class="col-lg-2 col-sm-2 col-xs-2 col-md-2 "></span>
+        <button type="button" class="btn col-lg-2 col-sm-2 col-xs-2 col-md-2 " aria-label="nj">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        </button>
+        <span class="col-lg-1 col-sm-1 col-xs-1 col-md-1 "></span>
+        <button type="button" class="btn col-lg-2 col-sm-2 col-xs-2 col-md-2 ">
+            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+        </button>
+        <span class="col-lg-1 col-sm-1 col-xs-1 col-md-1"></span>
+        <button type="button" class="btn col-lg-2 col-sm-2 col-xs-2 col-md-2 " onclick="start()">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        </button>
+    </div>
+</div>
+<script>
+    function start() {
+        PDFJS.getDocument('https://getSlidesAPI.azurewebsites.net/PDF/PlanProjekta_GetSlides.pdf').then(function (pdf) {
+            pdf.getPage(1).then(function (page) {
+                var scale = 1.5;
+                var viewport = page.getViewport(scale);
+
+                var canvas = document.getElementById('the-canvas');
+                var context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        });
+    }
+</script>
