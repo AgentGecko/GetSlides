@@ -34,7 +34,8 @@ namespace GetSlides.APP.Controllers
         {
             using (PresentationRepository presentationRepository = new PresentationRepository())
             {
-                presentationRepository.Delete(presentationId);
+                if(presentationRepository.CheckPresentationOwner(presentationId, User.Identity.Name))
+                    presentationRepository.Delete(presentationId);
             }
         }
         
@@ -57,21 +58,18 @@ namespace GetSlides.APP.Controllers
         }
 
         [Authorize]
-        [Route("edit")]
-        public void EditPresentation(int presentationId, string data)
+        [Route("edit/{presentationId}/name/{name}/info/{info}")]
+        public void EditPresentation(int presentationId, string name, string info)
         {
-            if (data.Contains("info"))
+            using(PresentationRepository presentationRepository = new PresentationRepository())
             {
-                using (PresentationRepository presentationRepository = new PresentationRepository())
+                if(presentationRepository.CheckPresentationOwner(presentationId,User.Identity.Name))
                 {
-                    presentationRepository.UpdateInfo(presentationId, data.Split('-')[1]);
-                }
-            }
-            else 
-            {
-                using (PresentationRepository presentationRepository = new PresentationRepository())
-                {
-                    presentationRepository.UpdateName(presentationId, data.Split('-')[1]);
+                    Presentation presentation = new Presentation();
+                    presentation.Name = name;
+                    presentation.Info = info;
+                    presentation.Id = presentationId;
+                    presentationRepository.Update(presentation);
                 }
             }
         }

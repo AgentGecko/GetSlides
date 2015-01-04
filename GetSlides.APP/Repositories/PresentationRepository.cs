@@ -42,21 +42,13 @@ namespace GetSlides.APP.Repositories
         public void Update(Presentation presentation)
         {
             Presentation current = context.Presentations.FirstOrDefault(t => t.Id == presentation.Id);
-            current = presentation;
+            if (presentation.Name != null)
+                current.Name = presentation.Name;
+            if (presentation.Info != null)
+                current.Info = presentation.Info;
             context.SaveChanges();
         }
-        public void UpdateInfo(int presentationId, string newInfo)
-        {
-            Presentation current = context.Presentations.FirstOrDefault(t => t.Id == presentationId);
-            current.Info = newInfo;
-            context.SaveChanges();
-        }
-        public void UpdateName(int presentationId, string newName)
-        {
-            Presentation current = context.Presentations.FirstOrDefault(t => t.Id == presentationId);
-            current.Info = newName;
-            context.SaveChanges();
-        }
+       
 
         public void Delete(Presentation presentation)
         {
@@ -70,6 +62,11 @@ namespace GetSlides.APP.Repositories
             context.SaveChanges();
         }
         #endregion
+
+        public bool CheckPresentationOwner(int presentationId, string userName)
+        {
+           return context.AspNetUsers.FirstOrDefault(t => t.UserName == userName).Presentations.Any(t => t.Id == presentationId);
+        }
 
         public void Dispose()
         {
