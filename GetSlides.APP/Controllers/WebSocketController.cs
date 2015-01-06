@@ -33,9 +33,9 @@ namespace GetSlides.APP.Controllers
                     }
                    
                     var subject = (WebSocketSubject) WebSocketFactory.CreateSubject(User.Identity.Name, out UserPin, userPresentation.PresentationURI);
+                    subject.presentationId = ParseData(presentationId);
                     HttpContext.Current.AcceptWebSocketRequest(subject);
-                    HttpContext.Current.Response.StatusCode = (int) HttpStatusCode.SwitchingProtocols;
-                    return UserPin;
+                    return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
                 }
                 catch (Exception ex) 
                 {
@@ -47,12 +47,19 @@ namespace GetSlides.APP.Controllers
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
 
+        [HttpGet]
+        [Route("present/getpin/{presentationId}")]
+        public dynamic GetSubjectPin(string presentationId)
+        {
+            WebSocketSubject subject = (WebSocketSubject)WebSocketFactory._subjects.Where(t => t.Value != null).FirstOrDefault(t => t.Value.GetPresentationId() == ParseData(presentationId)).Value;
+            return subject.GetPin();
+        }
 
         [HttpGet]
         [Route("geturi/{presentationPin}")]
         public dynamic GetPresentationURI(string presentationPin) 
         {
-            int _pin = GetPin(presentationPin);
+            int _pin = ParseData(presentationPin);
             if (WebSocketFactory.IsActive(_pin))
             {
 
@@ -69,7 +76,7 @@ namespace GetSlides.APP.Controllers
         {
             if (HttpContext.Current.IsWebSocketRequest)
             {
-                var observer = (WebSocketObserver)WebSocketFactory.CreateObserver(GetPin(presentationPin));
+                var observer = (WebSocketObserver)WebSocketFactory.CreateObserver(ParseData(presentationPin));
                 HttpContext.Current.AcceptWebSocketRequest(observer);
                 return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
             }
@@ -77,7 +84,7 @@ namespace GetSlides.APP.Controllers
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
 
-        private int GetPin(string pin) 
+        private int ParseData(string pin) 
         {
             return Int32.Parse(pin);
         }

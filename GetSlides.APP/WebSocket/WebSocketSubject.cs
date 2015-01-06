@@ -13,6 +13,7 @@ namespace GetSlides.APP.WebSocket
         public string userName;
         public int lastPage;
         public string presentationUri;
+        public int presentationId;
 
         public WebSocketSubject() { }
 
@@ -60,6 +61,14 @@ namespace GetSlides.APP.WebSocket
         }
         #endregion
 
+        public int GetPin()
+        {
+            return this.pin;
+        }
+        public int GetPresentationId() 
+        {
+            return this.presentationId;
+        }
         public void DisposeEntry() 
         {
             WebSocketFactory._subjects.TryUpdate(pin, null, this);
