@@ -29,6 +29,14 @@ namespace GetSlides.APP.Controllers
             return "Ok";
         }
 
+        [Authorize]
+        [Route("username")]
+        [HttpGet]
+        public string GetUserName()
+        {
+            return User.Identity.Name;
+        }
+
         [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(UserModel userModel)

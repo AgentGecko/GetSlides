@@ -5,17 +5,42 @@ module GetSlides {
 
     export class PdfViewer
     {
+        public presentationId: number;
         public pdf: PDFDocumentProxy;
         public canvas: HTMLCanvasElement;
         public scale: number;
+        public currentPage: number = 0;
+        public webSocketHandler: WebSocketHandler;
         public pages: { [pageNumber: number]: PDFPageProxy; } = {};
 
-        constructor(adress: string, canvasId: string) {
+        constructor(adress: string, canvasId: string, isSubject: boolean, wsUri: string, presentationId?: number) {
             this.scale = 1;
             this.canvas = (<any>document).getElementById(canvasId);
             this.canvas.height = 500;
             this.canvas.width = 500;
             this.getPdf(adress);
+            if (presentationId != null) {
+                this.webSocketHandler = new WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.OnWsMessage, this.OnWsError, presentationId);
+                this.presentationId = presentationId;
+            } else {
+                this.webSocketHandler = new WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.OnWsMessage, this.OnWsError);
+            }
+            
+        }
+
+        public OnWsOpen() {
+        }
+
+        public OnWsClose() {
+            
+        }
+
+        public OnWsMessage() {
+            
+        }
+
+        public OnWsError() {
+            
         }
 
         public getPdf(adress: string) {

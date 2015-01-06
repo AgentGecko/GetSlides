@@ -9,7 +9,7 @@ namespace GetSlides.APP.WebSocket
     public class WebSocketSubject : WebSocketHandler, ISubject
     {
         private List<IObserver> observers;
-        private int pin;
+        private string pin;
         public string userName;
         public int lastPage;
         public string presentationUri;
@@ -17,7 +17,7 @@ namespace GetSlides.APP.WebSocket
 
         public WebSocketSubject() { }
 
-        public WebSocketSubject(int pin, string _userName, string _presentationUri) 
+        public WebSocketSubject(string pin, string _userName, string _presentationUri) 
         {
             this.observers = new List<IObserver>();
             this.pin = pin;
@@ -61,7 +61,7 @@ namespace GetSlides.APP.WebSocket
         }
         #endregion
 
-        public int GetPin()
+        public string GetPin()
         {
             return this.pin;
         }

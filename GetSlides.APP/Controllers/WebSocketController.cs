@@ -16,24 +16,23 @@ namespace GetSlides.APP.Controllers
     public class WebSocketController : ApiController
     {
         [HttpGet]
-        //[Authorize]
-        [Route("present/{presentationId}")]
-        public dynamic GetSubject(string presentationId)
+        [Route("present/{presentationId}/username/{userName}")]
+        public dynamic GetSubject(string presentationId, string userName)
         {
             if (HttpContext.Current.IsWebSocketRequest)
             {
                 try
                 { 
-                    int UserPin;
+                    string UserPin;
                     Presentation userPresentation;
 
                     using(PresentationRepository presentationRepository = new PresentationRepository())
                     {
-                        userPresentation = presentationRepository.Select(Int32.Parse(presentationId));
+                        userPresentation = presentationRepository.Select(Convert.ToInt32(presentationId));
                     }
                    
-                    var subject = (WebSocketSubject) WebSocketFactory.CreateSubject(User.Identity.Name, out UserPin, userPresentation.PresentationURI);
-                    subject.presentationId = ParseData(presentationId);
+                    var subject = (WebSocketSubject) WebSocketFactory.CreateSubject(userName, out UserPin, userPresentation.PresentationURI);
+                    subject.presentationId = Convert.ToInt32(presentationId);
                     HttpContext.Current.AcceptWebSocketRequest(subject);
                     return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
                 }
@@ -48,10 +47,11 @@ namespace GetSlides.APP.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("present/getpin/{presentationId}")]
         public dynamic GetSubjectPin(string presentationId)
         {
-            WebSocketSubject subject = (WebSocketSubject)WebSocketFactory._subjects.Where(t => t.Value != null).FirstOrDefault(t => t.Value.GetPresentationId() == ParseData(presentationId)).Value;
+            WebSocketSubject subject = (WebSocketSubject)WebSocketFactory._subjects.Where(t => t.Value != null).FirstOrDefault(t => t.Value.GetPresentationId() == Convert.ToInt32(presentationId)).Value;
             return subject.GetPin();
         }
 
@@ -59,12 +59,12 @@ namespace GetSlides.APP.Controllers
         [Route("geturi/{presentationPin}")]
         public dynamic GetPresentationURI(string presentationPin) 
         {
-            int _pin = ParseData(presentationPin);
-            if (WebSocketFactory.IsActive(_pin))
+            string pin = presentationPin;
+            if (WebSocketFactory.IsActive(pin))
             {
 
-               WebSocketSubject subject = (WebSocketSubject) WebSocketFactory._subjects.FirstOrDefault(t => t.Key == _pin).Value;
-               return subject.presentationUri;
+               WebSocketSubject subject = (WebSocketSubject) WebSocketFactory._subjects.FirstOrDefault(t => t.Key == pin).Value;
+                return subject.presentationUri;
             }
             else
                 return "Inactive pin, please try again.";
@@ -76,7 +76,7 @@ namespace GetSlides.APP.Controllers
         {
             if (HttpContext.Current.IsWebSocketRequest)
             {
-                var observer = (WebSocketObserver)WebSocketFactory.CreateObserver(ParseData(presentationPin));
+                var observer = (WebSocketObserver)WebSocketFactory.CreateObserver(presentationPin);
                 HttpContext.Current.AcceptWebSocketRequest(observer);
                 return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
             }
@@ -84,10 +84,6 @@ namespace GetSlides.APP.Controllers
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
 
-        private int ParseData(string pin) 
-        {
-            return Int32.Parse(pin);
-        }
     }
     
 }

@@ -8,31 +8,31 @@ namespace GetSlides.APP.WebSocket
 {
     public static class WebSocketFactory
     {
-        public static ConcurrentDictionary<int, ISubject> _subjects = new ConcurrentDictionary<int, ISubject>();
+        public static ConcurrentDictionary<string, ISubject> _subjects = new ConcurrentDictionary<string, ISubject>();
 
         public static void Initialize() 
         {
-            for (int i = 0; i < 10000; i++)
+            for (int i = 1000; i < 10000; i++)
             {
-                _subjects.TryAdd(i, null);
+                _subjects.TryAdd(Convert.ToString(i), null);
             }
         }
-        public static int GeneratePin() 
+        public static string GeneratePin() 
         {
             return _subjects.First(t => t.Value == null).Key;
         }
-        public static ISubject CreateSubject(string _userID, out int subjectPin, string _presentationURI) 
+        public static ISubject CreateSubject(string userID, out string subjectPin, string presentationURI) 
         {
-            int value;
+            string value;
             subjectPin = value = WebSocketFactory.GeneratePin();
             var Pair = _subjects.First(t => t.Key == value);
-            WebSocketSubject subject = new WebSocketSubject(Pair.Key, _userID, _presentationURI);
+            WebSocketSubject subject = new WebSocketSubject(Pair.Key, userID, presentationURI);
             if (_subjects.TryUpdate(Pair.Key, subject, Pair.Value))
                 return subject;
             else
                 return null;
         }
-        public static IObserver CreateObserver(int pin)
+        public static IObserver CreateObserver(string pin)
         {
             if (IsActive(pin))
             {
@@ -53,7 +53,7 @@ namespace GetSlides.APP.WebSocket
 
             }
         }
-        public static bool IsActive(int pin)
+        public static bool IsActive(string pin)
         {
             ISubject outSubject;
             bool isActive = _subjects.TryGetValue(pin, out outSubject);

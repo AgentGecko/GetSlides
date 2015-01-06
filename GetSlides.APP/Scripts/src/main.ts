@@ -14,9 +14,16 @@ module GetSlides {
 
     (<any>app).element_selector = '#pageContainer';
 
+    app.get('#/logout/', (context: Sammy.EventContext) => {
+        $("#navbar-username").text("Signed in as Anon");
+        storage.setItem(storage.keys['auth'], null);
+        location.href = '#/login/';
+    });
+
     app.get('#/login/', (context: Sammy.EventContext) => {
         context.partial('/Views/Login/Index.html', (partial: any) => {
             loginPing();
+            
         });
     });
 
@@ -57,6 +64,9 @@ module GetSlides {
             console.log(error, data);
             if (data.access_token !== undefined) {
                 storage.setItem(storage.keys['auth'], data.token_type + " " + data.access_token);
+                router.getJsonAuth("/account/username", storage.getItem(storage.keys['auth']), (data) => {
+                    $("#navbar-username").text("Signed in as " + data);
+                });
                 console.log(data.token_type + " " + data.access_token);
                 location.href = '#/';
             } else {

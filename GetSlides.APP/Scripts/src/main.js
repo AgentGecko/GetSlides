@@ -13,6 +13,12 @@ var GetSlides;
 
     GetSlides.app.element_selector = '#pageContainer';
 
+    GetSlides.app.get('#/logout/', function (context) {
+        $("#navbar-username").text("Signed in as Anon");
+        GetSlides.storage.setItem(GetSlides.storage.keys['auth'], null);
+        location.href = '#/login/';
+    });
+
     GetSlides.app.get('#/login/', function (context) {
         context.partial('/Views/Login/Index.html', function (partial) {
             loginPing();
@@ -55,6 +61,9 @@ var GetSlides;
             console.log(error, data);
             if (data.access_token !== undefined) {
                 GetSlides.storage.setItem(GetSlides.storage.keys['auth'], data.token_type + " " + data.access_token);
+                GetSlides.router.getJsonAuth("/account/username", GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (data) {
+                    $("#navbar-username").text("Signed in as " + data);
+                });
                 console.log(data.token_type + " " + data.access_token);
                 location.href = '#/';
             } else {

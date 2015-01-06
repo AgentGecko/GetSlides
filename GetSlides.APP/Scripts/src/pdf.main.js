@@ -2,14 +2,33 @@
 var GetSlides;
 (function (GetSlides) {
     var PdfViewer = (function () {
-        function PdfViewer(adress, canvasId) {
+        function PdfViewer(adress, canvasId, isSubject, wsUri, presentationId) {
+            this.currentPage = 0;
             this.pages = {};
             this.scale = 1;
             this.canvas = document.getElementById(canvasId);
             this.canvas.height = 500;
             this.canvas.width = 500;
             this.getPdf(adress);
+            if (presentationId != null) {
+                this.webSocketHandler = new GetSlides.WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.OnWsMessage, this.OnWsError, presentationId);
+                this.presentationId = presentationId;
+            } else {
+                this.webSocketHandler = new GetSlides.WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.OnWsMessage, this.OnWsError);
+            }
         }
+        PdfViewer.prototype.OnWsOpen = function () {
+        };
+
+        PdfViewer.prototype.OnWsClose = function () {
+        };
+
+        PdfViewer.prototype.OnWsMessage = function () {
+        };
+
+        PdfViewer.prototype.OnWsError = function () {
+        };
+
         PdfViewer.prototype.getPdf = function (adress) {
             var _this = this;
             PDFJS.getDocument(adress).then(function (pdf) {

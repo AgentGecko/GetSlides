@@ -201,6 +201,7 @@
     <TypeScriptCompile Include="Scripts\src\register.main.ts" />
     <TypeScriptCompile Include="Scripts\src\router.ts" />
     <TypeScriptCompile Include="Scripts\src\storage.ts" />
+    <TypeScriptCompile Include="Scripts\src\websockets.main.ts" />
     <TypeScriptCompile Include="Scripts\typings\pdf\pdf.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout.mapping\knockout.mapping.d.ts" />
