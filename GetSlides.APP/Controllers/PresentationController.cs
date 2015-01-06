@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -43,7 +44,7 @@ namespace GetSlides.APP.Controllers
         [HttpPost]
         [Authorize]
         [Route("upload")]
-        public dynamic UploadPresentation()
+        public async Task<dynamic> UploadPresentation()
         {
             if (!Request.Content.IsMimeMultipartContent())
             {
@@ -53,8 +54,8 @@ namespace GetSlides.APP.Controllers
             string root = HttpContext.Current.Server.MapPath("~/PDF");
             var provider = new CustomMIMEStreamProvider(root);
 
-            Request.Content.ReadAsMultipartAsync(provider);
-           
+            await Request.Content.ReadAsMultipartAsync(provider);
+            
             Presentation uploadedPresentation = new Presentation(provider.fileName,root +"/"+ provider.fileName);
             AddPresentation(uploadedPresentation, User.Identity.Name);
             return GetUserPresentations();

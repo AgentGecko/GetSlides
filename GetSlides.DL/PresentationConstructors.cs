@@ -10,10 +10,10 @@ namespace GetSlides.DL
     {
         public Presentation()
         { }
-        public Presentation(string _name, string _presentationURI)
+        public Presentation(string name, string presentationURI)
         { 
-            this.Name = _name;
-            this.PresentationURI = _presentationURI;
+            this.Name = name;
+            this.PresentationURI = presentationURI;
             this.DateUploaded = DateTime.Now;
         }
     }

@@ -62,7 +62,6 @@
                 data: formData,
                 contentType: false,
                 processData: false,
-                crossDomain: true,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", token);
                 }
