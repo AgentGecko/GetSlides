@@ -1,7 +1,8 @@
 ﻿/// <reference path="../typings/pdf/pdf.d.ts" />
 
 module GetSlides {
-    
+
+
     export class PdfViewer
     {
         public pdf: PDFDocumentProxy;

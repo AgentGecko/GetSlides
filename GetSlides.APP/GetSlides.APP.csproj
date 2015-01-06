@@ -152,6 +152,7 @@
     <Content Include="Scripts\sammy-0.7.5.js" />
     <Content Include="Scripts\sammy-0.7.5.min.js" />
     <Content Include="Views\About\Index.html" />
+    <Content Include="Views\Login\Index.html" />
     <Content Include="Views\Presentation\Index.html" />
     <Content Include="Views\Presentation\PresentationOptions\Index.html" />
     <Content Include="Views\Presentation\Present\Index.html" />
