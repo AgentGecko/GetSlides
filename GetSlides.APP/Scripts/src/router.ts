@@ -70,7 +70,7 @@
                     xhr.setRequestHeader("Authorization", token);
                 }
             }).always((data) => {
-                console.log(data);
+                callback(data);
             });
         }
 

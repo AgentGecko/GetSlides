@@ -9,7 +9,7 @@ var GetSlides;
     GetSlides.router = new GetSlides.Router();
     GetSlides.storage = new GetSlides.Storage();
     GetSlides.pdfViewer;
-    GetSlides.viewmodel;
+    GetSlides.viewmodel = {};
 
     GetSlides.app.element_selector = '#pageContainer';
 
@@ -23,9 +23,8 @@ var GetSlides;
         context.partial('/Views/Presentation/Index.html', function (partial) {
             ping();
             GetSlides.router.getJsonAuth("/presentation/get", GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (data) {
-                ko.cleanNode($pageContainer);
-                GetSlides.viewmodel = ko.mapping.fromJS(data);
-                ko.applyBindings(GetSlides.viewmodel, $pageContainer);
+                var vdata = { "presentations": data };
+                updateViewModel(vdata);
                 GetSlides.enableFileUploader();
             });
         });
@@ -100,5 +99,13 @@ var GetSlides;
         }
     }
     GetSlides.ping = ping;
+
+    function updateViewModel(data) {
+        if (GetSlides.viewmodel.presentations != undefined)
+            ko.cleanNode($pageContainer);
+        GetSlides.viewmodel = ko.mapping.fromJS(data);
+        ko.applyBindings(GetSlides.viewmodel, $pageContainer);
+    }
+    GetSlides.updateViewModel = updateViewModel;
 })(GetSlides || (GetSlides = {}));
 //# sourceMappingURL=main.js.map

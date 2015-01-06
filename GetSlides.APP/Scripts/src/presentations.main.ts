@@ -14,7 +14,8 @@
         });
     }
 
-    export function uploadPdf() {
+    export function uploadPdf(event) {
+        
             var inputData = (<any>document.getElementById('file_uploader')).files;
             var formData = new (<any>window).FormData($('form')[0]);
             var name = $("#upload_status").text();
@@ -22,7 +23,11 @@
             console.log(inputData, formData, name, newText);
             var url = '/Presentation/upload/';
             router.uploadPdf(url, storage.getItem(storage.keys['auth']), formData, (data) => {
-
+                var vdata = { "presentations": data };
+                //updateViewModel(vdata);
+                $("#upload_status").text("No file chosen.");
+                $("#upload_btn").css("display", "none");
+                location.reload();
             });
     }
 

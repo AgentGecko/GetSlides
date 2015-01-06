@@ -67,7 +67,7 @@
                     xhr.setRequestHeader("Authorization", token);
                 }
             }).always(function (data) {
-                console.log(data);
+                callback(data);
             });
         };
 

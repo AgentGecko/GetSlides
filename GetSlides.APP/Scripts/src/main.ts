@@ -10,7 +10,7 @@ module GetSlides {
     export var router: Router = new Router();
     export var storage: Storage = new Storage();
     export var pdfViewer: PdfViewer;
-    export var viewmodel: any;
+    export var viewmodel: any = {};
 
     (<any>app).element_selector = '#pageContainer';
 
@@ -24,9 +24,8 @@ module GetSlides {
         context.partial('/Views/Presentation/Index.html', (partial: any) => {
             ping();
             router.getJsonAuth("/presentation/get", storage.getItem(storage.keys['auth']), (data) => {
-                ko.cleanNode($pageContainer);
-                viewmodel = ko.mapping.fromJS(data);
-                ko.applyBindings(viewmodel, $pageContainer);
+                var vdata = { "presentations": data };
+                updateViewModel(vdata);
                 enableFileUploader();
             });
         });
@@ -99,5 +98,13 @@ module GetSlides {
             console.log("auth empty");
         }
     }
+
+    export function updateViewModel(data) {
+        if(viewmodel.presentations != undefined)
+        ko.cleanNode($pageContainer);
+        viewmodel = ko.mapping.fromJS(data);
+        ko.applyBindings(viewmodel, $pageContainer);
+    }
+
 
 }
