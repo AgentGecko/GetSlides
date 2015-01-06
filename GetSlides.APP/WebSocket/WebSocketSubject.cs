@@ -10,16 +10,16 @@ namespace GetSlides.APP.WebSocket
     {
         private List<IObserver> observers;
         private int pin;
-        public string userId;
+        public string userName;
         public int lastPage;
 
         public WebSocketSubject() { }
 
-        public WebSocketSubject(int pin, string _userId) 
+        public WebSocketSubject(int pin, string _userName) 
         {
             this.observers = new List<IObserver>();
             this.pin = pin;
-            this.userId = _userId;
+            this.userName = _userName;
             this.lastPage = 0;
         }
 

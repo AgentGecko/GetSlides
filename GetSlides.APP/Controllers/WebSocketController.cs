@@ -14,38 +14,39 @@ namespace GetSlides.APP.Controllers
     public class WebSocketController : ApiController
     {
         [HttpGet]
+        //[Authorize]
         [Route("present")]
-        public HttpResponseMessage GetSubject(string user, string data)
+        public dynamic GetSubject()
         {
-            try{
             if (HttpContext.Current.IsWebSocketRequest)
             {
                 try
                 {
-                    int pin;
-                    var subject = (WebSocketSubject)WebSocketFactory.CreateSubject(user, out pin);
+                    int UserPin;
+                    var subject = (WebSocketSubject) WebSocketFactory.CreateSubject(User.Identity.Name, out UserPin);
                     HttpContext.Current.AcceptWebSocketRequest(subject);
-                    return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
+                    HttpContext.Current.Response.StatusCode = (int) HttpStatusCode.SwitchingProtocols;
+                    return UserPin;
                 }
-                catch 
+                catch (Exception ex) 
                 {
-                    HttpContext.Current.AcceptWebSocketRequest(new WebSocketHandler());
-                    return new HttpResponseMessage(HttpStatusCode.ServiceUnavailable);
-                }  
+                    throw ex;
+                }
+                
             }
             else
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
-            catch (Exception ex) { throw ex; }
         }
+            
+        
 
         [HttpGet]
-        [Route("watch")]
-        public HttpResponseMessage GetObserver(string user, string data)
+        [Route("watch/{presentationPin}")]
+        public HttpResponseMessage GetObserver(string presentationPin)
         {
             if (HttpContext.Current.IsWebSocketRequest)
             {
-                var observer = (WebSocketObserver)WebSocketFactory.CreateObserver(GetPin(data));
+                var observer = (WebSocketObserver)WebSocketFactory.CreateObserver(GetPin(presentationPin));
                 HttpContext.Current.AcceptWebSocketRequest(observer);
                 return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
             }
@@ -53,9 +54,9 @@ namespace GetSlides.APP.Controllers
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
 
-        private int GetPin(string data) 
+        private int GetPin(string pin) 
         {
-            return Int32.Parse(data);
+            return Int32.Parse(pin);
         }
     }
     
