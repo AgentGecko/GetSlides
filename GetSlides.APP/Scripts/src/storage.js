@@ -2,6 +2,10 @@
 (function (GetSlides) {
     var Storage = (function () {
         function Storage() {
+            this.keys = {
+                "pin": "__PIN",
+                "grant_type": "__GRANT_TYPE"
+            };
             this.isLocal = false;
             this.isSession = false;
             this.isObject = false;

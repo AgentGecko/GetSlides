@@ -1,7 +1,12 @@
 ﻿ module GetSlides {
      
      export class Storage {
-            
+         
+         public keys: {[key: string]: string; } = {
+             "pin": "__PIN",
+             "grant_type": "__GRANT_TYPE"  
+         };
+
          public isLocal: boolean = false;
          public isSession: boolean = false;
          public isObject: boolean = false;

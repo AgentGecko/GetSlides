@@ -5,6 +5,7 @@ var GetSlides;
     GetSlides.app = Sammy();
     GetSlides.router = new GetSlides.Router();
     GetSlides.storage = new GetSlides.Storage();
+    GetSlides.pdfViewer;
 
     GetSlides.app.element_selector = '#pageContainer';
 
@@ -13,18 +14,18 @@ var GetSlides;
         });
     });
 
-    GetSlides.app.get('#/About/', function (context) {
-        context.partial('/Views/Presentation/Present/Index.html', function (partial) {
+    GetSlides.app.get('#/account/', function (context) {
+        context.partial('/Views/Settings/Index.html', function (partial) {
         });
     });
 
-    GetSlides.app.get('#/Watch/', function (context) {
+    GetSlides.app.get('#/watch/:id/', function (context) {
         context.partial('/Views/Presentation/Watch/Index.html', function (partial) {
         });
     });
 
-    GetSlides.app.get('#/Account/', function (context) {
-        context.partial('/Views/Settings/Index.html', function (partial) {
+    GetSlides.app.get('#/present/:id/', function (context) {
+        context.partial('/Views/Presentation/Present/Index.html', function (partial) {
         });
     });
 
