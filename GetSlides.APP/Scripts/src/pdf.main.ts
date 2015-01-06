@@ -49,26 +49,26 @@ module GetSlides {
 
 }
 
-$(document).ready(() => {
-    PDFJS.getDocument('/PDF/k.pdf').then((pdf: PDFDocumentProxy) => {
-        console.log(pdf);
-        pdf.getPage(3).then((page: PDFPageProxy) => {
-            console.log(page);
+//$(document).ready(() => {
+//    PDFJS.getDocument('/PDF/k.pdf').then((pdf: PDFDocumentProxy) => {
+//        console.log(pdf);
+//        pdf.getPage(3).then((page: PDFPageProxy) => {
+//            console.log(page);
 
-            var scale = 1;
-            var viewport = page.getViewport(scale);
+//            var scale = 1;
+//            var viewport = page.getViewport(scale);
 
-            var canvas: HTMLCanvasElement = (<any>document).getElementById('canvas');
-            var context = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+//            var canvas: HTMLCanvasElement = (<any>document).getElementById('canvas');
+//            var context = canvas.getContext('2d');
+//            canvas.height = viewport.height;
+//            canvas.width = viewport.width;
 
-            var renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
+//            var renderContext = {
+//                canvasContext: context,
+//                viewport: viewport
+//            };
 
-            page.render(renderContext);
-        });
-    });
-});
+//            page.render(renderContext);
+//        });
+//    });
+//});

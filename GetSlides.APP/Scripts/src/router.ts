@@ -15,10 +15,8 @@
                 beforeSend(xhr) {
                     xhr.setRequestHeader("Authorization", token);
                 }
-            }).done((data) => {
-                callback(null, data);
-            }).fail((jqXhr, textStatus, errorThrown) => {
-                callback(errorThrown, null);
+            }).always((data) => {
+                callback(JSON.parse(data.responseText));
             });
 
         }
@@ -28,12 +26,13 @@
                 url: this.baseAdress + adress,
                 type: 'POST',
                 accepts: "application/json",
-                dataType: "application/json"
-            }).done((data) => {
-                    callback(null, data);
-                }).fail((jqXhr, textStatus, errorThrown) => {
-                    callback(errorThrown, null);
-                });
+                dataType: "application/json",
+                beforeSend(xhr) {
+                    xhr.setRequestHeader("Authorization", token);
+                }
+            }).always((data) => {
+                callback(JSON.parse(data.responseText));
+            });
 
         }
 
@@ -43,10 +42,8 @@
                 type: 'GET',
                 accepts: "application/json",
                 dataType: "application/json"
-            }).done((data) => {
-                callback(null, data);
-            }).fail((jqXhr, textStatus, errorThrown) => {
-                callback(errorThrown, null);
+            }).always((data) => {
+                callback(JSON.parse(data.responseText));
             });
         }
 
@@ -57,13 +54,26 @@
                 accepts: "application/json",
                 dataType: "application/json"
             }).done((data) => {
-                callback(null, data);
-            }).fail((jqXhr, textStatus, errorThrown) => {
-                callback(errorThrown, null);
+                callback(JSON.parse(data.responseText));
             });
         }
 
-        
+        public uploadPdf(adress: string, token: string, formData: any, callback: Function) {
+            $.ajax({
+                url: this.baseAdress + adress,
+                type: 'POST',
+                cache: false,
+                data: formData,
+                contentType: false,
+                processData: false,
+                crossDomain: true,
+                beforeSend(xhr) {
+                    xhr.setRequestHeader("Authorization", token);
+                }
+            }).always((data) => {
+                console.log(data);
+            });
+        }
 
         public getToken(username: string, password: string, callback: Function) {
             var data = { grant_type: "password", username: username, password: password };

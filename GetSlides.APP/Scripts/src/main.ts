@@ -1,19 +1,21 @@
 ﻿/// <reference path="../typings/jquery/jquery.d.ts" />
+/// <reference path="../typings/knockout/knockout.d.ts" />
+/// <reference path="../typings/knockout.mapping/knockout.mapping.d.ts" />
 /// <reference path="../typings/sammyjs/sammyjs.d.ts" />
 
 module GetSlides {
 
-
+    var $pageContainer = $("#pageContainer")[0];
     export var app: Sammy.Application = Sammy();
     export var router: Router = new Router();
     export var storage: Storage = new Storage();
     export var pdfViewer: PdfViewer;
+    export var viewmodel: any;
 
     (<any>app).element_selector = '#pageContainer';
 
-    app.get('#/login', (context: Sammy.EventContext) => {
+    app.get('#/login/', (context: Sammy.EventContext) => {
         context.partial('/Views/Login/Index.html', (partial: any) => {
-            console.log("login");
             loginPing();
         });
     });
@@ -21,9 +23,14 @@ module GetSlides {
     app.get('#/', (context: Sammy.EventContext) => {
         context.partial('/Views/Presentation/Index.html', (partial: any) => {
             ping();
+            router.getJsonAuth("/presentation/get", storage.getItem(storage.keys['auth']), (data) => {
+                ko.cleanNode($pageContainer);
+                viewmodel = ko.mapping.fromJS(data);
+                ko.applyBindings(viewmodel, $pageContainer);
+                enableFileUploader();
+            });
         });
     });
-
 
     app.get('#/account/', (context: Sammy.EventContext) => {
         context.partial('/Views/Settings/Index.html', (partial: any) => {
@@ -44,24 +51,31 @@ module GetSlides {
     });
 
 
-    app.run('#/login');
+    app.run('#/login/');
 
     export function login(username: string, password: string) {
         router.getToken(username, password, (error, data) => {
             console.log(error, data);
-            storage.setItem(storage.keys['auth'], data.token_type + " " + data.access_token);
-            console.log(data.token_type + " " + data.access_token);
-            location.href = '#/';
+            if (data.access_token !== undefined) {
+                storage.setItem(storage.keys['auth'], data.token_type + " " + data.access_token);
+                console.log(data.token_type + " " + data.access_token);
+                location.href = '#/';
+            } else {
+                console.log(data.error_description);
+            }
         });
     }
 
     export function loginPing() {
         console.log("loginPing");
-        if (storage[storage.keys['auth']] !== undefined) {
+        if (storage.getItem(storage.keys['auth']) !== undefined) {
             console.log(storage.getItem(storage.keys['auth']));
-            router.getJsonAuth("/account/ping", storage.getItem(storage.keys['auth']), (error, data) => {
-                if (error === null) {
+            router.getJsonAuth("/account/ping", storage.getItem(storage.keys['auth']), (data) => {
+                if (data === "Ok") {
+                    console.log("loginPingOk");
                     location.href = '#/';
+                } else if (data !== "Ok") {
+                    console.log("loginPingNotOk");
                 }
             });
         } else {
@@ -73,9 +87,11 @@ module GetSlides {
         console.log("ping");
         if (storage.getItem(storage.keys['auth']) !== undefined) {
             console.log(storage.getItem(storage.keys['auth']));
-            router.getJsonAuth("/account/ping", storage.getItem(storage.keys['auth']), (error, data) => {
-                if (error !== null) {
-                    console.log(error);
+            router.getJsonAuth("/account/ping", storage.getItem(storage.keys['auth']), (data) => {
+                if (data === "Ok") {
+                    console.log("pingOk");
+                } else if (data !== "Ok") {
+                    console.log("pingNotOk");
                     location.href = '#/login/';
                 }
             });

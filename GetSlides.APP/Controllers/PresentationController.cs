@@ -5,27 +5,28 @@ using System.Net;
 using System.Web;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 using GetSlides.DL;
 using GetSlides.APP.Repositories;
 using GetSlides.APP.Utility;
 
 namespace GetSlides.APP.Controllers
 {
-    [Route("api/presentation")]
+    [RoutePrefix("api/presentation")]
     public class PresentationController : ApiController
     {
         public PresentationController() { }
 
         [Authorize]
-        [Route("presentations")]
-        public List<Presentation> GetUserPresentations()
+        [Route("get")]
+        public dynamic GetUserPresentations()
         {
             List<Presentation> UserPresentations = null;
             using (PresentationRepository repo = new PresentationRepository())
             {
                 UserPresentations = repo.SelectByUsername(User.Identity.Name);
             }
-            return UserPresentations;
+            return Models.Presentation.ToList(UserPresentations);
         }
 
         [Authorize]

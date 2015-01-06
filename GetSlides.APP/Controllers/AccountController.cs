@@ -22,11 +22,11 @@ namespace GetSlides.APP.Controllers
         }
 
         [Authorize]
-        [Route("Ping")]
+        [Route("ping")]
         [HttpGet]
-        public IHttpActionResult Ping()
+        public string Ping()
         {
-            return Ok();
+            return "Ok";
         }
 
         [AllowAnonymous]

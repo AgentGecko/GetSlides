@@ -169,6 +169,7 @@
     <Compile Include="Controllers\PresentationController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\WebSocketController.cs" />
+    <Compile Include="Models\PresentationModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AuthRepository.cs" />
@@ -196,6 +197,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\src\main.ts" />
     <TypeScriptCompile Include="Scripts\src\pdf.main.ts" />
+    <TypeScriptCompile Include="Scripts\src\presentations.main.ts" />
     <TypeScriptCompile Include="Scripts\src\register.main.ts" />
     <TypeScriptCompile Include="Scripts\src\router.ts" />
     <TypeScriptCompile Include="Scripts\src\storage.ts" />

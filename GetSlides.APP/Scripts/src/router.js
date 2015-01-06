@@ -13,10 +13,8 @@
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", token);
                 }
-            }).done(function (data) {
-                callback(null, data);
-            }).fail(function (jqXhr, textStatus, errorThrown) {
-                callback(errorThrown, null);
+            }).always(function (data) {
+                callback(JSON.parse(data.responseText));
             });
         };
 
@@ -25,11 +23,12 @@
                 url: this.baseAdress + adress,
                 type: 'POST',
                 accepts: "application/json",
-                dataType: "application/json"
-            }).done(function (data) {
-                callback(null, data);
-            }).fail(function (jqXhr, textStatus, errorThrown) {
-                callback(errorThrown, null);
+                dataType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", token);
+                }
+            }).always(function (data) {
+                callback(JSON.parse(data.responseText));
             });
         };
 
@@ -39,10 +38,8 @@
                 type: 'GET',
                 accepts: "application/json",
                 dataType: "application/json"
-            }).done(function (data) {
-                callback(null, data);
-            }).fail(function (jqXhr, textStatus, errorThrown) {
-                callback(errorThrown, null);
+            }).always(function (data) {
+                callback(JSON.parse(data.responseText));
             });
         };
 
@@ -53,9 +50,24 @@
                 accepts: "application/json",
                 dataType: "application/json"
             }).done(function (data) {
-                callback(null, data);
-            }).fail(function (jqXhr, textStatus, errorThrown) {
-                callback(errorThrown, null);
+                callback(JSON.parse(data.responseText));
+            });
+        };
+
+        Router.prototype.uploadPdf = function (adress, token, formData, callback) {
+            $.ajax({
+                url: this.baseAdress + adress,
+                type: 'POST',
+                cache: false,
+                data: formData,
+                contentType: false,
+                processData: false,
+                crossDomain: true,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", token);
+                }
+            }).always(function (data) {
+                console.log(data);
             });
         };
 

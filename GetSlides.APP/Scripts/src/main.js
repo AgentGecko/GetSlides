@@ -1,17 +1,20 @@
 ﻿/// <reference path="../typings/jquery/jquery.d.ts" />
+/// <reference path="../typings/knockout/knockout.d.ts" />
+/// <reference path="../typings/knockout.mapping/knockout.mapping.d.ts" />
 /// <reference path="../typings/sammyjs/sammyjs.d.ts" />
 var GetSlides;
 (function (GetSlides) {
+    var $pageContainer = $("#pageContainer")[0];
     GetSlides.app = Sammy();
     GetSlides.router = new GetSlides.Router();
     GetSlides.storage = new GetSlides.Storage();
     GetSlides.pdfViewer;
+    GetSlides.viewmodel;
 
     GetSlides.app.element_selector = '#pageContainer';
 
-    GetSlides.app.get('#/login', function (context) {
+    GetSlides.app.get('#/login/', function (context) {
         context.partial('/Views/Login/Index.html', function (partial) {
-            console.log("login");
             loginPing();
         });
     });
@@ -19,6 +22,12 @@ var GetSlides;
     GetSlides.app.get('#/', function (context) {
         context.partial('/Views/Presentation/Index.html', function (partial) {
             ping();
+            GetSlides.router.getJsonAuth("/presentation/get", GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (data) {
+                ko.cleanNode($pageContainer);
+                GetSlides.viewmodel = ko.mapping.fromJS(data);
+                ko.applyBindings(GetSlides.viewmodel, $pageContainer);
+                GetSlides.enableFileUploader();
+            });
         });
     });
 
@@ -40,25 +49,32 @@ var GetSlides;
         });
     });
 
-    GetSlides.app.run('#/login');
+    GetSlides.app.run('#/login/');
 
     function login(username, password) {
         GetSlides.router.getToken(username, password, function (error, data) {
             console.log(error, data);
-            GetSlides.storage.setItem(GetSlides.storage.keys['auth'], data.token_type + " " + data.access_token);
-            console.log(data.token_type + " " + data.access_token);
-            location.href = '#/';
+            if (data.access_token !== undefined) {
+                GetSlides.storage.setItem(GetSlides.storage.keys['auth'], data.token_type + " " + data.access_token);
+                console.log(data.token_type + " " + data.access_token);
+                location.href = '#/';
+            } else {
+                console.log(data.error_description);
+            }
         });
     }
     GetSlides.login = login;
 
     function loginPing() {
         console.log("loginPing");
-        if (GetSlides.storage[GetSlides.storage.keys['auth']] !== undefined) {
+        if (GetSlides.storage.getItem(GetSlides.storage.keys['auth']) !== undefined) {
             console.log(GetSlides.storage.getItem(GetSlides.storage.keys['auth']));
-            GetSlides.router.getJsonAuth("/account/ping", GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (error, data) {
-                if (error === null) {
+            GetSlides.router.getJsonAuth("/account/ping", GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (data) {
+                if (data === "Ok") {
+                    console.log("loginPingOk");
                     location.href = '#/';
+                } else if (data !== "Ok") {
+                    console.log("loginPingNotOk");
                 }
             });
         } else {
@@ -71,9 +87,11 @@ var GetSlides;
         console.log("ping");
         if (GetSlides.storage.getItem(GetSlides.storage.keys['auth']) !== undefined) {
             console.log(GetSlides.storage.getItem(GetSlides.storage.keys['auth']));
-            GetSlides.router.getJsonAuth("/account/ping", GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (error, data) {
-                if (error !== null) {
-                    console.log(error);
+            GetSlides.router.getJsonAuth("/account/ping", GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (data) {
+                if (data === "Ok") {
+                    console.log("pingOk");
+                } else if (data !== "Ok") {
+                    console.log("pingNotOk");
                     location.href = '#/login/';
                 }
             });

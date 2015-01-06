@@ -42,28 +42,23 @@ var GetSlides;
     })();
     GetSlides.PdfViewer = PdfViewer;
 })(GetSlides || (GetSlides = {}));
-
-$(document).ready(function () {
-    PDFJS.getDocument('/PDF/k.pdf').then(function (pdf) {
-        console.log(pdf);
-        pdf.getPage(3).then(function (page) {
-            console.log(page);
-
-            var scale = 1;
-            var viewport = page.getViewport(scale);
-
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            var renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
-
-            page.render(renderContext);
-        });
-    });
-});
+//$(document).ready(() => {
+//    PDFJS.getDocument('/PDF/k.pdf').then((pdf: PDFDocumentProxy) => {
+//        console.log(pdf);
+//        pdf.getPage(3).then((page: PDFPageProxy) => {
+//            console.log(page);
+//            var scale = 1;
+//            var viewport = page.getViewport(scale);
+//            var canvas: HTMLCanvasElement = (<any>document).getElementById('canvas');
+//            var context = canvas.getContext('2d');
+//            canvas.height = viewport.height;
+//            canvas.width = viewport.width;
+//            var renderContext = {
+//                canvasContext: context,
+//                viewport: viewport
+//            };
+//            page.render(renderContext);
+//        });
+//    });
+//});
 //# sourceMappingURL=pdf.main.js.map

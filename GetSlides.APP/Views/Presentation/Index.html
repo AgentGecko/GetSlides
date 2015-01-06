@@ -1,53 +1,20 @@
 ﻿<div class="row panel panel-default">
-    <form enctype="multipart/form-data" class="panel-body">
-        <label class="col-lg-2 col-md-2 col-sm-1 col-xs-1" for="file_uploader"><span class="glyphicon glyphicon-plus-sign"></span></label>
-        <label id="upload_status">No file chosen.</label>
-        <input type="file" id="file_uploader" name="file" class="btn btn-default" style="display:none" />
-        <button class="btn pull-right" style="display:none" id="upload_btn">Submit</button>
-    </form>
-</div>
-<div id="UserPresentationContainer" class="row" data-bind="foreach: UserPresentations">
-    <div class="col-xs-12 col-md-4 col-sm-3 col-lg-2">
-        <a href="" class="thumbnail">
-            <img data-src="U" alt="...">
-        </a>
-        <div class="caption">
-            <h3 data-bind="text: Name"></h3>
+    <div class="panel-body">
+        <form enctype="multipart/form-data">
+            <label class="col-lg-2 col-md-2 col-sm-1 col-xs-1" for="file_uploader"><span class="glyphicon glyphicon-plus-sign"></span></label>
+            <label id="upload_status">No file chosen.</label>
+            <input type="file" id="file_uploader" name="file" class="btn btn-default" style="display: none" />
+        </form>
+        <button class="btn pull-right" onclick=" GetSlides.uploadPdf() " style="display: none" id="upload_btn">Submit</button>
+    </div>
+    <div class="row" data-bind="foreach: $root">
+        <div class="col-xs-12 col-md-4 col-sm-3 col-lg-2">
+            <a data-bind="attr: { href: '/#/present/' + id() +'/'}" class="thumbnail">
+                <img data-bind="attr: { src: picture }" alt="...">
+            </a>
+            <div class="caption">
+                <h3 data-bind="text: name"></h3>
+            </div>
         </div>
     </div>
 </div>
-<script>
-    $("#file_uploader").change(function () {
-        var newText = $("#file_uploader").val();
-        newText = newText.split("\\")[2];
-        if (newText.indexOf('.pdf') >= 0)
-        {
-            $("#upload_status").text(newText);
-            $("#upload_btn").css("display", "inline");
-        }
-        else
-        {
-            $("#upload_status").text("Error: The format is not supported.");
-        }
-    });
-    $("#upload_btn").click(function () {
-        
-        var inputData = document.getElementById('file_uploader').files;
-        var formData = new FormData($('form')[0]);
-        var name = $("#upload_status").text();
-        var newText = $("#file_uploader").val().split("\\")[2];
-        var sUrl = 'https://getslidesapi.azurewebsites.net/api/Presentation/';
-        $.ajax({
-            url: sUrl,
-            type: 'POST',
-            cache: false,
-            data: formData,
-            contentType: false,
-            processData: false,
-            crossDomain: true,
-            success: function (response) {
-                alert(response);
-            }
-        });
-    });
-</script>
