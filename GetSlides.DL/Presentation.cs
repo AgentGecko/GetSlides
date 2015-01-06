@@ -20,6 +20,7 @@ namespace GetSlides.DL
         public string Info { get; set; }
         public System.DateTime DateUploaded { get; set; }
         public string UserId { get; set; }
+        public string PresentationURI { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

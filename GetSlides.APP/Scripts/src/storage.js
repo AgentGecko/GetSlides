@@ -4,7 +4,7 @@
         function Storage() {
             this.keys = {
                 "pin": "__PIN",
-                "grant_type": "__GRANT_TYPE"
+                "auth": "__AUTH"
             };
             this.isLocal = false;
             this.isSession = false;

@@ -21,6 +21,14 @@ namespace GetSlides.APP.Controllers
             repo = new AuthRepository();
         }
 
+        [Authorize]
+        [Route("Ping")]
+        [HttpGet]
+        public IHttpActionResult Ping()
+        {
+            return Ok();
+        }
+
         [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(UserModel userModel)

@@ -4,7 +4,7 @@
          
          public keys: {[key: string]: string; } = {
              "pin": "__PIN",
-             "grant_type": "__GRANT_TYPE"  
+             "auth": "__AUTH"  
          };
 
          public isLocal: boolean = false;
