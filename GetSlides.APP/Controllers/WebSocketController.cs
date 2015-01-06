@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Web.WebSockets;
 using GetSlides.APP.WebSocket;
+using GetSlides.APP.Repositories;
+using GetSlides.DL;
 
 namespace GetSlides.APP.Controllers
 {
@@ -15,15 +17,22 @@ namespace GetSlides.APP.Controllers
     {
         [HttpGet]
         //[Authorize]
-        [Route("present")]
-        public dynamic GetSubject()
+        [Route("present/{presentationId}")]
+        public dynamic GetSubject(string presentationId)
         {
             if (HttpContext.Current.IsWebSocketRequest)
             {
                 try
-                {
+                { 
                     int UserPin;
-                    var subject = (WebSocketSubject) WebSocketFactory.CreateSubject(User.Identity.Name, out UserPin);
+                    Presentation userPresentation;
+
+                    using(PresentationRepository presentationRepository = new PresentationRepository())
+                    {
+                        userPresentation = presentationRepository.Select(Int32.Parse(presentationId));
+                    }
+                   
+                    var subject = (WebSocketSubject) WebSocketFactory.CreateSubject(User.Identity.Name, out UserPin, userPresentation.PresentationURI);
                     HttpContext.Current.AcceptWebSocketRequest(subject);
                     HttpContext.Current.Response.StatusCode = (int) HttpStatusCode.SwitchingProtocols;
                     return UserPin;
@@ -37,8 +46,22 @@ namespace GetSlides.APP.Controllers
             else
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
-            
-        
+
+
+        [HttpGet]
+        [Route("geturi/{presentationPin}")]
+        public dynamic GetPresentationURI(string presentationPin) 
+        {
+            int _pin = GetPin(presentationPin);
+            if (WebSocketFactory.IsActive(_pin))
+            {
+
+               WebSocketSubject subject = (WebSocketSubject) WebSocketFactory._subjects.FirstOrDefault(t => t.Key == _pin).Value;
+               return subject.presentationUri;
+            }
+            else
+                return "Inactive pin, please try again.";
+        }
 
         [HttpGet]
         [Route("watch/{presentationPin}")]

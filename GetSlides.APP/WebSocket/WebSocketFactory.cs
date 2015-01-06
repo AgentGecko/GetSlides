@@ -21,16 +21,15 @@ namespace GetSlides.APP.WebSocket
         {
             return _subjects.First(t => t.Value == null).Key;
         }
-        public static ISubject CreateSubject(string _userID, out int subjectPin) 
+        public static ISubject CreateSubject(string _userID, out int subjectPin, string _presentationURI) 
         {
             int value;
             subjectPin = value = WebSocketFactory.GeneratePin();
             var Pair = _subjects.First(t => t.Key == value);
-            WebSocketSubject subject = new WebSocketSubject(Pair.Key, _userID);
+            WebSocketSubject subject = new WebSocketSubject(Pair.Key, _userID, _presentationURI);
             if (_subjects.TryUpdate(Pair.Key, subject, Pair.Value))
                 return subject;
             else
-                // trebao bi bit custom exception
                 return null;
         }
         public static IObserver CreateObserver(int pin)
@@ -60,7 +59,7 @@ namespace GetSlides.APP.WebSocket
             bool isActive = _subjects.TryGetValue(pin, out outSubject);
             if (outSubject == null) 
                 return false;
-            if (isActive == false) // the key is invalid
+            if (isActive == false) 
                 return false;
             return true;
 

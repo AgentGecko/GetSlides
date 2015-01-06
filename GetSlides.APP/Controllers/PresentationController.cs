@@ -54,7 +54,7 @@ namespace GetSlides.APP.Controllers
 
             Request.Content.ReadAsMultipartAsync(provider);
 
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return GetUserPresentations();
         }
 
         [Authorize]

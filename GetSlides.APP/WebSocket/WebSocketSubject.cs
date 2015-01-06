@@ -12,15 +12,17 @@ namespace GetSlides.APP.WebSocket
         private int pin;
         public string userName;
         public int lastPage;
+        public string presentationUri;
 
         public WebSocketSubject() { }
 
-        public WebSocketSubject(int pin, string _userName) 
+        public WebSocketSubject(int pin, string _userName, string _presentationUri) 
         {
             this.observers = new List<IObserver>();
             this.pin = pin;
             this.userName = _userName;
             this.lastPage = 0;
+            this.presentationUri = _presentationUri;
         }
 
         public void Subscribe(IObserver observer)
