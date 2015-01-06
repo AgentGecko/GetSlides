@@ -11,5 +11,7 @@ namespace GetSlides.APP.WebSocket
         void Subscribe(IObserver observer);
         void Unsubscribe(IObserver observer);
         void Notify(string msg);
+
+        int GetPresentationId();
     }
 }

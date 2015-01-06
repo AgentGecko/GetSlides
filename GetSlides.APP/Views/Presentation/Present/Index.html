@@ -18,7 +18,7 @@
     </div>
 </div>
 <script>
-    var wsUri = "ws://localhost:6316/api/ws/present?user=drugibrate&data=0-";
+    var wsUri = "ws://localhost:6316/api/ws/present/1";
     var output;
 
     function init() {
@@ -35,8 +35,11 @@
         websocket.onerror = function (evt) { onError(evt) };
     }
     function onOpen(evt) {
-        console.log("CONNECTED");
-        doSend($('#presentationKey').val());
+        
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:6316/api/ws/present/getpin/1"
+        }).done(function (data) { console.log(data); });
     }
     function onClose(evt) {
         console.log("DISCONNECTED");
