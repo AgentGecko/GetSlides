@@ -54,7 +54,9 @@ namespace GetSlides.APP.Controllers
             var provider = new CustomMIMEStreamProvider(root);
 
             Request.Content.ReadAsMultipartAsync(provider);
-
+           
+            Presentation uploadedPresentation = new Presentation(provider.fileName,root +"/"+ provider.fileName);
+            AddPresentation(uploadedPresentation, User.Identity.Name);
             return GetUserPresentations();
         }
 
