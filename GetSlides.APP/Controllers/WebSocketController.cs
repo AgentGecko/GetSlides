@@ -77,6 +77,8 @@ namespace GetSlides.APP.Controllers
             if (HttpContext.Current.IsWebSocketRequest)
             {
                 var observer = (WebSocketObserver)WebSocketFactory.CreateObserver(presentationPin);
+                WebSocketSubject sub = (WebSocketSubject)WebSocketFactory._subjects.FirstOrDefault(t => t.Key == presentationPin).Value;
+                observer.lastpage = sub.lastPage;
                 HttpContext.Current.AcceptWebSocketRequest(observer);
                 return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
             }

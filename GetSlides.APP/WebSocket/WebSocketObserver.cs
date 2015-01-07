@@ -8,21 +8,22 @@ namespace GetSlides.APP.WebSocket
 {
     public class WebSocketObserver : WebSocketHandler, IObserver
     {
+        public string lastpage;
         public WebSocketObserver() { }
 
         public void Update(string msg) 
         {
-            this.Send("Subject updated some content.");
+            this.Send(msg);
         }
 
         #region WSHandler
         public override void OnOpen()
         {
-            this.Send("Hello! Let's do the full-duplex communication again!!");
+            this.Send(this.lastpage);
         }
         public override void OnMessage(string message)
         {
-            var msg = "Subject sent: " + message + " at " + DateTime.Now;
+            var msg = "You sent: " + message + " at " + DateTime.Now + ". You shouldn't be doing that,you are an observer" ;
             this.Send(msg);
         }
         public override void OnClose()
