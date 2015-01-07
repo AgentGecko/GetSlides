@@ -56,10 +56,11 @@ module GetSlides {
         });
     });
 
-    app.get('#/watch/:id/', (context: Sammy.EventContext) => {
+    app.get('#/watch/connect/', (context: Sammy.EventContext) => {
         context.partial('/Views/Presentation/Watch/Index.html', (partial: any) => {
-            ping();
-            navbarToggle(true);
+            navbarToggle(false);
+            resizeCanvas();
+            pdfViewer = new PdfViewer(selectedPresentationUri, "canvas", false, "ws://localhost:6316/api/ws/watch/" + spin);
         });
     });
 

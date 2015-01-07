@@ -14,11 +14,16 @@
             if (isSubject) this.id = id;
             this.websocket = new WebSocket(uri);
             this.websocket.onopen = (event) => {
-                this.onOpen(event, onOpen);
+                if (this.isSubject) {
+                    this.onOpen(event, onOpen);
+                } else {
+                    this.onMessage(event, onMessage);
+                }
             };
             this.websocket.onclose = (event) => {
             };
             this.websocket.onmessage = (event) => {
+                this.onMessage(event, onMessage);
             };
             this.websocket.onerror = (event) => {
             }
@@ -29,6 +34,7 @@
             if (this.isSubject) {
                 router.getJsonAuth("/ws/present/getpin/" + this.id, storage.getItem(storage.keys['auth']), (data) => {
                     this.pin = data;
+                    $("#pinNum").text(this.pin);
                     callback(data);
                 });
             }

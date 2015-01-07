@@ -9,18 +9,20 @@ var GetSlides;
             this.canvas = document.getElementById(canvasId);
             this.load(adress);
             if (presentationId != null) {
-                this.webSocketHandler = new GetSlides.WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.OnWsMessage, this.OnWsError, presentationId);
+                this.webSocketHandler = new GetSlides.WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.goToPage, this.OnWsError, presentationId);
                 this.presentationId = presentationId;
             } else {
-                this.webSocketHandler = new GetSlides.WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.OnWsMessage, this.OnWsError);
+                this.webSocketHandler = new GetSlides.WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.goToPage, this.OnWsError);
             }
         }
-        PdfViewer.prototype.goToPage = function (pageNum) {
-            var _this = this;
-            if (pageNum > 0 && pageNum < this.pdf.numPages) {
-                this.currentPage = pageNum;
-                this.getPage(this.currentPage, function () {
-                    _this.renderPage(_this.currentPage);
+        PdfViewer.prototype.goToPage = function (pageNum1) {
+            var pageNum = parseInt(pageNum1);
+            console.log(pageNum, GetSlides);
+            if (pageNum > 0 && pageNum < GetSlides.pdfViewer.pdf.numPages) {
+                GetSlides.pdfViewer.currentPage = pageNum;
+                console.log(pageNum, GetSlides);
+                GetSlides.pdfViewer.getPage(GetSlides.pdfViewer.currentPage, function () {
+                    GetSlides.pdfViewer.renderPage(GetSlides.pdfViewer.currentPage);
                 });
             }
         };

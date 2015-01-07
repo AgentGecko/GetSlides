@@ -1,8 +1,8 @@
 ﻿<div class="jumbotron">
     <h1>Hello, <a href="#/Account" class="navbar-link" data-bind="text: ThisUser.UserName" id="usernamePlaceholder"></a></h1>
     <p>To watch a presentation insert a presentation key:</p>
-    <input id="presentationKeyInput" onchange="" />
+    <input id="presentationKeyInput" />
     <br />
     <br />
-    <p><a class="btn btn-primary btn-lg" href="#" onclick="testWebSocket()" role="button">Watch!</a></p>
+    <p><a class="btn btn-primary btn-lg" onclick="GetSlides.getUrl($('#presentationKeyInput').val());" role="button">Watch!</a></p>
 </div>

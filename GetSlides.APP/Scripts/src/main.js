@@ -55,10 +55,11 @@ var GetSlides;
         });
     });
 
-    GetSlides.app.get('#/watch/:id/', function (context) {
+    GetSlides.app.get('#/watch/connect/', function (context) {
         context.partial('/Views/Presentation/Watch/Index.html', function (partial) {
-            ping();
-            navbarToggle(true);
+            navbarToggle(false);
+            resizeCanvas();
+            GetSlides.pdfViewer = new GetSlides.PdfViewer(GetSlides.selectedPresentationUri, "canvas", false, "ws://localhost:6316/api/ws/watch/" + GetSlides.spin);
         });
     });
 

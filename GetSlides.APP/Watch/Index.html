@@ -34,10 +34,10 @@
         <div class="jumbotron">
             <h1>Hello, Anon</h1>
             <p>To watch a presentation insert a presentation key:</p>
-            <input id="presentationKeyInput" onchange="" />
+            <input id="presentationKeyInput"  />
             <br />
             <br />
-            <p><a class="btn btn-primary btn-lg" href="#" onclick="" role="button">Watch!</a></p>
+            <p><a class="btn btn-primary btn-lg" onclick="GetSlides.getUrl($('#presentationKeyInput').val());" role="button">Watch!</a></p>
         </div>
 
     </div>
