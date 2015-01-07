@@ -27,14 +27,17 @@ module GetSlides {
         }
 
         public goToPage(pageNum1: string) {
-            var pageNum = parseInt(pageNum1);
-            console.log(pageNum, GetSlides);
+            if (pageNum1 === "CLOSE") GetSlides.pdfViewer.stop();
+            else {
+                var pageNum = parseInt(pageNum1);
+                console.log(pageNum, GetSlides);
             if (pageNum > 0 && pageNum < GetSlides.pdfViewer.pdf.numPages) {
                 GetSlides.pdfViewer.currentPage = pageNum;
                 console.log(pageNum, GetSlides);
                 GetSlides.pdfViewer.getPage(GetSlides.pdfViewer.currentPage, () => {
                     GetSlides.pdfViewer.renderPage(GetSlides.pdfViewer.currentPage);
                 });
+            } 
             }
         }
 

@@ -16,14 +16,18 @@ var GetSlides;
             }
         }
         PdfViewer.prototype.goToPage = function (pageNum1) {
-            var pageNum = parseInt(pageNum1);
-            console.log(pageNum, GetSlides);
-            if (pageNum > 0 && pageNum < GetSlides.pdfViewer.pdf.numPages) {
-                GetSlides.pdfViewer.currentPage = pageNum;
+            if (pageNum1 === "CLOSE")
+                GetSlides.pdfViewer.stop();
+            else {
+                var pageNum = parseInt(pageNum1);
                 console.log(pageNum, GetSlides);
-                GetSlides.pdfViewer.getPage(GetSlides.pdfViewer.currentPage, function () {
-                    GetSlides.pdfViewer.renderPage(GetSlides.pdfViewer.currentPage);
-                });
+                if (pageNum > 0 && pageNum < GetSlides.pdfViewer.pdf.numPages) {
+                    GetSlides.pdfViewer.currentPage = pageNum;
+                    console.log(pageNum, GetSlides);
+                    GetSlides.pdfViewer.getPage(GetSlides.pdfViewer.currentPage, function () {
+                        GetSlides.pdfViewer.renderPage(GetSlides.pdfViewer.currentPage);
+                    });
+                }
             }
         };
 
