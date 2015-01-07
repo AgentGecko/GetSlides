@@ -10,11 +10,16 @@
                 this.id = id;
             this.websocket = new WebSocket(uri);
             this.websocket.onopen = function (event) {
-                _this.onOpen(event, onOpen);
+                if (_this.isSubject) {
+                    _this.onOpen(event, onOpen);
+                } else {
+                    _this.onMessage(event, onMessage);
+                }
             };
             this.websocket.onclose = function (event) {
             };
             this.websocket.onmessage = function (event) {
+                _this.onMessage(event, onMessage);
             };
             this.websocket.onerror = function (event) {
             };
@@ -25,6 +30,7 @@
             if (this.isSubject) {
                 GetSlides.router.getJsonAuth("/ws/present/getpin/" + this.id, GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (data) {
                     _this.pin = data;
+                    $("#pinNum").text(_this.pin);
                     callback(data);
                 });
             }

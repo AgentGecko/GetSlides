@@ -1,5 +1,7 @@
 ﻿var GetSlides;
 (function (GetSlides) {
+    GetSlides.selectedPresentationId;
+
     function enableFileUploader() {
         $("#file_uploader").change(function () {
             var newText = $("#file_uploader").val();

@@ -1,5 +1,6 @@
 ﻿module GetSlides {
-   
+
+    export var selectedPresentationId: number;
 
     export function enableFileUploader() {
         $("#file_uploader").change(() => {
