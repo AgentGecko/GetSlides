@@ -16,9 +16,7 @@ module GetSlides {
         constructor(adress: string, canvasId: string, isSubject: boolean, wsUri: string, presentationId?: number) {
             this.scale = 1;
             this.canvas = (<any>document).getElementById(canvasId);
-            this.canvas.height = 500;
-            this.canvas.width = 500;
-            this.getPdf(adress);
+            this.load(adress);
             if (presentationId != null) {
                 this.webSocketHandler = new WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.OnWsMessage, this.OnWsError, presentationId);
                 this.presentationId = presentationId;
@@ -26,6 +24,45 @@ module GetSlides {
                 this.webSocketHandler = new WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.OnWsMessage, this.OnWsError);
             }
             
+        }
+
+        public goToPage(pageNum: number) {
+            if (pageNum > 0 && pageNum < this.pdf.numPages) {
+                this.currentPage = pageNum;
+                this.getPage(this.currentPage, () => {
+                    this.renderPage(this.currentPage);
+                });
+            }
+        }
+
+        public nextPage() {
+            if (this.currentPage < this.pdf.numPages) {
+                this.currentPage++;
+                this.webSocketHandler.send(this.currentPage);
+                this.getPage(this.currentPage, () => {
+                    this.renderPage(this.currentPage);
+                });
+            }
+        }
+
+        public prevPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.webSocketHandler.send(this.currentPage);
+                this.getPage(this.currentPage, () => {
+                    console.log("aaa");
+                    this.renderPage(this.currentPage);
+                });
+            }
+        }
+
+        public stop() {
+            this.webSocketHandler.websocket.close();
+            location.href = '#/';
+        }
+
+        public updatePageNumber() {
+            $("#pageNum").text(this.currentPage + "/" + this.pdf.numPages);
         }
 
         public OnWsOpen() {
@@ -43,23 +80,39 @@ module GetSlides {
             
         }
 
-        public getPdf(adress: string) {
-            PDFJS.getDocument(adress).then((pdf: PDFDocumentProxy) => {
-                this.pdf = pdf;
+        public load(adress: string) {
+            this.getPdf(adress, () => {
+                this.getPage(1, () => {
+                    this.renderPage(1);
+                });
             });
         }
 
-        public getPage(pageNumber: number) {
+        public getPdf(adress: string, callback?: Function) {
+            PDFJS.getDocument(adress).then((pdf: PDFDocumentProxy) => {
+                this.pdf = pdf;
+                if(callback !== undefined)callback();
+            });
+        }
+
+        public getPage(pageNumber: number, callback?: Function) {
             if (this.pdf !== undefined && this.pdf !== null) {
                 if (pageNumber > 0 && pageNumber <= this.pdf.numPages) {
-                    this.pdf.getPage(pageNumber).then((page: PDFPageProxy) => {
-                        this.pages[pageNumber] = page;
-                    });
+                    if (this.pages[pageNumber] === undefined) {
+                        this.pdf.getPage(pageNumber).then((page: PDFPageProxy) => {
+                            this.pages[pageNumber] = page;
+                            this.currentPage = pageNumber;
+                            if (callback !== undefined) callback();
+                        });
+                    } else {
+                        this.currentPage = pageNumber;
+                        if (callback !== undefined) callback();
+                    }
                 }
             }
         }
 
-        public renderPage(pageNumber: number) {
+        public renderPage(pageNumber: number, callback?: Function) {
 
             var viewport = this.pages[pageNumber].getViewport(this.scale);
             var context = this.canvas.getContext('2d');
@@ -69,31 +122,9 @@ module GetSlides {
             };
 
             this.pages[pageNumber].render(renderContext);
+            this.updatePageNumber();
+            if (callback !== undefined) callback();
         }
     }
 
 }
-
-//$(document).ready(() => {
-//    PDFJS.getDocument('/PDF/k.pdf').then((pdf: PDFDocumentProxy) => {
-//        console.log(pdf);
-//        pdf.getPage(3).then((page: PDFPageProxy) => {
-//            console.log(page);
-
-//            var scale = 1;
-//            var viewport = page.getViewport(scale);
-
-//            var canvas: HTMLCanvasElement = (<any>document).getElementById('canvas');
-//            var context = canvas.getContext('2d');
-//            canvas.height = viewport.height;
-//            canvas.width = viewport.width;
-
-//            var renderContext = {
-//                canvasContext: context,
-//                viewport: viewport
-//            };
-
-//            page.render(renderContext);
-//        });
-//    });
-//});

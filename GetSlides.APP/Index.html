@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="Content/bootstrap.css" />
    <!-- <link rel="stylesheet" href="Content/bootstrap-theme.css" />-->
 </head>
@@ -23,15 +24,15 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#/">MyPresentations</a></li>
-                    <li><a href="#/watch/">Watch</a></li>
-                    <li class="dropdown">
+                    <li id="myPresentations" class="active"><a href="#/">MyPresentations</a></li>
+                    <li id="watch"><a href="#/watch/">Watch</a></li>
+                    <li id="settings" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a role="menuitem" href="#/account/">Account</a></li>
-                            <li><a role="menuitem" href="#/logout/">Log Out</a></li>
+                            <li><a role="menuitem" id="account" onclick="$('#account').dropdown('toggle');" href="#/account/">Account</a></li>
+                            <li><a role="menuitem" id="logout" onclick="$('#logout').dropdown('toggle');" href="#/logout/">Log Out</a></li>
                         </ul>
                     </li>
                 </ul>

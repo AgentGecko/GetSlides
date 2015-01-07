@@ -7,9 +7,7 @@ var GetSlides;
             this.pages = {};
             this.scale = 1;
             this.canvas = document.getElementById(canvasId);
-            this.canvas.height = 500;
-            this.canvas.width = 500;
-            this.getPdf(adress);
+            this.load(adress);
             if (presentationId != null) {
                 this.webSocketHandler = new GetSlides.WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.OnWsMessage, this.OnWsError, presentationId);
                 this.presentationId = presentationId;
@@ -17,6 +15,48 @@ var GetSlides;
                 this.webSocketHandler = new GetSlides.WebSocketHandler(wsUri, isSubject, this.OnWsOpen, this.OnWsClose, this.OnWsMessage, this.OnWsError);
             }
         }
+        PdfViewer.prototype.goToPage = function (pageNum) {
+            var _this = this;
+            if (pageNum > 0 && pageNum < this.pdf.numPages) {
+                this.currentPage = pageNum;
+                this.getPage(this.currentPage, function () {
+                    _this.renderPage(_this.currentPage);
+                });
+            }
+        };
+
+        PdfViewer.prototype.nextPage = function () {
+            var _this = this;
+            if (this.currentPage < this.pdf.numPages) {
+                this.currentPage++;
+                this.webSocketHandler.send(this.currentPage);
+                this.getPage(this.currentPage, function () {
+                    _this.renderPage(_this.currentPage);
+                });
+            }
+        };
+
+        PdfViewer.prototype.prevPage = function () {
+            var _this = this;
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.webSocketHandler.send(this.currentPage);
+                this.getPage(this.currentPage, function () {
+                    console.log("aaa");
+                    _this.renderPage(_this.currentPage);
+                });
+            }
+        };
+
+        PdfViewer.prototype.stop = function () {
+            this.webSocketHandler.websocket.close();
+            location.href = '#/';
+        };
+
+        PdfViewer.prototype.updatePageNumber = function () {
+            $("#pageNum").text(this.currentPage + "/" + this.pdf.numPages);
+        };
+
         PdfViewer.prototype.OnWsOpen = function () {
         };
 
@@ -29,25 +69,45 @@ var GetSlides;
         PdfViewer.prototype.OnWsError = function () {
         };
 
-        PdfViewer.prototype.getPdf = function (adress) {
+        PdfViewer.prototype.load = function (adress) {
             var _this = this;
-            PDFJS.getDocument(adress).then(function (pdf) {
-                _this.pdf = pdf;
+            this.getPdf(adress, function () {
+                _this.getPage(1, function () {
+                    _this.renderPage(1);
+                });
             });
         };
 
-        PdfViewer.prototype.getPage = function (pageNumber) {
+        PdfViewer.prototype.getPdf = function (adress, callback) {
+            var _this = this;
+            PDFJS.getDocument(adress).then(function (pdf) {
+                _this.pdf = pdf;
+                if (callback !== undefined)
+                    callback();
+            });
+        };
+
+        PdfViewer.prototype.getPage = function (pageNumber, callback) {
             var _this = this;
             if (this.pdf !== undefined && this.pdf !== null) {
                 if (pageNumber > 0 && pageNumber <= this.pdf.numPages) {
-                    this.pdf.getPage(pageNumber).then(function (page) {
-                        _this.pages[pageNumber] = page;
-                    });
+                    if (this.pages[pageNumber] === undefined) {
+                        this.pdf.getPage(pageNumber).then(function (page) {
+                            _this.pages[pageNumber] = page;
+                            _this.currentPage = pageNumber;
+                            if (callback !== undefined)
+                                callback();
+                        });
+                    } else {
+                        this.currentPage = pageNumber;
+                        if (callback !== undefined)
+                            callback();
+                    }
                 }
             }
         };
 
-        PdfViewer.prototype.renderPage = function (pageNumber) {
+        PdfViewer.prototype.renderPage = function (pageNumber, callback) {
             var viewport = this.pages[pageNumber].getViewport(this.scale);
             var context = this.canvas.getContext('2d');
             var renderContext = {
@@ -56,28 +116,12 @@ var GetSlides;
             };
 
             this.pages[pageNumber].render(renderContext);
+            this.updatePageNumber();
+            if (callback !== undefined)
+                callback();
         };
         return PdfViewer;
     })();
     GetSlides.PdfViewer = PdfViewer;
 })(GetSlides || (GetSlides = {}));
-//$(document).ready(() => {
-//    PDFJS.getDocument('/PDF/k.pdf').then((pdf: PDFDocumentProxy) => {
-//        console.log(pdf);
-//        pdf.getPage(3).then((page: PDFPageProxy) => {
-//            console.log(page);
-//            var scale = 1;
-//            var viewport = page.getViewport(scale);
-//            var canvas: HTMLCanvasElement = (<any>document).getElementById('canvas');
-//            var context = canvas.getContext('2d');
-//            canvas.height = viewport.height;
-//            canvas.width = viewport.width;
-//            var renderContext = {
-//                canvasContext: context,
-//                viewport: viewport
-//            };
-//            page.render(renderContext);
-//        });
-//    });
-//});
 //# sourceMappingURL=pdf.main.js.map

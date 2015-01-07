@@ -31,6 +31,16 @@ namespace GetSlides.APP.Controllers
         }
 
         [Authorize]
+        [Route("get/{id}")]
+        public dynamic GetUserPresentation(int id)
+        {
+            using (PresentationRepository repo = new PresentationRepository())
+            {
+                return new Models.Presentation(repo.Select(id));
+            }
+        }
+
+        [Authorize]
         [Route("delete")]
         public void DeletePresentation(int presentationId)
         {
@@ -56,7 +66,7 @@ namespace GetSlides.APP.Controllers
 
             await Request.Content.ReadAsMultipartAsync(provider);
             
-            Presentation uploadedPresentation = new Presentation(provider.fileName,root +"/"+ provider.fileName);
+            Presentation uploadedPresentation = new Presentation(provider.fileName, "http://localhost:6316/PDF/"+ provider.fileName);
             AddPresentation(uploadedPresentation, User.Identity.Name);
             return GetUserPresentations();
         }

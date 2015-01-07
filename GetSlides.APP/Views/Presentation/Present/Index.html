@@ -1,19 +1,19 @@
-﻿<h1>Present view</h1>
-<div>
-    <canvas class="row" id="canvas"></canvas>
-    
+﻿<div>
+    <canvas id="canvas"></canvas>
+
     <div class="row">
-        <span class="col-lg-2 col-sm-2 col-xs-2 col-md-2 "></span>
-        <button id="prev" type="button" class="btn col-lg-2 col-sm-2 col-xs-2 col-md-2">
+        <button onclick="GetSlides.pdfViewer.prevPage()" id="prev" type="button" class="btn col-md-offset-2 col-lg-offset-2 col-sm-offset-2 col-xs-offset-2 col-lg-2 col-sm-2 col-xs-2 col-md-2">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         </button>
         <span class="col-lg-1 col-sm-1 col-xs-1 col-md-1 "></span>
-        <button id="stop" type="button" class="btn col-lg-2 col-sm-2 col-xs-2 col-md-2">
+        <button onclick="GetSlides.pdfViewer.stop()" id="stop" type="button" class="btn col-lg-2 col-sm-2 col-xs-2 col-md-2">
             <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
         </button>
         <span class="col-lg-1 col-sm-1 col-xs-1 col-md-1"></span>
-        <button id="next" type="button" class="btn col-lg-2 col-sm-2 col-xs-2 col-md-2">
+        <button onclick="GetSlides.pdfViewer.nextPage()" id="next" type="button" class="btn col-lg-2 col-sm-2 col-xs-2 col-md-2">
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         </button>
+        <span class="col-lg-1 col-sm-1 col-xs-1 col-md-1"></span>
+        <span class="col-lg-1 col-sm-1 col-xs-1 col-md-1" id="pageNum">0/0</span>
     </div>
 </div>

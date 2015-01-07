@@ -1,6 +1,11 @@
 ﻿/// <reference path="../typings/jquery/jquery.d.ts" />
 /// <reference path="../typings/knockout/knockout.d.ts" />
 /// <reference path="../typings/knockout.mapping/knockout.mapping.d.ts" />
+/// <reference path="pdf.main.ts" />
+/// <reference path="storage.ts" />
+/// <reference path="presentations.main.ts" />
+/// <reference path="websockets.main.ts" />
+/// <reference path="router.ts" />
 /// <reference path="../typings/sammyjs/sammyjs.d.ts" />
 
 module GetSlides {
@@ -12,9 +17,14 @@ module GetSlides {
     export var pdfViewer: PdfViewer;
     export var viewmodel: any = {};
 
+    $(window).resize(() => {
+        resizeCanvas();
+    });
+
     (<any>app).element_selector = '#pageContainer';
 
     app.get('#/logout/', (context: Sammy.EventContext) => {
+        console.log("LOGOUT");
         $("#navbar-username").text("Signed in as Anon");
         storage.setItem(storage.keys['auth'], null);
         location.href = '#/login/';
@@ -53,20 +63,33 @@ module GetSlides {
     app.get('#/present/:id/', (context: Sammy.EventContext) => {
         context.partial('/Views/Presentation/Present/Index.html', (partial: any) => {
             ping();
+            resizeCanvas();
+            router.getJsonAuth("/presentation/get/" + context.params["id"], storage.getItem(storage.keys['auth']), (presentation) => {
+                router.getJsonAuth("/account/username", storage.getItem(storage.keys['auth']), (username) => {
+                    console.log(presentation, username);
+                    pdfViewer = new PdfViewer(presentation.presentationUri, "canvas", true, "ws://localhost:6316/api/ws/present/"+ presentation.id + "/username/" + username, presentation.id);
+                });
+                
+            });
         });
     });
 
 
     app.run('#/login/');
 
+    export function resizeCanvas() {
+
+        var canvas = (<any>document).getElementById("canvas");
+        canvas.height = window.innerHeight -120;
+        canvas.width = this.canvas.height * 27/ 19;
+        $("#canvas").css("margin-left", ((window.innerWidth - this.canvas.width) / 2));
+    }
+
     export function login(username: string, password: string) {
         router.getToken(username, password, (error, data) => {
             console.log(error, data);
             if (data.access_token !== undefined) {
                 storage.setItem(storage.keys['auth'], data.token_type + " " + data.access_token);
-                router.getJsonAuth("/account/username", storage.getItem(storage.keys['auth']), (data) => {
-                    $("#navbar-username").text("Signed in as " + data);
-                });
                 console.log(data.token_type + " " + data.access_token);
                 location.href = '#/';
             } else {
@@ -81,8 +104,11 @@ module GetSlides {
             console.log(storage.getItem(storage.keys['auth']));
             router.getJsonAuth("/account/ping", storage.getItem(storage.keys['auth']), (data) => {
                 if (data === "Ok") {
+                    router.getJsonAuth("/account/username", storage.getItem(storage.keys['auth']), (data) => {
+                        $("#navbar-username").text("Signed in as " + data);
+                        location.href = '#/';
+                    });
                     console.log("loginPingOk");
-                    location.href = '#/';
                 } else if (data !== "Ok") {
                     console.log("loginPingNotOk");
                 }
@@ -99,6 +125,10 @@ module GetSlides {
             router.getJsonAuth("/account/ping", storage.getItem(storage.keys['auth']), (data) => {
                 if (data === "Ok") {
                     console.log("pingOk");
+
+                    router.getJsonAuth("/account/username", storage.getItem(storage.keys['auth']), (data) => {
+                        $("#navbar-username").text("Signed in as " + data);
+                    });
                 } else if (data !== "Ok") {
                     console.log("pingNotOk");
                     location.href = '#/login/';
