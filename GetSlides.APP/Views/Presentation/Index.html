@@ -4,14 +4,14 @@
             <label class="col-lg-2 col-md-2 col-sm-1 col-xs-1" for="file_uploader"><span class="glyphicon glyphicon-plus-sign"></span></label>
             <label id="upload_status">No file chosen.</label>
             <input type="file" id="file_uploader" name="file" class="btn btn-default" style="display: none"/>
-            <button class="btn pull-right" onclick="event.preventDefault(); GetSlides.uploadPdf();" style="display: none" id="upload_btn">Submit</button>
+            <button class="btn btn-info pull-right" onclick="event.preventDefault(); GetSlides.uploadPdf();" style="display: none" id="upload_btn">Submit</button>
         </form>
        
     </div>
 </div>
     <div class="row" data-bind="foreach: presentations">
     <div class="col-xs-12 col-md-4 col-sm-3 col-lg-2">
-        <a data-bind="attr: { href: '/#/present/' + id() +'/'}" class="thumbnail">
+        <a data-toggle="modal" data-target="#present-modal" class="thumbnail">
             <img data-bind="attr: { src: picture }" alt="...">
         </a>
         <div class="caption">
@@ -19,3 +19,36 @@
         </div>
     </div>
 </div>
+   <!-- <div class="modal fade " id="present-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" data-bind="text:name"></h4>
+                </div>
+                <div class="modal-body">
+                    <p>Edit presentation info and name&hellip;</p>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Present presentation</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div> -->
+<div class="modal fade" id="present-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Are you sure you want to present this presentation?</h4>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-warning">Yes</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

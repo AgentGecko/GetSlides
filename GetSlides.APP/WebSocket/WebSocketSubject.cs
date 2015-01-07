@@ -11,7 +11,7 @@ namespace GetSlides.APP.WebSocket
         private List<IObserver> observers;
         private string pin;
         public string userName;
-        public int lastPage;
+        public string lastPage;
         public string presentationUri;
         public int presentationId;
 
@@ -22,7 +22,7 @@ namespace GetSlides.APP.WebSocket
             this.observers = new List<IObserver>();
             this.pin = pin;
             this.userName = _userName;
-            this.lastPage = 0;
+            this.lastPage = "0";
             this.presentationUri = _presentationUri;
         }
 
@@ -36,19 +36,18 @@ namespace GetSlides.APP.WebSocket
         }
         public void Notify(string msg) 
         {
+            this.lastPage = msg;
             this.observers.ForEach(x => x.Update(msg));
         }
 
         #region WSHandler
         public override void OnOpen()
         {
-            this.Send("Hello! Let's do the full-duplex communication again!!");
+            this.Send("OPEN");
         }
         public override void OnMessage(string message)
         {
-            var msg = "You sent: " + message + " at " + DateTime.Now;
             this.Notify(message);
-            this.Send(msg);
         }
         public override void OnClose()
         {
@@ -71,6 +70,7 @@ namespace GetSlides.APP.WebSocket
         }
         public void DisposeEntry() 
         {
+            this.observers.ForEach(x => x.Close());
             WebSocketFactory._subjects.TryUpdate(pin, null, this);
         }
 

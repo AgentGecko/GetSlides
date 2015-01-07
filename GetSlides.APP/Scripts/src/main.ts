@@ -60,6 +60,12 @@ module GetSlides {
         });
     });
 
+    app.get('#/watch/', (context: Sammy.EventContext) => {
+        context.partial('/Views/Presentation/Watch/InsertPin.html', (partial: any) => {
+            ping();
+        });
+    });
+
     app.get('#/present/:id/', (context: Sammy.EventContext) => {
         context.partial('/Views/Presentation/Present/Index.html', (partial: any) => {
             ping();
