@@ -2,12 +2,62 @@
 <html lang="en">
 <head>
     <title>GetSlides registration</title>
+    <link rel="stylesheet" href="../Content/bootstrap.css" />
+    <style>
+        body {
+            background-color: #f39c12;
+        }
+        .login-form {
+    display:block;
+    width:80%;
+    padding: 10px;
+    margin-left:auto;
+    margin-right:auto;
+}
+    .login-form input,.login-form button,.login-form h1 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        max-width: 200px;
+        margin-left:auto;
+        margin-right:auto;
+        display:block;
+    }
+    .login-form img {
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        width: 100%;
+        max-width: 380px;
+    }
+    .login-form h1 {
+        text-align:center;
+        margin-top:0;
+        font-style: oblique;
+        color:#34495e
+    }
+    .login-form button {
+        background-color:#34495e;
+        background-image: none;
+        color:whitesmoke;
+        text-shadow:none;
+
+    }
+        .login-form button:hover {
+            background-image:none;
+            background-color:#95a5a6;
+            color:whitesmoke;
+            text-shadow:none;
+        }
+    </style>
 </head>
     <body>
     <form class="login-form" novalidate="novalidate">
-        <h1>Register</h1>
+        <h1 style="font-style: oblique
+    ">Register</h1>
         <div class="form-group">
             <!--<input type="email" placeholder="E-mail" class="form-control" name="email"/>-->
+            <img style="display:block;margin-left:auto;margin-right:auto;width: 100%;max-width: 320px;" src="../Images/GetSlides1.png" />
+
             <input type="text" placeholder="Username" class="form-control" id="username" name="username"/>
             <input type="password" placeholder="Enter password" class="form-control" id="password1" name="password1"/>
             <input type="password" placeholder="Re-enter password" class="form-control" name="password2"/>

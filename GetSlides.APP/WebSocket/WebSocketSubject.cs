@@ -70,6 +70,7 @@ namespace GetSlides.APP.WebSocket
         }
         public void DisposeEntry() 
         {
+            this.observers.ForEach(x => x.Update("CLOSE"));
             this.observers.ForEach(x => x.Close());
             WebSocketFactory._subjects.TryUpdate(pin, null, this);
         }
