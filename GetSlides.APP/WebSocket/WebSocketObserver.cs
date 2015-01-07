@@ -34,5 +34,10 @@ namespace GetSlides.APP.WebSocket
             base.OnError();
         }
         #endregion
+
+        public void Close()
+        {
+            base.Close();
+        }
     }
 }

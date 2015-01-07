@@ -9,5 +9,6 @@ namespace GetSlides.APP.WebSocket
     public interface IObserver
     {
         void Update(string msg);
+        void Close();
     }
 }

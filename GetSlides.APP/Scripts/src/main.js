@@ -48,6 +48,12 @@ var GetSlides;
         });
     });
 
+    GetSlides.app.get('#/watch/', function (context) {
+        context.partial('/Views/Presentation/Watch/InsertPin.html', function (partial) {
+            ping();
+        });
+    });
+
     GetSlides.app.get('#/present/:id/', function (context) {
         context.partial('/Views/Presentation/Present/Index.html', function (partial) {
             ping();
