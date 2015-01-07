@@ -32,12 +32,14 @@ var GetSlides;
     GetSlides.app.get('#/login/', function (context) {
         context.partial('/Views/Login/Index.html', function (partial) {
             loginPing();
+            navbarToggle(false);
         });
     });
 
     GetSlides.app.get('#/', function (context) {
         context.partial('/Views/Presentation/Index.html', function (partial) {
             ping();
+            navbarToggle(true);
             GetSlides.router.getJsonAuth("/presentation/get", GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (data) {
                 var vdata = { "presentations": data };
                 updateViewModel(vdata);
@@ -49,24 +51,28 @@ var GetSlides;
     GetSlides.app.get('#/account/', function (context) {
         context.partial('/Views/Settings/Index.html', function (partial) {
             ping();
+            navbarToggle(true);
         });
     });
 
     GetSlides.app.get('#/watch/:id/', function (context) {
         context.partial('/Views/Presentation/Watch/Index.html', function (partial) {
             ping();
+            navbarToggle(true);
         });
     });
 
     GetSlides.app.get('#/watch/', function (context) {
         context.partial('/Views/Presentation/Watch/InsertPin.html', function (partial) {
             ping();
+            navbarToggle(true);
         });
     });
 
     GetSlides.app.get('#/present/:id/', function (context) {
         context.partial('/Views/Presentation/Present/Index.html', function (partial) {
             ping();
+            navbarToggle(true);
             resizeCanvas();
             GetSlides.router.getJsonAuth("/presentation/get/" + context.params["id"], GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (presentation) {
                 GetSlides.router.getJsonAuth("/account/username", GetSlides.storage.getItem(GetSlides.storage.keys['auth']), function (username) {
@@ -78,6 +84,21 @@ var GetSlides;
     });
 
     GetSlides.app.run('#/login/');
+
+    function navbarToggle(login) {
+        if (login) {
+            $("#myPresentations").css("display", "block");
+            $("#watchanon").css("display", "none");
+            $("#watchlogin").css("display", "block");
+            $("#settings").css("display", "block");
+        } else {
+            $("#myPresentations").css("display", "none");
+            $("#watchanon").css("display", "block");
+            $("#watchlogin").css("display", "none");
+            $("#settings").css("display", "none");
+        }
+    }
+    GetSlides.navbarToggle = navbarToggle;
 
     function resizeCanvas() {
         var canvas = document.getElementById("canvas");
@@ -101,7 +122,7 @@ var GetSlides;
     }
     GetSlides.login = login;
 
-    function loginPing() {
+    function loginPing(callback) {
         console.log("loginPing");
         if (GetSlides.storage.getItem(GetSlides.storage.keys['auth']) !== undefined) {
             console.log(GetSlides.storage.getItem(GetSlides.storage.keys['auth']));
@@ -122,7 +143,7 @@ var GetSlides;
     }
     GetSlides.loginPing = loginPing;
 
-    function ping() {
+    function ping(callback) {
         console.log("ping");
         if (GetSlides.storage.getItem(GetSlides.storage.keys['auth']) !== undefined) {
             console.log(GetSlides.storage.getItem(GetSlides.storage.keys['auth']));

@@ -17,14 +17,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#/about/">GetSlides</a>
+                <a class="navbar-brand" href="/#/login">GetSlides</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="Login.html">Login</a></li>
-                    <li><a href="Index.html">Watch</a></li>
+                    <li><a href="/#/login/">Login</a></li>
+                    <li class="active"><a href="/">Watch</a></li>
                 </ul>
                 <p id="navbar-username" class="navbar-text navbar-right">Signed in as Anon</p>
             </div><!-- /.navbar-collapse -->
@@ -32,23 +32,15 @@
     </nav>
     <div id="pageContainer" class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
         <div class="jumbotron">
-            <h1>Hello, <a href="#/Account" class="navbar-link" data-bind="text: ThisUser.UserName" id="usernamePlaceholder"></a></h1>
+            <h1>Hello, Anon</h1>
             <p>To watch a presentation insert a presentation key:</p>
             <input id="presentationKeyInput" onchange="" />
             <br />
             <br />
-            <p><a class="btn btn-primary btn-lg" href="#" onclick="testWebSocket()" role="button">Watch!</a></p>
+            <p><a class="btn btn-primary btn-lg" href="#" onclick="" role="button">Watch!</a></p>
         </div>
 
     </div>
     <script src="../Scripts/jquery-2.1.3.min.js"></script>
-    <script src="../Scripts/knockout-3.2.0.js"></script>
-    <script src="../Scripts/knockout.mapping-latest.js"></script>
-    <script src="../Scripts/pdf.js"></script>
-    <script src="../Scripts/bootstrap.js"></script>
-    <script src="../Scripts/src/presentations.main.js"></script>
-    <script src="../Scripts/src/websockets.main.js"></script>
-    <script src="../Scripts/src/pdf.main.js"></script>
-    <script src="../Scripts/src/main.js"></script>
 </body>
 </html>

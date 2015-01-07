@@ -163,7 +163,6 @@
     <Content Include="Views\Presentation\Watch\InsertPin.html" />
     <Content Include="Views\Settings\Index.html" />
     <Content Include="Watch\Index.html" />
-    <Content Include="Watch\Login.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

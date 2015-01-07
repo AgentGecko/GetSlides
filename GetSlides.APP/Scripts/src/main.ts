@@ -33,13 +33,14 @@ module GetSlides {
     app.get('#/login/', (context: Sammy.EventContext) => {
         context.partial('/Views/Login/Index.html', (partial: any) => {
             loginPing();
-            
+            navbarToggle(false);
         });
     });
 
     app.get('#/', (context: Sammy.EventContext) => {
         context.partial('/Views/Presentation/Index.html', (partial: any) => {
             ping();
+            navbarToggle(true);
             router.getJsonAuth("/presentation/get", storage.getItem(storage.keys['auth']), (data) => {
                 var vdata = { "presentations": data };
                 updateViewModel(vdata);
@@ -51,24 +52,28 @@ module GetSlides {
     app.get('#/account/', (context: Sammy.EventContext) => {
         context.partial('/Views/Settings/Index.html', (partial: any) => {
             ping();
+            navbarToggle(true);
         });
     });
 
     app.get('#/watch/:id/', (context: Sammy.EventContext) => {
         context.partial('/Views/Presentation/Watch/Index.html', (partial: any) => {
             ping();
+            navbarToggle(true);
         });
     });
 
     app.get('#/watch/', (context: Sammy.EventContext) => {
         context.partial('/Views/Presentation/Watch/InsertPin.html', (partial: any) => {
             ping();
+            navbarToggle(true);
         });
     });
 
     app.get('#/present/:id/', (context: Sammy.EventContext) => {
         context.partial('/Views/Presentation/Present/Index.html', (partial: any) => {
             ping();
+            navbarToggle(true);
             resizeCanvas();
             router.getJsonAuth("/presentation/get/" + context.params["id"], storage.getItem(storage.keys['auth']), (presentation) => {
                 router.getJsonAuth("/account/username", storage.getItem(storage.keys['auth']), (username) => {
@@ -82,6 +87,21 @@ module GetSlides {
 
 
     app.run('#/login/');
+
+
+    export function navbarToggle(login: boolean) {
+        if (login) {
+            $("#myPresentations").css("display", "block");
+            $("#watchanon").css("display", "none");
+            $("#watchlogin").css("display", "block");
+            $("#settings").css("display", "block");
+        } else {
+            $("#myPresentations").css("display", "none");
+            $("#watchanon").css("display", "block");
+            $("#watchlogin").css("display", "none");
+            $("#settings").css("display", "none");
+        }
+    }
 
     export function resizeCanvas() {
 
@@ -104,7 +124,7 @@ module GetSlides {
         });
     }
 
-    export function loginPing() {
+    export function loginPing(callback?: Function) {
         console.log("loginPing");
         if (storage.getItem(storage.keys['auth']) !== undefined) {
             console.log(storage.getItem(storage.keys['auth']));
@@ -124,7 +144,7 @@ module GetSlides {
         }
     }
 
-    export function ping() {
+    export function ping(callback?: Function) {
         console.log("ping");
         if (storage.getItem(storage.keys['auth']) !== undefined) {
             console.log(storage.getItem(storage.keys['auth']));

@@ -11,7 +11,7 @@
 </div>
     <div class="row" data-bind="foreach: presentations">
     <div class="col-xs-12 col-md-4 col-sm-3 col-lg-2">
-        <a data-toggle="modal" data-target="#present-modal" class="thumbnail">
+        <a style="cursor:pointer" data-toggle="modal" data-bind="click: function(){GetSlides.selectedPresentationId = $data.id();}" data-target="#present-modal" class="thumbnail">
             <img data-bind="attr: { src: picture }" alt="...">
         </a>
         <div class="caption">
@@ -19,23 +19,6 @@
         </div>
     </div>
 </div>
-   <!-- <div class="modal fade " id="present-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" data-bind="text:name"></h4>
-                </div>
-                <div class="modal-body">
-                    <p>Edit presentation info and name&hellip;</p>
-                    <button type="button" class="btn btn-info" data-dismiss="modal">Present presentation</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div> -->
 <div class="modal fade" id="present-modal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -45,7 +28,7 @@
             </div>
             <div class="modal-body">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-warning">Yes</button>
+                <button type="button" onclick="location.href='#/present/' + GetSlides.selectedPresentationId + '/';" class="btn btn-warning">Yes</button>
             </div>
             <div class="modal-footer">
             </div>
