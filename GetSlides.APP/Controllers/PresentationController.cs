@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Web.Script.Serialization;
 using GetSlides.DL;
 using GetSlides.APP.Repositories;
+using GetSlides.APP.Storage;
 using GetSlides.APP.Utility;
 
 namespace GetSlides.APP.Controllers
@@ -63,10 +64,14 @@ namespace GetSlides.APP.Controllers
             
             string root = HttpContext.Current.Server.MapPath("~/PDF");
             var provider = new CustomMIMEStreamProvider(root);
-
             await Request.Content.ReadAsMultipartAsync(provider);
+
+            //var result = await BlobStorage.SavePdfToBlob(await Request.Content.ReadAsStreamAsync(), "bla.pdf");
+
+
             
             Presentation uploadedPresentation = new Presentation(provider.fileName, "http://localhost:6316/PDF/"+ provider.fileName);
+
             AddPresentation(uploadedPresentation, User.Identity.Name);
             return GetUserPresentations();
         }
